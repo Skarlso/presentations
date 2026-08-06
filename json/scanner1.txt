@@ -1,0 +1,42 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/pkg/json
+cpu: Apple M4 Max
+BenchmarkScanner/canada-16         	     481	   2354571 ns/op	 956.04 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/canada-16         	     495	   2381912 ns/op	 945.06 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/canada-16         	     505	   2426339 ns/op	 927.76 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/canada-16         	     504	   2373017 ns/op	 948.61 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/canada-16         	     498	   2412082 ns/op	 933.24 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/canada-16         	     508	   2356440 ns/op	 955.28 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/citm_catalog-16   	    1144	   1045978 ns/op	1651.28 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/citm_catalog-16   	    1144	   1066030 ns/op	1620.22 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/citm_catalog-16   	    1136	   1065774 ns/op	1620.61 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/citm_catalog-16   	    1142	   1045283 ns/op	1652.38 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/citm_catalog-16   	    1146	   1041219 ns/op	1658.83 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/citm_catalog-16   	    1160	   1050986 ns/op	1643.41 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/twitter-16        	    2329	    499330 ns/op	1264.72 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/twitter-16        	    2430	    505392 ns/op	1249.55 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/twitter-16        	    2335	    512012 ns/op	1233.40 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/twitter-16        	    2400	    503248 ns/op	1254.88 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/twitter-16        	    2414	    502721 ns/op	1256.19 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/twitter-16        	    2440	    507978 ns/op	1243.19 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/code-16           	     524	   2325274 ns/op	 834.51 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/code-16           	     519	   2268485 ns/op	 855.40 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/code-16           	     507	   2248552 ns/op	 862.99 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/code-16           	     546	   2226623 ns/op	 871.49 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/code-16           	     537	   2223794 ns/op	 872.60 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/code-16           	     543	   2243903 ns/op	 864.78 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/example-16        	  114177	     10552 ns/op	1234.23 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/example-16        	  115617	     10366 ns/op	1256.47 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/example-16        	  116811	     10499 ns/op	1240.55 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/example-16        	  113601	     10563 ns/op	1232.99 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/example-16        	  113260	     10488 ns/op	1241.86 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/example-16        	  115586	     10415 ns/op	1250.53 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/sample-16         	    3757	    317945 ns/op	2162.30 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/sample-16         	    3788	    322576 ns/op	2131.25 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/sample-16         	    3735	    322939 ns/op	2128.86 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/sample-16         	    3694	    319474 ns/op	2151.95 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/sample-16         	    3742	    320326 ns/op	2146.22 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/sample-16         	    3836	    321877 ns/op	2135.88 MB/s	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/pkg/json	48.417s

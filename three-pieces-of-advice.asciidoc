@@ -1,0 +1,95 @@
+= Three pieces of advice
+
+Today I'm going to tell you three stories from my career.
+
+These are my stories, and while I present them as illustrations of things that I think are important.
+I'm well aware that an australian from the other end of the earth has little in common with you in the audience, so I want you to listen to the advice i'm about to give as if it we _me_ telling _myself_, because this is actually the case, these are all lessons I've figured out in my life, and lessons i'm _trying_ to teach myself.
+
+== About me
+
+David, grew up in Australia
+Both parents worked for the governement in research, not unlike Academicpark.
+I was exposed to computers at a very early age; my first computer was a C64
+
+== Programming is a craft
+
+My thesis is programming is a craft, like carpentry, or medicine, not an art, like painting.
+
+plan to make the case for this based on my experience as a system
+administrator (which is *absolutely* a craft) and show that commercial
+software programming is a craft. I want to emphases the importance of
+history and tradition which is strong in most crafts but mostly absent
+in programming.
+
+== Find a mentor, be self sufficient.
+
+The second section is a call to action to practice you craft, to learn
+your craft, and specifically collaborate with others. Programming
+isn't being a star trek fan and watching all the videos at home, it's
+a craft that has existed for longer than (i'm guessing) anyone in the
+room, so it's time to stop inventing from first principals and
+establish a culture of study and learning. Specifically I want to
+push mentorship, collaborative learning, study groups, reading and
+questioning.
+
+- if programming is a craft, like metalwork, or carpentry, or being a
+surgeon, what can we, as programmers, learn from how those other
+crafts pass on knowledge. Go is still in its infancy, so almost
+everyone who will write programs in Go has yet to every learn about
+the language, let alone dedicate a career to it. I want to build a
+case for mentoring and apprenticeship. Not specifically direct
+mentorship, but making a case for active learning, contributing to
+forums, watching conference videos, promulgating knowledge at meetups,
+and engaging critically with what they hear and read. The goal is to
+make a case for how every programmer can become a great programmer,
+which leads into the final idea.
+
+== Move fast, and don't break things
+
+The last section is a call to action about the day to day realities of
+applying our craft to make Go a success, because if Go is a success,
+we all have a career for life working in the language we love. If its
+not a success, then we'll have Go for maybe another 5 years, then
+somethings else will come along. Specifically I want to focus on how
+all of us as Go programmers can write programs that _other_ people can
+maintain. This is not because I want Go programmers to be
+interchangeable cogs, but because I realise that for a long time,
+possibly, ever, Go is going to be just one of language in peoples'
+toolbelts. We *must* be able to move between projects, and that means
+being able to pick up someone elses' code, built it, run the tests,
+add a feature, push that through CI. For all go's simplicity, this is
+still too difficult today. I want to focus on the goal - being able to
+maintain other peoples' programs (and they yours) rather than "use
+tool X because dave said it's the best". The latter is dogma, the
+former is a motto.
+
+- the last idea is called (tentatively) move fast and don't break
+things, which is where I tie these general ideas back to Go
+programmers. Just like a carpenter does not get paid for sharpening
+their saw--they get paid for building houses--nor are surgeons
+compensated on the number of incisions they make, but on the lives
+saved--we commercial programmers are employed to solve problems -- not
+write programs. So I want to talk about two things that are critical
+that every Go programmer knows how to do; the first is they should be
+able to write a cli application, a web application, a web proxy, a
+server daemon, and so on, every Go programmer should be able to do
+these things because those are the kinds of problems that need to be
+solved for businesses. Those projects are tables stakes, and if fear
+or inexperience is keeping you from attempting them, then we need to
+talk about mentoring and studying the craft. And, critically, every Go
+programmer should be able to take over maintenance of one of these
+projects. It's one thing to write a small tool to fill a business
+requirement, it is entirely another thing to write that tool to a
+standard that means others can maintain and extend it.
+
+And this is really the point I want to finish on, programs which
+cannot be maintained, will be replaced, and so therefore will Go
+programmers.
+
+== Conclusion
+
+tl;dr
+- learn you craft
+- find a mentor
+- move fast, but don't break things.
+

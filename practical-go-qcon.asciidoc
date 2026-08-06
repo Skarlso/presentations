@@ -1,0 +1,1094 @@
+= Practical Go: Real world advice for writing maintainable Go programs
+:toc:
+
+Hello, again
+
+My goal over the next two sessions is to give you my advice for best practices writing Go code.
+
+
+== Guiding principals
+
+If we're going to talk about best practices in any programming language we need some way to define what we mean by _best_.
+
+If you came to my keynote yesterday you would have seen this quote from Russ Cox, the Go team lead
+
+"Software engineering is what happens to programming when you add time and other programmers."
+-- Russ Cox
+
+Russ is making the distinction between software _programming_ and software _engineering_.
+The former is a program you write for yourself.
+The latter is a product that many people will work on over time.
+Engineers will come and go, requirements will change, features will be added and bugs fixed.
+
+I'm probably one of the longest users of Go in this room, but to argue that my seniority somehow gives my views more weight is false.
+Instead the advice I'm going to present today is informed by what I believe to be the guiding principals underlying Go itself.
+They are:
+
+. Simplicity
+. Readability
+. Productivity
+
+You'll note that I didn't say _performance_, or _concurrency_.
+Those are important attributes, but not as important as these three.
+
+=== Simplicity
+
+Why should we strive for simplicity?
+Why is important that Go code be simple?
+
+We've all been in a situation where you say "I can't understand this code", yes?
+We've all worked on programs where you're scared to make a change because you're worried it'll break another part of the program; a part you don't understand and don't know how to fix.
+
+This is complexity.
+Complexity is what kills software projects
+ what turns reliable software in unreliable sof
+
+So, simplicity is the highest goal of Go.
+Whatever programs we right, we should be able to say that they are simple.
+
+=== Readability
+
+"Readability is essential for maintability."
+-- Mark Reinhold, JVM language summit 2018
+
+Why should we strive for readabilty?
+Why is it important that Go code be readable?
+
+Readability is important because all software, not just Go code, is written by humans to be read by other humans.
+The fact that it is also consumed by machines is secondary.
+
+Code is read many more times than it is written.
+A single piece of code will, over its lifetime, be read hundreds, maybe thousands of times.
+
+"The most important skill for a programmer is the ability to effectively communicate ideas."
+-- https://gaston.life/books/effective-programming/
+
+Readability is key to being able to understand what the code is doing.
+If you can't understand what the code is doing, how can you hope to maintain it.
+
+Because, if software cannot be maintained, it will be rewritten; and that's the last time the company will invest in Go.
+
+And this is really it.
+If you're writing a program for yourself, maybe it only has to run once, or you're the only person who'll ever see it, then do what ever works for you.
+But if this is a piece of software that more than one person will contribute to, or that will be used by people over a long enough time that requirements, features, or the environment it runs in changes, then your goal must be that this program be _maintainable_.
+
+=== Productivity
+
+The last underlying principle I want to highlight is productivity.
+When I say productivity, Go programmers should feel that they can get a lot done with Go.
+
+They aren't waiting for the compiler
+They don't spend days debugging inscrutible compile errors
+They don't waste days with complicated build scripts or deploying code to production.
+And most importantly they don't spend your time trying to understand what your coworker wrote.
+
+Productivity is what the Go team talk about when they say the language must _scale_.
+
+== Identifiers
+
+Ok, let's start at the beginning.
+
+The first section we're going to discuss is _identifiers_.
+An identifier is a name; the name of a variable, the name of a function, the name of a method, the name of a type, the name of a package.
+
+Readability is the defining quality of good code.
+Good names are critical to readability.
+
+=== Choose identifiers for clarity, not brevity
+
+Go is not a language that optimises for clever one liners, nor is a language which optimises for the least number of lines in a program.
+We're not optimising for the size of the source code on disk, nor how long it takes to type.
+
+"Obvious code is important. What you _can_ do in one line you _should_ do in three."
+-- Ukiah Smith  
+
+// https://twitter.com/UkiahSmith/status/1044931395112644608
+
+Given the limited syntax of our language, the names we give to things in our programs have an oversized impact on the readability of our programs.
+
+To get technical, when I'm talking about naming, I'm talking about naming _identifiers_ in Go programs.
+But that's a bit lengthy, so lets just call it naming from now on -- you understand what I mean.
+
+Anything in Go that is an _identifier_ has a name.
+To make this clear this
+
+* the name of a type, struct, or interface
+* the name of a function or a method
+* the name of a package
+* the name of a constant
+* the name of a variable, formal parameter, or return value
+
+The properties of a good name are:
+
+- Short (easy to type),
+- Accurate (easy to understand).
+- Consistent (easy to guess),
+
+Let's talk about each of these properties
+
+=== Identfier length
+
+Sometimes people criticise the Go style for recommending short variable names.
+
+As Rob Pike said, "Go programmers want the _right_ length identifiers"
+
+By using longer identifies for some things we indicate to the reader that they are of higher importance. 
+
+"The greater the distance between a name's declaration and its uses, the longer the name should be."
+-- Andrew Gerrand footnote:[https://talks.golang.org/2014/names.slide#4]
+
+I'm going to make a slight modification on this and suggest this maxim
+
+"The length of an identifer is proportional to the distance between its definition and _last_ use."
+
+From this we can draw some rules
+
+- Functions
+
+Let's look at an example to make this clear
+
+----
+type Person struct {
+	Name string
+	Age int
+}
+
+// AverageAge returns the average age of people.
+func AverageAge(people []Person) int {
+	if len(people) == 0 {
+		return 0
+	}
+
+	var count, sum int
+	for _, p := range people {
+		sum += p.Age
+		count += 1
+	}
+
+	return sum/count
+}	
+----
+In this example, the range variable `p` is declared on line X and only referenced on the following line. It 
+
+TIP: Use blank lines to break up the flow of a function in the same way you use paragraphs to break up the flow of a document. In `AverageAge` we have three operations occuring in sequence. The first is the precondition, checking that we don't divide by zero if people is empty, the second is the accumulation of the sum and count, and the final is the computation of the average.
+
+=== Don't name your variables for their types
+
+BAD: config *Config
+
+If `conf`, or maybe even `c` will do. If there is more that one config in scope
+
+=== Use a consistent naming style
+
+For example, if your code passes around a database handle, make sure each time the parameter appears, it has the same name
+
+db *sql.DB, not 
+
+Doing so promotes familiarity; if you see a `db`, you know it's a *sql.DB and that has either been created locally or provided for you.
+
+Similarly for method receivers, use a consistent name between
+
+[NOTE]
+====
+The convention for short receiver names in Go is at odds with the advice provided so far.
+This is just one of the choices made early on that has become the preferred style, just like the use of CamelCase rather than Snake_case
+====
+
+==== Take away
+
+* short variable names work well when the distance between their declaration and _last_ use is short.
+* long variable names need to justify themselves, the longer they are, the more value they need to bring. Lengthy beurocratic names carry a low amount of signal.
+* the name of your varible shouldn't be longer than its type.
+* never include the name of your type in the name of your variable.
+* constants should describe the value they contain, _not_ where that value is used.
+* Single letter variables for loops and branches, single words for parameters and return values, multiple words for functions and package level things,
+* Single words for methods, single words for interfaces, and always remember that the name of a package is part of the name the caller uses to to refer to it, so make use of that.
+
+=== Use a consistent declaraton style
+
+Go has at least six different ways to declare a variable
+
+* `var x int = 1`
+* `var x = 1`
+* `var x int; x = 1`
+* `var x = int(1)`
+* `x := 1`
+
+I'm sure there are more that I haven't thought of.
+
+With all these different ways of declaraing a variable, how do we find some commonality so rather than everyone having their own style
+
+I want to present a suggestions for how I declare variables in my programs.
+This is  the  style I try to use where possible.
+
+When declaring, but not initialising, a variable, use `var`.
+As Go does not permit uninitialised variables, num will be initialised to the zero value.
+Some other examples of this form might be
+
+----
+var players int 
+
+var things []Thing // an empty slice of Things
+
+var thing Thing // empty Thing struct 
+json.Unmarshall(reader, &thing)
+----
+The key is that `var` acts as a clue that the variable has been deliberately declared as the zero value of the indicated type.
+
+When declaring _and_ initalising, use `:=`
+
+Let's look at why using the previous example, deliberately initalising each variable
+
+----
+var players int = 0
+
+var things []Thing = nil
+
+var thing *Thing = new(Thing)
+json.Unmarshall(reader, thing)
+----
+
+In the first and third examples, there are no automatic coercions from one type to another; the type on the left hand side of the assignment operator _must_ be identical to the type on the right hand side.
+So the compiler can infer the type of the variable being declared from the type on the right hand side
+
+----
+var players = 0
+
+var things []Thing = nil
+
+var thing = new(Thing)
+json.Unmarshall(reader, thing)
+----
+
+What about the middle statement
+
+Of course, with any rule of thumb, there are exceptions.
+Sometimes two variables are closely related so writing
+
+ var min int
+ max := 1000
+
+Woud be odd, so this may be more readable.
+
+ min, max := 0, 1000
+
+However in this case min and max might be constants.
+
+
+
+[TIP]
+====
+When something is complicated, it should stand out.
+
+ var length uint32 = 0x80
+
+Here length may be being used with a library which requires a specific numeric type and this is probably more readable than
+
+ length := uint32(0x80)
+
+====
+
+=== Don't be a maverick
+
+We talked about a goal of software engineering to produce readabile, maintainable, code.
+therefore you will likely spend most of your career working on projects which you are not the sole author.
+
+My personal rule of thumb is; if it fits throught `gofmt` then its not worth holding up a code review for.
+
+Follow the local style.
+Changing styles in the middle of a file is jarring.
+Uniformity, even if its not your preferred approach, is more valuable for maintenance than it is your personal preference.
+
+TIP: If you want to do a renaming across a codebase, do not mix this into another change. If someone is using git bisect they don't want to wade through thousands of lines of renaming to find the code you changed as well.
+
+== Comments
+
+Before we move on to larger things I want to spend a few minutes talking about comments.
+
+"Good code has lots of comments, bad code _requires_ lots of comments."
+-- Dave Thomas and Andrew Hunt, The pragmatic programmer
+
+Comments are very important to the readability of a Go program.
+Comments should do one of three things.
+
+* They should explain _what_ the thing does.
+* They should explain _how_ the thing does what it does.
+* They should explain _why_ the thing is why it is.
+
+
+=== Comments on variables and constants should describe their contents not their purpose
+
+[source,go]
+----
+const randomNumber = 6 // determined from an unbiased die
+----
+For variables without an initial value, the comment should describe the contents of the variable.
+
+[source,go]
+----
+// registry of SQL drivers
+var drivers = make(map[string]*sql.Driver)
+----
+
+[TIP]
+.Hiding in plain sight
+====
+This is a tip from Kate Gregory.
+//footnote:[https://www.youtube.com/watch?v=Ic2y6w8lMPA]
+Sometimes a better name for a variable is right there in the comments.
+
+var sqlDrivers = make(map[string]*sql.Driver)
+
+Now we don't need a comment, the _use_ of the map is right there in it's name.
+====
+
+=== Comments are associative
+
+Keeping documentation up to date is important, but its hard.
+And
+
+The important rule for godoc is comments associate with the declaration that directly follows them
+
+Let's look at an example
+
+=== Always document public symbols
+
+Because godoc _is_ the documentation for your package, you should always add a comment for every public function and method.
+
+Here are two rules from the Google Style guide
+
+- Any function that is not both obvious and short must be commented.
+- Any function in a library must be commented regardless of length or complexity
+
+There is one exception to this rule; you don't need to document methods that implement an interface.
+Specfically don't do this:
+
+ // Read implements the io.Reader interface
+ func (r *FileReader) Read(buf []byte) (int, error)
+
+This comment says nothing.
+It doesn't tell you what the method does, in fact it's worse, it tells you to go look somewhere else for the documentation.
+
+In this sitaution I suggest removing the comment entirely.
+
+Here is an example from the `io` package
+
+----
+// LimitReader returns a Reader that reads from r
+// but stops with EOF after n bytes.
+// The underlying implementation is a *LimitedReader.
+func LimitReader(r Reader, n int64) Reader { return &LimitedReader{r, n} }
+
+// A LimitedReader reads from R but limits the amount of
+// data returned to just N bytes. Each call to Read
+// updates N to reflect the new amount remaining.
+// Read returns EOF when N <= 0 or when the underlying R returns EOF.
+type LimitedReader struct {
+	R Reader // underlying reader
+	N int64  // max bytes remaining
+}
+
+func (l *LimitedReader) Read(p []byte) (n int, err error) {
+	if l.N <= 0 {
+		return 0, EOF
+	}
+	if int64(len(p)) > l.N {
+		p = p[0:l.N]
+	}
+	n, err = l.R.Read(p)
+	l.N -= int64(n)
+	return
+}
+----
+Not now the LimitedReaer declaration is directly preceded by the function that uses it, and the declaration of LimtedReaer's Read method follows the delcaration of LimitedReader itself.
+Even thgouh LimitedReader.Read has no documentation itself, its clear from that Read is an implementation of io.Reader.
+
+
+=== Write the comment for the function first
+
+A suggestion I have for you is before you write the function, write the comment first.
+If you find it hard to write the comment, then it's a sign that the code you're about to write is going to be hard to understand.
+
+=== Don't comment bad code, rewrite it
+
+Comments highlighting the grossness of a particular piece of code are not sufficient.
+If you encounter one of these comments, you should raise an issue as a reminder to refactor it later.
+It is ok to live with technical debt, as long as the amount of debt is known.
+
+The tradition in the standard library is to annotate a todo style comment with the username of the person who noticed it.
+
+   // TODO(dfc) this is O(N^2), find a faster way to do this
+
+The username is not a promise that that person has comitted to fixing the issue, but they may be the best person to ask when the time comes to address it.
+Other project annotate todos with a date and or an issue number, which is a benficial tradition.
+
+=== Rather than comment on a block of code, refactor it
+
+Functions should do one thing only.
+If you find yourself commenting a piece of code because it is antithetical to the rest of the function, consider extracting that into a function of its own.
+
+Smaller functions, in addition to be easier to comprehend, are easier to test in isolation.
+
+== Package Design
+
+In this next section we'll talk about designing a package including the package's name, naming types, writing functinos and methods.
+
+=== A good package starts with its name
+
+Just like we talked about names for variables in the previous section, the name of a package is very important.
+
+Think of your package's name as a one word _elevator pitch_ for what the 
+
+==== Good package names
+
+. Should be unique
+
+[NOTE]
+.Prefer lower case names for packages.
+====
+There are two places where you can give a package a name.
+The first is the `package` declaration at the top of each `.go` file in a directory.
+The second is the name of the directory holding those files.
+
+**Those two names should match**
+
+The first name, the `package` declaration will be visibile as a prefix on every 
+====
+
+==== Avoid package names like `base`, `common`, or `util`
+
+Use the plural; `strings` for string handling utilities.
+
+
+An identifier’s name includes its package name
+Prefer lower case package names and import paths
+
+=== Use guard clauses 
+
+My friend Mat Ryer calls this practice 'line of sight' coding.
+
+
+=== Make the zero value useful
+
+Every variable declaration, assuming no explicit initaliser is provided, will be automatically intialised to a value that matches the contents of zero’d memory.
+This is the value’s zero value.
+The type of the value determines its zero value; for numeric types it is zero, for pointer types nil, the same for
+
+This property of always setting a value to a known default is important for safety and correctness of your program, but can also make your Go programs simpler and more compact.
+This is what Go programmers talk about when they say "give your structs a useful zero value".
+
+Consider the sync.Mutex type.
+sync.Mutex contains two unexported integer fields, representing the variable’s internal state.
+Thanks to the zero value those fields will be set to will be set to 0 whenever a sync.Mutex is declared.
+sync.Mutex has been deliberately coded to take advantage of this property, making the type usable without explicit initialisation.
+
+----
+type AtomicInt struct {
+	mu  sync.Mutex
+	val int
+}
+
+func (a *AtomicInt) Inc() {
+	a.mu.Lock() // a.mu is usable without explicit initialisation.
+	a.mu.val++
+	a.mu.Unlock()
+}
+
+func main() {
+	var i AtomicInt
+
+	i.Inc()
+}
+----
+
+Another example of a type with a useful zero value is bytes.Buffer.
+You can decare a bytes.Buffer and start writing to it without explicit initialisation.
+
+----
+package main
+
+import "bytes"
+import "io"
+import "os"
+
+func main() {
+        var b bytes.Buffer
+        b.Write([]byte("Hello world"))
+        io.Copy(os.Stdout, &b)
+}
+----
+
+A useful property of slices is their zero value is nil. This makes sense if we look at the runtime’s definition of a slice header.
+
+----
+type slice struct {
+        array *[...]T // pointer to the underlying array
+        len   int
+        cap   int
+}
+----
+The zero value of this struct would imply len and cap have the value 0, and array, the pointer to memory holding the contents of the slice’s backing array would be nil.
+This means you don’t need to explicitly make a slice, you can just declare it.
+
+----
+package main
+
+import "fmt"
+import "strings"
+
+func main() {
+        // s := make([]string, 0)
+        // s := []string{}
+        var s []string
+
+        s = append(s, "Hello")
+        s = append(s, "world")
+        fmt.Println(strings.Join(s, " "))
+}
+----
+
+[NOTE]
+====
+var s []string is similar to the two commented lines above it, but not identical. It is possible to detect the difference between a slice value that is nil and a slice value that has zero length. The following code will output false.
+
+package main
+
+import "fmt"
+import "reflect"
+
+func main() {
+        var s1 = []string{}
+        var s2 []string
+        fmt.Println(reflect.DeepEqual(s1, s2))
+}
+====
+
+A surprising, but useful, property of uninitalised pointer variables (nil pointers) is you can call methods on types that have a nil value. This can be used to provide default values simply.
+
+----
+package main
+
+import "fmt"
+
+type Config struct {
+        path string
+}
+
+func (c *Config) Path() string {
+        if c == nil {
+                return "/usr/home"
+        }
+        return c.path
+}
+
+func main() {
+        var c1 *Config
+        var c2 = &Config{
+                path: "/export",
+        }
+        fmt.Println(c1.Path(), c2.Path())
+}
+----
+
+=== Eschew package level state.
+
+. No package level variables.
+. Avoid global side effects.
+
+== Project Structure
+
+Let's talk about combining
+
+=== Consider fewer, larger packages
+Arrange code into files by import statements.
+Prefer nouns for file names.
+Eschew elaborate package hierarchies, resist the desire to apply taxonomy
+
+=== Keep package main small as small as possible
+
+Your main function, and main package should do as little as possible.
+This is because main.main acts as a singleton; there can only be one main function in a program.
+Because main.main is a singleton there are a lot of assumptions built into the things that main.main will call that they will only be called during main.main or main.init, and only called _once_.
+
+This makes it hard to write tests for code written in main.main.
+
+TIP: main should parse flags, open connections to databases, loggers, and such, then hand off execution to a high level object.
+
+== API Design
+
+The final piece of design advice I'm going to give today is potentailly the most important.
+
+All of the suggestions I've made so far are just that, suggestions.
+These are the way I try to write Go, but I'm not going to push them hard in code review.
+
+However when it comes to reviewing APIs in code review, I am less forgiving.
+This is because everything we've talked about so far can be fixed without breaking backward compatability; they are, for the most part, internal details.
+
+=== Design APIs that are hard to misuse.
+
+If you take anything away from this presntation, it is this advice
+
+"Design APIs that are hard to misuse"
+-- Dave Cheney
+
+
+
+=== Design APIs for their default use case.
+
+_Never_ pass `nil` as an API parameter
+
+I want to give a few 
+
+Go has a nullable type, NULL, nil, null, whatever.
+This tends to upset people who come from a Java or C#, perhaps C++ background because they are traumatised by 
+
+I offer to you that nil is not a problem in Go if you follow two simple rules
+
+. Always check your errors; the biggest source of accidental nil values is poor error handling. We'll talk more about error handling in the next section
+. Never explicitly pass nil into a function or method.
+
+==== Be wary of functions which take several parameters of the same type
+
+Let's compare two function signatures
+
+ func Max(a, b int) int
+ func CopyFile(to, from string) error
+
+What's the difference between these two functions?
+Obviously one returns the maximum of two numbers, the other copies a file, but that's not the important thing.
+
+ Max(8, 10) // 10
+ Max(10, 8) // 10
+
+Max is _commutative_; the order of the parameters does not matter.
+
+What about this
+
+ CopyFile("/tmp/backup", "presentation.md")
+ CopyFile("presentation.md", "/tmp/backup")
+
+Which one of these made a backup of your presentation and which one overwrite your presentation with last week's version?
+
+One solution is to 
+
+----
+package main
+
+func copyFile(to, from string) error { return nil }
+
+type Source string
+
+func (src Source) CopyTo(dest string) error {
+	return copyFile(dest, string(src))
+}
+
+func main() {
+	var from Source = "presentation.md"
+	from.CopyTo("/tmp/backup")
+}
+----
+
+
+
+=== Prefer var args to []T parameters
+
+It's very common to write a function or method that takes a slice of values.
+
+----
+func ShutdownVMs(ids []string) error
+----
+
+Let's come back to our average age example
+
+----
+type Person struct {
+        Name string
+        Age int
+}
+
+// AverageAge returns the average age of people.
+func AverageAge(people []Person) int {
+        if len(people) == 0 {
+                return 0
+        }
+
+        var count, sum int
+        for _, p := range people {
+                sum += p.Age
+                count += 1
+        }
+
+        return sum/count
+}
+----
+
+The problem is the caller can do something like this
+
+ avg := AverageAge(nil)
+
+So we have to avoid the divide by zero condition here with a check.
+Arethmetically the average age of zero people isn't zero, its unknown. So what'd we'd really like is to ensure that the caller always averages at least one person.
+
+Consider this
+
+----
+type Person struct {
+        Name string
+        Age int
+}
+
+// AverageAge returns the average age of people.
+func AverageAge(first Person, rest ...Person) int {
+        count, sum := 1, first.Age
+        for _, p := range rest {
+                sum += p.Age
+                count += 1
+        }
+
+        return sum/count
+}
+----
+Now the caller cannot use AverageAge unsafely, it always returns a numerically sensible answer.
+
+ me := Person{ Name: "David", Age: 42 }
+ avg := AverageAge(me) // 42
+
+The syntax is a little more complicated for the caller if there is more than one element
+
+ qcon := make([]People, 1200) 
+ avg := Average(qcon[0], qcon[1:])
+
+
+
+
+
+
+=== Let callers define the interface they require
+
+As a concrete example, say I've been given a task to write a function that persists a Document structure to disk.
+
+----
+// Save writes the contents of doc to the file f.
+func Save(f *os.File, doc *Document) error
+----
+I could specify this function, Save, which takes an `*os.File` as the destination to write the `Document`.
+But this has a few problems
+
+The signature of `Save` precludes the option to write the data to a network location.
+Assuming that network storage is likely to become requirement later, the signature of this function would have to change, impacting all its callers.
+
+`Save` is also unpleasant to test, because it operates directly with files on disk. So, to verify its operation, the test would have to read the contents of the file after being written.
+
+And I would have to ensure that `f` was written to a temporary location and always removed afterwards.
+
+`*os.File` also defines a lot of methods which are not relevant to `Save`, like reading directories and checking to see if a path is a symlink.
+It would be useful if the signature of the `Save` function could describe only the parts of `*os.File` that were relevant.
+
+What can we do ?
+
+----
+// Save writes the contents of doc to the supplied
+// ReadWriterCloser.
+func Save(rwc io.ReadWriteCloser, doc *Document) error
+----
+
+Using `io.ReadWriteCloser` we can apply the interface segregation principle to redefine `Save` to take an interface that describes more general file shaped things.
+
+With this change, any type that implements the `io.ReadWriteCloser` interface can be substituted for the previous `*os.File`.
+
+This makes `Save` both broader in its application, and clarifies to the caller of `Save` which methods of the `*os.File` type are relevant to its operation.
+
+And as the author of `Save` I no longer have the option to call those unrelated methods on `*os.File` as it is hidden behind the `io.ReadWriteCloser` interface.
+
+But we can take the interface segregation principle a bit further.
+
+Firstly, it is unlikely that if `Save` follows the single responsibility principle, it will read the file it just wrote to verify its contents--that should be responsibility of another piece of code.
+
+----
+// Save writes the contents of doc to the supplied
+// WriteCloser.
+func Save(wc io.WriteCloser, doc *Document) error
+----
+
+So we can narrow the specification for the interface we pass to Save to just writing and closing.
+
+Secondly, by providing `Save` with a mechanism to close its stream, which we inherited in this desire to make it still look like a file, this raises the question of under what circumstances will `wc` be closed.
+
+Possibly Save will call Close unconditionally, or perhaps Close will be called in the case of success.
+
+This presents a problem for the caller of `Save` as it may want to write additional data to the stream after the document is written.
+
+----
+// Save writes the contents of doc to the supplied
+// Writer.
+func Save(w io.Writer, doc *Document) error
+----
+
+A better solution would be to redefine `Save` to take only an `io.Writer`, stripping it completely of the responsibility to do anything but write data to a stream.
+
+By applying the interface segregation principle to our `Save` function, the results has simultaneously been a function which is the most specific in terms of its requirements--it only needs a thing that is writable--and the most general in its function, we can now use Save to save our data to anything which implements io.Writer.
+
+=== Prefer streaming interfaces
+
+Consider these two methods that read data from a file.
+
+----
+func (f *File) Read(buf []byte) (int, error)
+func (f *File) Read() ([]byte, error)
+----
+The first is well known to all Go programmers as `io.Reader`.
+
+We all know how to use the `io.Reader` interface: you pass a buffer to `Read` and it returns the number of characters read into that buffer and possibly an error.
+
+----
+buf := make([]byte, 8192)
+n, err := f.Read(buf)
+buf = buf[:n] // reslice buffer
+if err != nil {
+	// now handle error
+	...
+}
+...
+----
+
+Wouldn't this be easier if Read returned a buffer of what it read, like this
+
+
+
+. Use type assertions for optional behaviour
+
+== Error handling
+
+I've given several presentations about error handling footnote:[https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully] and written a lot about error handling on my blog.
+I also spoke a lot about error handling in yesterday's session so I won't repeat what I've said.
+
+- https://dave.cheney.net/2014/12/24/inspecting-errors
+- https://dave.cheney.net/2016/04/07/constant-errors
+
+Today we'll cover two other areas related to error handling.
+
+=== Elminate handling by eliminating errors
+
+If you were in my presentation yesterday I talked about the draft proposals for improving error handling.
+But do you know what is better than 
+
+This section draws inspiration from John Ousterhout's recently book, A philosophy of Software Design footnote:[https://www.amazon.com/Philosophy-Software-Design-John-Ousterhout/dp/1732102201].
+One of the chapters in that book is called "Define Errors Out of Existence".
+We're going to try to apply this advice to Go.
+
+==== Counting lines
+
+Let's write a function to count the number of lines in a file.
+
+----
+func CountLines(r io.Reader) (int, error) {
+        var (
+                br    = bufio.NewReader(r)
+                lines int
+                err   error
+        )
+
+        for {
+                _, err = br.ReadString('\n')
+                lines++
+                if err != nil {
+                        break
+                }
+        }
+
+        if err != io.EOF {
+                return 0, err
+        }
+        return lines, nil
+}
+----
+
+Because we're following our advice from previous sections, `CountLines` takes an io.Reader, not a *File; its the job of the caller to provide the io.Reader who's contents we want to count.
+
+We construct a bufio.Reader, and then sit in a loop calling the ReadString method incrementing a counter until we reach the end of the file, then we return the number of lines read.
+At least that's the code we want to write, but instead this function is made mode complicated by error handling.
+
+First, there is this strange construction
+
+----
+                _, err = br.ReadString('\n')
+                lines++
+                if err != nil {
+                        break
+                }
+----
+We increament the count of lines _before_ checking the error--that looks odd.
+
+The reason we have to write it this way is ReadString will return an error if it encounters and end-of-file before hitting a newline character.
+This can happen if there is no final newline in the file.
+
+To try to fix this, we rearrange the logic to increment the line count, then see if we need to exit the loop.
+
+NOTE: this logic still isn't perfect, can you spot the bug?
+
+And we're not done checking errors yet.
+ReadString will return `io.EOF` when it hits the end of the file.
+This is expected, `ReadString` needs some way of saying _stop, there is nothing more to read_.
+So before we return the error to CountLine's caller, we need to check if it was _not_ io.EOF, and in that case propogate it up, otherwise we return nil to say that everything worked fine.
+
+I think this is a good example of Russ Cox's observation that error handling can obscure the operation of the function.
+
+Let's look at an improved version.
+
+----
+func CountLines(r io.Reader) (int, error) {
+        sc := bufio.NewScanner(r)
+        lines := 0
+
+        for sc.Scan() {
+                lines++
+        }
+        return lines, sc.Err()
+}
+----
+This improved version switches from using `bufio.Reader` to `bufio.Scanner`.
+
+Under the hood the scanner uses bufio.Reader, but it adds a nice layer of abstraction which helps clarify CountLines.
+Scanner can scan for any pattern, but by default it looks for newlines.
+The method, `sc.Scan()` returns true if the scanner has matched a line of text and _has not_ encountered an error.
+So, the body of our for loop will be called only when there is a line of text in the scanner's buffer.
+This means our revised CountLines correctly handles the case where there is no trailing newline, and also handles the case where the file was empty.
+
+Secondly, as sc.Scan returns false once an error is encountered our for loop will readlines only until the end of file, or an error is encountered.
+The scanner type memoises the first error it encountered and we can recover that once we've exited the loop using the sc.Err() value.
+
+Lastly, the scanner's Err() method takes care of handling io.EOF and will return nil if the end of file was reached successfully.
+
+==== WriteResponse
+
+The second example is inspired from the _Errors are values_ blog post footnote:[https://blog.golang.org/errors-are-values].
+
+We've seen earlier examples dealing with opening, writing and closing files.
+The error handling is present, but not overly onerous as the operations can be encapsulated in helpers like `ioutil.ReadFile` and `ioutil.WriteFile`.
+However when dealing with low level network protocols it becomes necessary to build the response 
+
+TIP: When you find yourself faced with overbearing error handling, try to extract some of the operations into a helper type.
+
+=== Only handle an error once
+
+Lastly, I want to mention that you should only handle errors once. Handling an error means inspecting the error value, and making a _single_ decision.
+
+----
+// WriteAll writes the contents of buf to the supplied writer.
+func WriteAll(w io.Writer, buf []byte) {
+        w.Write(buf)
+}
+----
+If you make less than one decision, you’re ignoring the error.
+As we see here, the error from `w.WriteAll` is being discarded.
+
+But making _more than one_ decision in response to a single error is also problematic.
+The following is code that I come across frequently.
+
+----
+func WriteAll(w io.Writer, buf []byte) error {
+        _, err := w.Write(buf)
+        if err != nil {
+                log.Println("unable to write:", err) // annotated error goes to log file
+                return err // unannotated error returned to caller
+        }
+        return nil
+}
+----
+In this example if an error occurs during `w.Write`, a line will be written to a log file, noting the file and line that the error occurred, and the error is also returned to the caller, who possibly will log it, and return it, all the way back up to the top of the program.
+
+The caller is probably doing the same
+
+----
+func WriteConfig(w io.Writer, conf *Config) error {
+	buf, err := json.Marshal(conf)
+	if err != nil {
+		log.Printf("could not marshal config: %v", err)
+		return err
+	}
+	if err := WriteAll(w, buf); err != nil {
+	        log.Println("could not write config: %v", err)
+	        return err
+	}
+	return nil
+}
+----	
+
+So you get a stack of duplicate lines in your log file, 
+
+ unable to write: io.EOF
+ could not write config: io.EOF
+
+but at the top of the program you get the original error without any context.
+
+ err := WriteConfig(f, &conf)
+ fmt.Println(err) // io.EOF
+
+I want to dig into this a little further because I dont' see the problems with logging _and_ returning as just a matter of personal preference.
+
+----
+func WriteConfig(w io.Writer, conf *Config) error {
+        buf, err := json.Marshal(conf)
+        if err != nil {
+                log.Printf("could not marshal config: %v", err)
+        }
+        if err := WriteAll(w, buf); err != nil {
+                log.Println("could not write config: %v", err)
+                return err
+        }
+        return nil
+}
+----
+
+The problem I see a lot is programmers forgetting to return from an error.
+As we talked about earlier, Go style is to use guard clauses, checking preconditions as the function progresses and returning early.
+
+In this example the author checked the error, logged it, but _forgot_ to return.
+This has caused a subtle bug.
+
+Because the json marshalling failed, the contents of buf are unknown, maybe it contains nothing, but worse it could contain a 1/2 written json fragment.
+The contract for error handling in Go says that you cannot make any assumptions about the contents of other return values in the presence of an error.
+
+Because the programmer forgot to return from the function, the corrupt buffer will be passed to WriteAll, which will probably succeed and so the config file will be written incorrectly.
+However the function will return just fine, and the only indiciation that a problem happened will be a teltail log line
+
+==== Add context to errors
+
+
+
+----
+func WriteConfig(w io.Writer, conf *Config) error {
+        buf, err := json.Marshal(conf)
+        if err != nil {
+                return fmt.Errorf("could not marshal config: %v", err)
+        }
+        if err := WriteAll(w, buf); err != nil {
+                return fmt.Errorf("could not write config: %v", err)
+        }
+        return nil
+}
+
+func WriteAll(w io.Writer, buf []byte) error {
+        _, err := w.Write(buf)
+        if err != nil {
+		return fmt.Errorf("write failed: %v", err)
+        }
+        return nil
+}
+----
+
+
+func Write(w io.Write, buf []byte) error {
+        _, err := w.Write(buf)
+        return errors.Wrap(err, "write failed")
+}
+Using the errors package gives you the ability to add context to error values, in a way that is inspectable by both a human and a machine.
+
+
+== Concurrency
+
+. Never start a goroutine without when it will stop.
+When sending or receiving on a channel, consider what happens if the other party never receives the message
+. Keep yourself busy while waiting for a goroutine.
+or, do the work yourself.
+. Leave concurrency to the caller

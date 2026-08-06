@@ -1,0 +1,9 @@
+= Just stop already
+
+Go's concurrency support is one of its headline features. 
+Goroutines are so easy to use, just add `go ` in front of a statement and you've spawned a new subprocess.
+No threads, no thread executors, no thread ids, no completion status.
+
+Except its not that simple
+
+In this talk I'll discuss why managing the lifetime of your programs goroutines is important, why 

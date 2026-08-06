@@ -1,0 +1,19 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/pkg/json
+cpu: Apple M4 Max
+                                              │ decoder1.txt │            decoder4.txt            │             decoder5.txt             │
+                                              │     B/s      │     B/s       vs base              │      B/s       vs base               │
+DecoderNextToken/pkgjson/canada-16              730.7Mi ± 1%   719.5Mi ± 1%  -1.53% (p=0.015 n=6)    809.9Mi ± 1%  +10.84% (p=0.002 n=6)
+DecoderNextToken/encodingjson/canada-16         85.03Mi ± 0%   84.14Mi ± 2%       ~ (p=0.065 n=6)    85.38Mi ± 1%   +0.41% (p=0.002 n=6)
+DecoderNextToken/pkgjson/citm_catalog-16        1.244Gi ± 2%   1.190Gi ± 2%  -4.31% (p=0.002 n=6)    1.315Gi ± 1%   +5.73% (p=0.002 n=6)
+DecoderNextToken/encodingjson/citm_catalog-16   198.9Mi ± 1%   201.6Mi ± 1%  +1.38% (p=0.041 n=6)    200.7Mi ± 1%   +0.92% (p=0.009 n=6)
+DecoderNextToken/pkgjson/twitter-16             991.5Mi ± 1%   970.0Mi ± 1%  -2.17% (p=0.002 n=6)   1071.3Mi ± 1%   +8.05% (p=0.002 n=6)
+DecoderNextToken/encodingjson/twitter-16        113.5Mi ± 1%   112.4Mi ± 2%       ~ (p=0.180 n=6)    114.0Mi ± 1%        ~ (p=0.258 n=6)
+DecoderNextToken/pkgjson/code-16                628.1Mi ± 4%   600.8Mi ± 1%  -4.35% (p=0.002 n=6)    726.6Mi ± 6%  +15.67% (p=0.002 n=6)
+DecoderNextToken/encodingjson/code-16           58.64Mi ± 1%   59.07Mi ± 1%  +0.74% (p=0.026 n=6)    58.52Mi ± 1%        ~ (p=0.589 n=6)
+DecoderNextToken/pkgjson/example-16             957.9Mi ± 1%   936.5Mi ± 0%  -2.23% (p=0.002 n=6)   1050.5Mi ± 1%   +9.66% (p=0.002 n=6)
+DecoderNextToken/encodingjson/example-16        107.4Mi ± 1%   109.0Mi ± 1%  +1.53% (p=0.009 n=6)    108.2Mi ± 1%        ~ (p=0.240 n=6)
+DecoderNextToken/pkgjson/sample-16              1.834Gi ± 1%   1.833Gi ± 1%       ~ (p=0.818 n=6)    1.867Gi ± 1%   +1.77% (p=0.002 n=6)
+DecoderNextToken/encodingjson/sample-16         423.8Mi ± 2%   436.2Mi ± 2%  +2.95% (p=0.002 n=6)    431.2Mi ± 2%   +1.76% (p=0.002 n=6)
+geomean                                         363.6Mi        360.5Mi       -0.86%                  380.1Mi        +4.53%

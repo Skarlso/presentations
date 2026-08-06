@@ -1,0 +1,1132 @@
+= The things I keep repeating in Go
+Dave Cheney <dave@cheney.net>
+v1.0, 8th November, 2024
+:toc:
+
+== Introduction
+
+* Hey there everybody!
+
+Hello, for those who I haven't met, my name is David and through Go's long affiation with Sydney, I've had the privilege to work as a Go programmer for more than a decade.
+Since transitioning to being a full time go programmer I’ve written Go at 8 different companies, been the tech lead for half a dozen different projects.
+I’ve contributed to dozens of proect and read and reviewed code for hundreds more.
+
+But the goal is not to toot my own horn here.
+Instead, what I want to say is this experience has allowed me to form some pretty strong opinions about what makes good, readable, maintainable, Go code.
+I'm here today to share some of those opinions with you today.
+
+I settled on naming this talk, the "things I keep repeating about Go" because this is a talk about the ideas that I find myself repeating, reimplementing, across those projects, and continue to refine throughout my career as a Go programmer.
+I want to share a few of those with you today.
+
+Today we’re going to talk bout five things
+- Names; names of identifiers, names of types, functions and packages and how that influences your design.
+- Initialisation; if you’re wondering how I intends to spend 10 minutes talking about the complexity of assigning a value to a variable, prepare to be amazed. 
+- Helpers; extending your vocabulary and be clearer about what your trying to say in your code
+- Logging; im going to opine about logging or more specifically _not_ logging
+- Goroutine management ; no goroutine left behind as I promised Chewxy that I would present a solution using just one slide
+
+== Identifiers
+
+* lord help me i'm back on my bullshit
+
+I want to take a few minutes and talk about names; the names of variables, constants, the names or functions, the names of types and the name of packages.
+All of the things that we can give names to in a program
+If there is one thing that I think taht we can all be a journey of continuious self improvement, it is obsessively fretting about naming.
+
+=== Long vs short, what's the ideal length for a variable?
+
+* it was the style of the time
+
+A lot of Go programmers, certainly folks of my generation, we got our start with the Go tutorial, so we've all internalised the Pike style short identifiers.
+Thusly, we've all had, or read, or reacted too, the perenial flame wars about the short identifiers vs long.
+
+It’s not unusual to have a short variable name in a local scope; the smaller the scope the smaller the name.
+The small the scope, the less impact the code has, thus the less impact the name of the local variables.
+
+> The greater the distance between a name's declaration and its uses, the longer the name should be.
+> Andrew Gerrand -- https://go.dev/talks/2014/names.slide#4
+
+The long gone, but not forgotten Andrew Gerrand, proposed this razor; the best identifier is the shortest one that captures its rason d'etra.
+And thusly  lot of ink has been spilled over the years about local identifiers; in retrospect I believe this is missing the point, because local identifiers have the smallest scope — the real value -- even though you read code in small scopes more often, is in the larger scopes; function names, method names, types, packages.
+Thats where to put your effort, because The question of long identifiers vs short is not as important as _consistency_
+
+This means
+- Put the important parts at the beginning; not the end — this isn’t a triller novel, you don’t need to keep the reader in suspense til the end of the identifier. This is especially important when theres more than one thing of the same type in scope.
+- If the name carries no meaning, then it doesn’t need a long name
+
+Here's an example, from a pernicious piece of code which didn't learn the right way to handle a null boolean from the `sql` package.
+
+----
+func isTrue(boolPtr *bool) bool {
+	if boolPtr != nil {
+		return *boolPtr
+	}
+
+	return false
+}
+----
+Does including the name of the type in the name of a variable of that type make it more or less type safe?
+Does boolPtr really carry more information than bp, or perhaps just p?
+
+----
+func isTrue(p *bool) bool {
+	if p != nil {
+	return *p
+	}
+	return false
+}
+----
+
+Or perhaps even
+
+----
+func isTrue(p *bool) bool {
+	return p != nil && *p
+}
+----
+
+This is a contrived example, but hopefully shows that the importnat part of the function; the logic, is not the name of the formal parameter.
+
+But it’s unlikely you would encounter a function called r, even less that you’d find a type or even a package called r, or any other single letter; testing.T not withstanding.
+The shortest you’d find would probably be acronyms, io, http, which describe their utility through the shared understanding of those acronyms.
+
+=== Be consistent
+
+The duality of a go package, as the author you spend so much time inside the package yet the callers know your types by an entirely different name.
+
+Something that I have started to do recently is naming the local variable after the receieve of the type; For example we have a type called Request in a package called completion.
+Traditionally you might see something like this
+
+----
+package completion
+
+type Request struct { ... }
+
+func (r *Request) String() string { ... }
+----
+
+Following the ports and adapters style, The completion request is built from a http.Request, so the first thing we do in a http handler is this
+
+----
+func (h *Handler) ServeHTTP(rw http.ResponseWriter, req http.Request) {
+   creq, err := completion.NewRequest(req)
+   if err != nil { ... }
+   ...
+}
+----
+
+Here we're passing the http request to a completion.NewRequest factory; which returns you a validated completion Request.
+So there's two problems, in this _very_ common use case, we can't use `req` as that is already defined to be a http.Request.
+
+What could we call the result? We could call it `r`, but that might mean in other context, where `req` is not defined it might be known as `req`, because `r` might be taken by io type things.
+
+The pattern i've been adopting is two fold;
+
+- Here i've called it `creq` and abandon the identified `req` to be always shorthand for http Requests.
+- adding a `c` at the front to indicate its a completion request, not any other kind of requests -- which at some points during out system we did have. `creq`, fairly uncontraversial
+- secondly, this _also_ becomes the name of the _receiver_
+
+----
+package completion
+
+type Request struct { ... }
+
+func (creq *Request) String() string { ... }
+----
+
+Which means whenever the reader sees a `creq`, inside the completion package, or outside, a `creq` is _always_ and intravertably a completion Request.
+
+
+=== Function names are more important than comments
+
+Kate Gregory spends a long time in Beautiful C++ talking about comments, specifically if you can give an identifier a good enough name, it may not need a comment.
+I keep this piece of advice close to my heart when I'm sitting in front of a keyboard.
+
+There are fundamentally three types of comments
+
+- What something is; the name of an identifer is not sufficient to describe it.
+- Why something is; why the _value_ of an identifier may be unexpectedly notable.
+- Why it came to pass that this thing is what it is; a novella describing how it came to pass that this code wart is here, in your face.
+
+I recently reviewed this piece of code,
+
+----
+func ValidateChildren(parent *Node) []*Node { ... }
+----
+
+The body of the function doesn't matter, we know all we need to know from its name.
+Can you tell me a few problems with this definition
+
+It's called validate, but it doesn't return an error.  How is it going to communicate an invalid state.
+And in fact this code was not validating anything, it was flating the the graph of nodes passed to it.
+
+Again, a contrived example and I expect your experiences in the real world to be subtler, but hopefully this gives you a whiff.
+
+=== Not everything needs a name
+
+Sometimes an identifiers name is so unimportant you can forgot it entirely. In fact, giving the identifier a name may be counter productive.
+
+An example taken from a recent piece of code; in parsing completion requests the competion.Request type above is not what we JSON decode into; we decode into an intermediary type, then copy the fields we care about into the actual completion request.
+
+So, what should we call this intermediate type; this request, but not the actual request. What if we didn't give it any name at all?
+
+----
+package compleition
+
+func NewRequest(r io.Reader) (*Request, error)
+var v struct {
+   Prompt string `json:"prompt"`
+   Stop Stop `json:"stop"`
+   ...
+}
+err := json.NewDecoder(r).Decode(&v)
+if err != nil { ... }
+var creq Request
+// validate v and populate creq
+return &creq, nil
+----
+
+This intermediate type is so transient it doesn't need a name, there's never more than one of them, they're never visible outside this function
+
+=== Package names
+
+- `package io`, obviously contains input/output types, functions, types, etc
+- `package strings`, obviously contains types and functions related to the manipulation of strings.
+- `net/http`, possibly one of the best package names because of implied relationship between networking and http, contains just about everything one needs to work with http.
+
+A good package's name should describe what the package _provides_, not what it contains.
+This is my mantra for assessing package names, but its incomplete, for example
+
+- `github.com/mycompany/whimisalmicroservice/api` - yes, this provides an api, and api for the whymsical microservice, but in the context of this
+
+This is also why api is a bad name; who’s api, which api, is it a package for creating or consuming your api, or a package for creating or consuming apis in general?
+
+Perhaps this is permissible in an internal package, we have a model package in my current project, but this exists to hold types and helpers specifically for dealing with upstream data types specific to this project. 
+
+We'll see later some examples where I think `internal` is an opportunity to break these rules in favor of expressability.
+
+=== Fewer files, fewer packages
+
+Can I get a show of hands of whose been symied by an import loop error?
+Yes, and how did you solve it?
+
+I'll wager that most of you tried to take the type that was causing the loop and pull it up into its own package.
+And then you repeated this the next time you hit an import loop error,
+and again,
+and again,
+and again.
+If you're in this situation, did it feel like adding more packages, carving types into smaller and smaller units and arranging them in a ricketty doghouse architecture feel like winning?
+
+I know none of you will believe me, and you'll have to learn this lesson yourself, but when writing Go, err on the side of larger files, fewer files, and fewer packages.
+The latter is especially important.
+
+The way to break import loops is not to banish the offending type to its own naughty corner package, but to describe your dependenices using interfaces, not types.
+
+=== divide files by what they import
+
+I suggested fewer files per package, but what rubric should we use to decide how many files?
+
+Personally I start out with a single file per package, named after the package, and pair it with a single _test.go file.
+Don't over think it, don't over engineering it, brevity is the soul of wit.
+
+But, what do we do for packages that grow beyond a single file, how should we lay things out?
+We're not programming in Java, so a file per class is ont the way to go.
+
+Instead I use the import set of a file as a proxy for its completity,
+The longer the import list, the more the code in this file is doing and thus the opportunity to rearrange things to reduce the cognitive load per file.
+
+This isn't necessarily a show stopper, there are good reasons for this occasionally; a file which provides the constructor to glue together a lot of types, helpers and interfaces from other packages into a simpler API.
+But you have to wonder, why are there _so many_ packages providing so little that they can't be used,
+a. by themselves directly
+b. that are so complicated that they need a helper in a different package to soften the blow.
+But I digress.
+
+One of the ways that I use the import set as an aide to making my code easier to read and reason about is to try to consolidate all the code that uses a specific import into its own file within the package.
+
+Obviously the stdlib is an outlier here, but not as much as you think. Everyone's going to import "errors" and "fmt", but "io", or "bufio", or "net", or "http"?
+To make a broad observation, if every file in your package imports io so it can talk about io.Readers or io.Writers, perhaps the package is too low level, rather than working with raw bytes you can create a higher level abstraction.
+I often try to isolate the `net` dependency in a package to a single file, usually for client or server (sometimes both) behaviour.
+I've found this generally leads to a "ports and adapters", (sometimes called the hexagonal architecture), style.
+
+`net/http` is similar, I've found my designs are cleaner when I move away from the http.Request/http.Response types either by using the body as an io.Reader or io.Writer, or by consuming the request and creating a new Request type which is independant of the protocol.
+I'll come back to this in a bit.
+
+
+Always be refactoring your functions to make them smaller; this makes the caller easier to read because less code is generaly easier to reason about. But, pushing a part of a function into its own means you have to give it a name, and that name can, when done well, amplify the intent of the little bit of functionally that you chipped away. 
+
+=== Design
+
+I want to put a bow around this section,
+
+When I struggle with programming tasks it is in large part because I don’t have a strong conceptual understanding of the moving parts of the problems. I can’t visualise them so I cannot manipulate them.
+
+Concersly, the solutions I’m most proud of layered upon a data model that described the problem and the actors within it so well that additions and improvements were simply a case of filling out the unfinished parts.
+
+> I do maintain that if your naming is wrong, your entire design is wrong. -- Morrissey
+
+Naming is everything, it tells you everything about your program becasue clunky names, contradictory prose tells you where your design needs work -- if its hard to talk about, its hard to use --
+if you need to clarify each declartion or use with a comment, that's your design pleeding you its needs work
+
+- Shorter is better than longer. All things being equal, a short name takes up less space on the page and less space in your head.
+Gerrands rule; a name should be as short as possible and no shorter.
+- Put the unique parts at the front (not the back).
+This becomes even more 
+- Name the receiver and the local var the same; give creq answer
+- Name packages after what they can do for you, not what they contain.
+
+== Writing fewer conditionals for more readable code
+
+I want to turn to initalisation.
+
+In writing this talk I've reflected a lot on the the bugs I've written, the code i've reviewed, the incidents etc, and the central theme of all of this can be summed up as
+
+* `if` is bad, `else` is worse
+
+That is, the `if`, the conditional, the selection in, `sequence`, _`selection`_, `iteration`, the cornerstone of procedural programming, is something I try to avoid.
+I try to write as much code as I can without an `if` statement
+
+
+I'd say the biggest change in my coding style over time is I'm developing an increasing dislike of conditional statements. 
+To summarise the phylosophy of this section its simply that I've come to believe that `if` is bad, and `else` is worse.
+
+That is, every time I see an `if` statement in my code, i'm looking for ways to elimate it.
+If i see an `else` statement, i'm incentivised to redesign that bit of code to eliminate the else.
+
+Our brains are 99% animal instict with dusting of self awareness and neurosis, anything we can do to reduce the cognitive load when reading code we should.
+I've talked at length about better names for better code, the second part of this story is the actual flow of statements.
+
+By way of explaining myself I am not arguing for a functional style, or that conditional statements are bad per-sey, but more and more, just as people would argue that the error handing in Go code "got in the way", i'm of the mind that conditionals in your code "get in the way" of reading the logic.
+
+Let's unpack this a bit.
+
+=== once and only once
+
+Here's a very common scenario
+
+----
+var thing Thing
+if ctx.Environment == "production" {
+    thing = &RealThing{ ... }
+} else {
+    thing = &MockThing{ ... }
+}
+...
+----
+
+Removing the `else` in this case is trivial
+
+----
+var thing Thing = &MockThing{ ... }
+if etc.Environment == "production" {
+   thing = &RealThing { ... }
+}
+----
+
+This is an improvement because at least we're declaring thing to have _a_ value, even if it defaults to the mock.
+Now, even if someone monkeys with the conditional, thing is going to be initalised to something.
+
+I'm sure that more than one of you in the audience are cringing about perforance. what if making a mock thing is expensive, we're paying double in production.
+Arguably it depends on context, if this is setup code, its unlikely that this will be an issue. If this occurs per request then I would agree that this is an easily avoided cost.
+
+----
+func newThing(env string) Thing {
+	switch env {
+	case "production":
+		return &RealThing
+	default:
+		return &RealThing
+	}
+}
+
+var thing = newThing(ctx.Environment)
+----
+
+You're probably not surprised to see that to solve this I've created a helper function and pushed the conditional in there.
+You're possibly saying -- well smartie pants, you didn't get rid of the if, you just moved it. 
+My rebuttal will be that in moving the conditinoal logic to a helper I've achive several improvements
+
+1. in the caller thing is always initalised when it's declared. As the reader of this code you don't need to worry about what the thing is or how it was created, other than knowing theres a thing, and it is conditional on the enviroment youre running in.
+2. newThing is now a free function, you can write a unit test around it easily, rather than the larger context of its caller.
+3. newThing is now clearer about what it is doing, its not conditionally initalising thing any more, rather it is clear it is select a concrete type based on the enviroment. 
+
+===  Keep to the left
+
+Mat Ryer coined the term _keep to the left_.
+Without taking away from this, you may also know it as _guard clauses_, or _preconditions_.
+Whatever the name, the goal is to keep the -- so called -- happy path as close to the left margin as possible.
+
+As an example I could have written newThing like this
+
+----
+func newThing(env string) Thing {
+    if env != "production" {
+           return &MockThing
+    }
+    return &RealThing
+}
+----
+Indicating that production is the expected case and the others are exceptional
+But in keeping with my dislike of if I prefer switch because it re-enforces that this code is a selection; we're selecting a thing based on the enviroment, and it makes extending the logic to additonal enviroments straight forward without else, if else, or multiple if conditions.
+
+The guard clause style common to Go programmers so this is a good thing, but my suggestion to you is to be vigilent when you find the importnat, critical, unusual, or otherwise spicy code launching itself towards the right hand margin in a sea of braces.
+
+* note, some days I wish the roles of `switch` and `select` were reversed.
+
+So, lets talk about those conditionals
+
+=== Don't check, just return
+
+Error checking is a fact of life in Go.
+Pretty much everything you can do, you need to check if it worked
+
+----
+    service, err := builder.With(....).With(...).With(...).Build()
+    if err != nil {
+        return nil, err
+    }
+    return service, nil
+----
+
+This is so commonplace we probably do it by rote, but don't miss the opportunity to simply write
+
+----
+	return builder.With(...).With(...).With(...).Build()
+----
+
+because the caller will also be doing its own error checking.
+
+=== main.main calls main.run
+
+Another Mat Ryer gem is the main.run pattern.
+
+Let's face it, main.main is odd;
+- it doesn't return an error -- possibly the _most_ important in a Go program and you can't return an error from it.
+- it carries with it a stack of implicit state; the environment, the os args, std in, std out, etc
+
+Testing main.main can be complicated, in those tests I've seen a lot of manipulation of global state, manipulating args, putting them back, which inhibits t.Parallel, and honestly just feels grotty.
+
+But one of the oddests things I've noticed about projects where main.main does all the setup directly is usually that setup is most fraught.
+
+The exmple from a recent project was what to do when you fail to setup the logger.
+
+Not surprisingly this came up because bloody loggers are global state and whne it failed to initalise, using the logger to try to report that error caused a nil panic.
+
+----
+package main
+
+import "fmt"; import "os"
+
+func main() {
+	if err := main.run(os.Env, os.Stdin, os.Stdout); if err != nil {
+	   fmt.Sprintf(os.Stderr, err)
+	   os.Exit(1)
+	}
+}
+
+func run(env, stdin, stdout) error { ... }
+----
+
+Now you can put all your process setup logic in a regular go function.
+Problem during that setup, just return the error.
+
+Depending on the project main.run may live in another package, its mostly the same, your main.main is just the thinnest shim that calls the actual main function and exits on error.
+
+===  Conditions should naturally be negative
+
+In my current project we have a very important piece of code when making a call to our upstream provider to ask them not to record the request if our customer hasn't given us permisison.
+You might expect it to look like this.
+
+----
+if !creq.Metadata.Token.RestrictedTelemetry {
+   // send headers to ask not record
+}
+----
+
+but what it actually looks like is this.
+
+----
+if creq.DenyTelemetry() {
+   // send headers to ask not record
+}
+
+func (creq *Request) DenyTelemetry() bool {
+    return !creq.PermitTelemetry() 
+}
+
+func (creq *Request) PermitTelemetry() bool {
+    return creq.Metadata.Token.RestrictedTelemetry
+}
+----
+
+Why? As I mentioned, this logic is critical to our contract with our customer.
+Irriversably bad things happen if that one little character, the !, which, to my fading eyes could be easy to miss in a well intentioned refactor.
+So, just like signing a contract or purchasing a house, slowing down and being explicit is beneficial.
+
+By moving the logic into a helper method we've given a name to the operation. Two names in fact, that differ in their prefix -- note I didn't call them `TelemetryPermitted` and `TelemetryDisabled` because a slight transposition would not have been caught by the type checker.
+
+I think I dislike the negation oerator almost as much as the conditional operator.
+If your linter settings permit you might even consider
+
+----
+func (creq *Request) DenyTelemetry() bool {
+    return creq.PermitTelemetry() == false
+}
+----
+
+
+The second reason I've come to prefer this style is it means I can write condiation blocks that are true;
+When I write conditional, I want the result to always be true -- i mean, it must be true for the conditional body to execute -- but compare these two
+
+if !creq.Stream {
+	return fmt.Errorf("non-streaming mode not supported")
+}
+
+if creq.Stream == false {
+	return ...
+}
+
+I argue the latter, while not as brief, is simpler to read; say it out loud, "not creq.Stream" vs "creq.Stream == false"
+
+And, of course, even better would be to add a helper, but don't reintroduce the negation
+
+if !creq.StreamingMode() { .... }
+
+instead 
+
+if creq.StreamingDisabled() { ... // not supported }
+
+This may be useful if you have pedantic linters in use in your project.
+
+=== Prefer < to <= and friends
+
+Prefer > or < vs <= for the reason that the latter means you have to remember two things; less than x, _or_, equal to x.
+
+In the code surrouding making a http call we summarise the success or failure of the call with logic that looks at the http status code.
+The http rfcs define status codes from 200 to 299 to be succes, 300 to 399 to be redirect, 400 to 499 to be client error, 500 and up to be server errors
+So we might be tempted to write something like
+
+----
+failure := resp.StatusCode >= 400
+----
+
+But i'm going to try to make the case that it is better to write this as
+
+----
+failure := resp.StatusCode > 399
+----
+
+Because the former is actually testing two things
+1. Is the result equal to 400?
+2. Is the result larger than 400
+
+As the reader pawing over this code I have to remember these two things, when I could simply say; is the status code larger than 399.
+Yes, its not a nice round number, but maybe this would be better still?
+
+----
+failure := resp.StatusCode > http.StatusBadRequest-1
+----
+
+=== Why, why elimiate small syntactic details?
+
+Why am I spending so much of your time trying to talk you our of using ! or =<, because of
+
+https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two
+
+Because of this; 7 items plus or minus 2; above that limit our minds group items -- one could say we compose them -- then work with those groupings.
+
+he number of distinct facts you have to keep in your head limits the grasp of the problem.
+
+When writing a conditional, you want to read it as "is true", not "_not_ is true"
+When writing a conditoinal, you want to say, is larger than or is smaller than, not is larger _or_ equal too.
+Simply because that's half as many things to keep in your head.
+
+=== Conclusion
+
+Condtional statements are unavoidable, but where possible I try to push them as far down into leaf methods as possible.
+This makes the caller uncondition. 
+
+Again consider the fragment
+
+----
+// setLoggingHeaders sets the approprite headers to permit or deny logging of 
+// the http.Request.
+func setLoggingHeaders(req *http.Request, creq *completion.Request) {
+  if creq.IsRestrictedTelemetryPermitted {
+     // set positive headers
+     return
+     }
+     set negative headers
+     }
+----
+
+then in the caller it becomes the unconditional
+
+
+----
+setLoggingHeaders(req, creq)
+----
+
+- If there are more than two choices, pull it into a function
+- Use switch rather than if/ else/ return
+- Don’t repeat (your logic), write helpers.
+- Replace loops with simple generic algos
+
+== Put your logic in helper
+
+By this point you've probably figured out that my style is heavily weighted towards helpers
+
+1. Helpers allow you to give names to anonymous operations
+2. Helpers allow you to push conditionals down the stack, closer to the edge, making them opaque but at the same time more testable.
+
+Let's drive this point home with a few more examples
+
+=== ptr and ptr.To
+
+I think it was Uber who first published a `ptr` package. go.pkg.dev has dozens of them. 
+
+----
+package ptr
+
+// To returns a pointer to the given value.
+func To[T any](v T) *T {
+	return &v
+}
+----
+
+This helps you when you need a pointer to a value; protobuf we're looking at you. 
+Its very easy to take the address of a variable, but impossible to take the address of a value.
+Now you've given a name to what would be 
+
+And this is so simple you don't need to take a dependency on someone elses' package. Just write this yourself in your projects `internal` namespace.
+
+We can take this a little further, this is from my `pub` project which exists entirely in the activity pub JSON domain
+
+----
+// package to contains functions for converting between types.
+package to
+
+import (
+	"io"
+	"net/http"
+
+	"github.com/go-json-experiment/json"
+	"github.com/go-json-experiment/json/jsontext"
+)
+
+// JSON writes the given object to the response body as JSON.
+// If obj is a nil slice, an empty JSON array is written.
+// If obj is a nil map, an empty JSON object is written.
+// If obj is a nil pointer, a null is written.
+func JSON(rw http.ResponseWriter, obj any, writerOpts ...func(w io.Writer) io.Writer) error {
+	rw.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w := io.Writer(rw)
+	for _, opt := range writerOpts {
+		w = opt(w)
+	}
+	return json.MarshalWrite(w, obj, jsontext.WithIndent("  "))
+}
+----
+which lets you return strutured JSON, 
+----
+func NodeInfoIndex(env *activitypub.Env, w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("cache-control", "max-age=259200, public")
+	return to.JSON(w, map[string]any{
+		"links": []any{
+			map[string]any{
+				"rel":  "http://nodeinfo.diaspora.software/ns/schema/2.0",
+				"href": fmt.Sprintf("https://%s/nodeinfo/2.0", r.Host),
+			},
+			map[string]any{
+				"rel":  "http://nodeinfo.diaspora.software/ns/schema/2.1",
+				"href": fmt.Sprintf("https://%s/nodeinfo/2.1", r.Host),
+			},
+		},
+	})
+}
+----
+Is this logically different to
+----
+	return json.NewEncoder(rw).Encode(map[...]...)
+----
+No, but did you notice I forgot to set the content type.
+
+Is `to` a great name for a package?
+No, its a terrible name, but that's not the point inside the `internal` namespace I think this is perfectly fine.
+He's not in the audience, but if Ian Taylor is watching this recording I just want to appologise unconditionally for being so down on `internal`, I was completely wrong.
+
+=== pushing and popping
+
+- Dealing with openai
+
+Consider a part of your code that is taking the frontmost element from a slice and processing it
+
+----
+// Chunk returns the last chunk read from the stream.
+// The chunk is only valid if Next returned true.
+func (s *streamIterator) Chunk() *completion.Chunk {
+	choice := s.Choices[0]
+	s.Choices = s.Choices[1:]
+	return &completion.Chunk{
+		ChunkMetadata: s.ChunkMetadata,
+		ChoicePart:    choice,
+	}
+}
+----
+or maybe like this
+
+----
+func (s *streamIterator) Chunk() *completion.Chunk {
+	first, rest := s.Choices[0], s.Choices[1:]
+	s.Choices = rest
+	return &completion.Chunk{
+		ChunkMetadata: s.ChunkMetadata,
+		ChoicePart:    first,
+	}
+}
+----
+
+Or, write yourself a little helper like this
+
+----
+// popFirst removes the first element from the slice and returns it.
+func popFirst[T any](s *[]T) T {
+	v := (*s)[0]
+	*s = (*s)[1:]
+	return v
+}
+----
+
+Now you can avoid declaring the temporary variable, or using the complicated multiple assignment syntax.
+
+----
+func (s *streamIterator) Chunk() *completion.Chunk {
+	return &completion.Chunk{
+		ChunkMetadata: s.ChunkMetadata,
+		ChoicePart:    popFirst(&s.Choices),
+	}
+}
+----
+
+If you find yourself writing this a lot then you might consider 
+
+----
+type List[T any] []T
+
+func (l *List[T]) PopFront() T {
+	v := (*l)[0]
+	*l = (*l)[1:]
+	return v
+}
+----
+
+then you can write
+
+----
+// Chunk returns the last chunk read from the stream.
+// The chunk is only valid if Next returned true.
+func (s *streamIterator) Chunk() *completion.Chunk {
+	return &completion.Chunk{
+		ChunkMetadata: s.ChunkMetadata,
+		ChoicePart:    s.Choices.PopFront(),
+	}
+}
+----
+
+* note: List[T] is interoperable with anything that takes a []T
+
+And while you're at it, why not replace
+
+----
+s.chunkOrError.Chioces = append(s.chunkOrError.Choices, choice)
+----
+
+with 
+
+----
+s.chunkOrError.Chioces.Push(choice)
+
+func (l *List[T]) Push(v ...T) {
+	*l = append(*l, v...)
+}
+----
+
+=== context.Canceled is viral
+
+If you work with a microservice API it might be commonplace for the request to be cancelled before your done. 
+In that case, you may not want to 
+
+----
+    err = spec.speculate(req.Context())
+    if errors.Is(err, context.Canceled) {
+        return nil
+    }
+    return err
+----
+
+and replace it with
+
+----
+    err = spec.speculate(req.Context())
+    return ignoreContextCanceled(err)
+}
+
+// ignoreContextCanceled returns nil if the error is context.Canceled, otherwise it returns the error.
+func ignoreContextCanceled(err error) error {
+    if errors.Is(err, context.Canceled) {
+        return nil
+    }
+    return err
+}
+----
+
+=== Keep debugging cruft out of your tests
+
+Everyone's written a functional test for a http API, yes?
+
+----
+require := require.New(t)
+
+req := ...
+resp, err := http.defaultclient.do(req)
+require.noerror(err)
+defer resp.body.close()
+
+require.equal(http.statusok, resp.statuscode, "unexpected status code: %v", resp.status)
+----
+
+But when this test fails, the reason why will most likely be in the body of the response, so you probably want to print that out as well.
+No problem, we'll just grab the body of the response
+
+----
+func dumpBody(r io.Reader) string {
+    buf, _ := io.ReadAll(d.r)
+    return string(buf)
+}
+
+...
+
+
+resp, err := http.defaultclient.do(req)
+require.noerror(err)
+defer resp.body.close()
+
+require.equal(http.statusok, resp.statuscode, "unexpected status code: %v %q", resp.Status, dumpBody(resp.Body))
+----
+
+Can anyone spot the problem?
+
+----
+require.Equal(http.StatusOK, resp.StatusCode, "unexpected status code: %v %v", resp.Status, dumpBody{resp})
+
+type dumpBody struct {
+	resp *http.Response
+}
+
+func (d dumpBody) String() string {
+	buf, _ := io.ReadAll(d.resp.Body)
+	return string(buf)
+}
+----
+
+=== Dealing with unhelpful JSON
+
+For my sins I spend most of my day dealing with the OpenAI JSON _API_.
+It's not a great API. 
+
+For example, consider this gem
+
+> stop
+> string / array / null
+> 
+> Optional
+> Defaults to null
+> Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
+
+`stop` is defined as a string, or an array of up to four strings, or not present.
+
+How can we model this in Go?
+
+----
+package openai
+
+type Request struct {
+	Stop any `json:"stop"`
+	...
+}
+----
+
+This will work, but it pushes the validation logic into _every_ user of that field.
+Anything that touches this field, copies it into another struct, has to deal with the fact it could be nil, a string, a slice, or a map, or a float, or anything else that the JSON decoder can decode into.
+
+Obviously the answer is a helper; decoding the request into a struct, then pass that struct to a validation function;
+cool, two error checks for the price of one; one from the json decode, one from the validation that JSON doesn't support; but what if it did?
+
+----
+// Stop is a []string that represents an OpenAI stop sequence.
+// A stop sequence is a single string, or an array of up to 4 strings.
+type Stop []string
+
+func (s *Stop) UnmarshalJSON(b []byte) error {
+	var stop any
+	if err := json.Unmarshal(b, &stop); err != nil {
+		return err
+	}
+	switch stop := stop.(type) {
+	case string:
+		*s = []string{stop}
+		return nil
+	case []interface{}:
+		for i, v := range stop {
+			if i > 3 {
+				return fmt.Errorf("stop must be an array of four or less strings but contained %d", len(stop))
+			}
+			st, ok := v.(string)
+			if !ok {
+				return fmt.Errorf("stop array must contain only strings but contained %T", v)
+			}
+			*s = append(*s, st)
+		}
+	default:
+		return fmt.Errorf("stop must be a string or an array of strings but was %T", stop)
+	}
+	if len(*s) == 0 {
+		return errors.New("stop array must contain at least one string")
+	}
+	return nil
+}
+----
+
+Now we can write
+
+----
+package openai
+
+type Stop []string
+
+func (s *Stop) UnmarshalJSON(b []byte) error { ... }
+
+type Request struct {
+        Stop Stop `json:"stop"`
+        ...
+}
+----
+
+And if the JSON decodes then Request.Stop will be a slice of up to four strings; if the request contained a single string, it will be transformed into a slice containing the string.
+
+This type does not define a MarshalJSON method, so the process currently doens't work in reverse; slices of a single string are not desugared into a string because the next component in the chain didn't care and was probably doing the same thing under the hood anyway, but if it was required the procedure is straight forward.
+
+=== Conclusion
+
+I don't believe much but I believe the Sapir-Whorf Hypothesis and I believe this.
+
+The language you use to describe a problem directly influences how you think about the problem,
+
+Look for clunky semantics, inelegant prose and ask yourself, could this be improved if there was another verb or noun in your arsenal.
+
+Also, you'll have fewer conditionals in your business code, and you can push all that testing out to free functions which are much simpler to test.
+
+== If you like it, you should have put a metric on it
+
+I've a fairly robust dislike of logging. I think its overused, and leads to other anti patterns when your product is in production.
+I've worked on multiple products where log lines became load bearing, processes were built around them to count the number of log lines per second, to disect them, all aide of trying to glean observabilty information from ephemeral babbling to stdout.
+
+> Logs to tell you what _is_ happening now \
+> Metrics to explain what _has_ happened
+> -- Jonathan Hall, Cup o Go show
+
+I love this quote from the Cup o Go show, although Jonathan Hall says that he took it from soneone else.
+
+Don't get it twisted, if you are interacting with _a_ user directly, via the terminal, in a debug window in their IDE, then go wild.
+But, I offer to you, that for most of the software you're writing you that logging will not communcate directly with the user.
+Perhaps its with the operators of the service, if you have such a team.
+Possibly that logging is communication with you the authors of the software, and its this that I want to frame my comments about logging.
+
+=== Structured logging is three metrics in a trenchcoat.
+
+Specifically, if your looking in the past, if your observing requests that have happened in the past, over time, then you should be using a metric.
+
+Don't confuse this for the interactive output of a program you started and are waiting for the output.
+That's not what I'm talking about, but also i think reprsents the minority of software written by practicioners in this room.
+
+I challenge to you, next time you reach for a logger, try emitting a metric instead. I hope you'll be pleasently surprised.
+
+Again, on my current project we emit no log lines after startup.
+All of the observability from our product comes from datadog metrics.
+
+Initially this was by necessecity, because of the environment we initally deployed into didn't have access to the company splunk clusters any log lines we emitted were ephemeral
+
+== No goroutine left behind
+
+In Go it’s trivia to start a goroutine, but, as I’m fond of saying, do you know when that goroutine will stop?
+How will it stop it?
+How will you know when it has stopped?
+And so on.
+
+In this talk I want to present a solution that I find myself rewriting often. It’s small enough that it fits on a slide
+
+Description
+This is a talk about a solution I find myself rewriting on pretty much every backend Go service I work on. Even in a microservice shop the requirement to set up a bunch of parallel goroutines is ubiquitous. For example, the main external web service, plus one listening on loopback for metrics and debug. Most monitoring clients run a background process to batch metrics. Heath checks, database pools, etc, all need to start correctly for your service to run and must trigger a shutdown of your service if one fails.
+
+The group type, documented below, is an idea which has evolved since the Juju days a decade ago of William Reade’s Manifold, through Peter Bourgon’s “How I do things” talk, and through many of my own iterations. Similar, but not identical to, sync.ErrGroup, the group type allows users to compose goroutines with predictable lifetimes; all goroutines start successfully, or non do; when one goroutine exits, all others are shut down automatically. This powerful pattern allows reliable service startup and shutdown behaviour.
+
+Notes
+Here’s the code
+
+----
+// A group manages the lifetime of a set of goroutines from a common context.
+// The first goroutine in the group to return will cause the context to be canceled,
+// terminating the remaining goroutines.
+type group struct {
+   // ctx is the context passed to all goroutines in the group.
+   ctx    context.Context
+   cancel context.CancelFunc
+   done   sync.WaitGroup
+
+   errOnce sync.Once
+   err     error
+}
+
+
+// newGroup returns a new group using the given context.
+func newGroup(ctx context.Context) *group {
+   ctx, cancel := context.WithCancel(ctx)
+   return &group{
+       ctx:    ctx,
+       cancel: cancel,
+   }
+}
+
+
+// add adds a new goroutine to the group. The goroutine should exit when the context
+// passed to it is canceled.
+func (g *group) add(fn func(context.Context) error) {
+   g.done.Add(1)
+   go func() {
+       defer g.done.Done()
+       defer g.cancel()
+       if err := fn(g.ctx); err != nil {
+           g.errOnce.Do(func() { g.err = err })
+       }
+   }()
+}
+
+
+// wait waits for all goroutines in the group to exit. If any of the goroutines
+// fail with an error, wait will return the first error.
+func (g *group) wait() error {
+   g.done.Wait()
+   g.errOnce.Do(func() {
+       // noop, required to synchronise on the errOnce mutex.
+   })
+   return g.err
+}
+----
+
+Whenever you want to do more than one thing at a time in a Go program you'll need goroutines.
+In some scenarios this will be managed for you, the example i'm thinking of is net/http manages the lifetime of the goroutine to the lifetime of the http request.
+But, I've found, and hopefully you'll agree that in any non trivial application you quickly grow a phalanx of goroutines for, lets say, background tasks.
+
+Some examples
+- logging or stats libraries that run a worker process to batch events
+- background tasks
+- the net/http server itself
+
+Initially it seems straight forward to tie the lifetime of these goroutines to the lifetime of the process; process exits, all goroutines are by definition dead.
+But, generally you don't want to hook everything up to cntl-c, you want some notion of graceful shutdown.
+Also, once you group your, lets say, service, goroutines together you want them to live and die as a family, if one goroutine exits you want the rest to shut down as well to prevent your application running in an unknown state;
+imagine if your app ran for days but the metrics pump barfed a few minutes after startup,
+or if the background worker that processed events and jobs stopped running and the rest of your application wedges or drops data.
+
+What i'm going to show you is a piece of code that was the inspiration for the title of this talk, its a piece of code I have (re)written on every project i've worked on.
+
+<group group>
+
+This piece of code is like a jazz standard, every go program eventually implements some versino of it; people like Peter Bourgon were talking about it a decade ago, in 2012 in Juju we ended up implementing some version of it.
+
+Examples
+- grouping workers together
+- http shutdown
+- hook in cntl-c via the context
+- tie back to main.run
+
+== Conclusion
+
+How to sum up this
+
+- style; be consistent, write for the reader and always be looking for opportunites to improve your data model, your names, and thus your design
+- names; as short as possible and no shorter. As you refactor your code, ask yourself, does the name of the containing function or method still match the operation, can it be improved?
+- APIs matter most; when in doubt, defer to the caller of your API, look for ways to make it harder to misue your API.
+- helpers; extend the language of your project with types and helpers to be clearer about what the code is doing. the more helpers you write, the less temporariry variables you'll need in the calling function. This means the identifiers you do declare will live longer, be more meaningful, and thus deserve more descriptive names.
+- push conditionals outwards to the leaves of your program, into free functions, makes it easier to test, easier to read
+- prefer metrics to logs, debug logs are fine during development but if theres no interactive story with your application, and I argue that's most of you, then prefer metrics for observability as by definition you are observing what has happened in the past.
+
+
+
+
+== Stylistic issues
+
+There's no real order here, let just jump in
+
+=== Constants at the top; types in the middle, free functions at the end
+
+Does the compiler care about the order of your declarations? No, not at all.
+So this is purely an asthetic practice, its to make it look preettier, because we like to look at pretty things.
+it makes the code easlier to understand.
+
+For me, I've settled on putting constants at the top, just below imports, then types and exported functions, think the constructor for your types, if needed.
+Then finally the unexported free functions.
+
+But really, consistency is key; it doesn't matter which you really choose more than it does that you're consistent,
+or at least your team is consistent.
+You may not get the whole world to agree on the _one true_ way to order your declarations, but at least in the little part of the world you control, be consistent.
+
+=== Use paragraphs to break up ideas
+
+While we're on the subject of prose, use paragraphs to break up ideas.
+
+This applies equally to writing as it does to programming.
+But be on the lookout for writing a novel in the body of a function.
+I'll have more to say about that later.
+=== Packages
+
+If you have an interface type called Service, that should be in the file called service.go, not that you should have one file per type, but if your Service type is in another file in that package, then its time to clean things up.
+== if is bad, else is worse
+
+
+I know there are many accomplished functional programmers in the room today, so I ask you please bear with me as I transition through this catharsis.
+
+
+In this section I want to go through some examples of how I apply this philosophy.
+
+== Initalise once and only once.
+
+=== Keep to the left; use guard clauses, return early
+
+Repeating Mat Ryer here, keep your code as close as possible to the left hand margin;
+Limit indentantion by putting the _exceptional_ case in the the block. 
+This is a style known as _guard_ clauses.
+
+== Avoid negation, prefer helpers.
+
+
+== Helpers helper helpers
+
+I'm going to make the case that you should be writing helpers.
+Perhaps you already are, perhaps you could be using more.
+I'm going to give a bunch of examples where I think helpers make the code more readable and more testable.
+
+=== Compose functions
+
+When considitering a function that does two things, split it into the composition of those functions.
+
+example: recording time and status of a function
+
+
+How would you test this?
+
+Here are a bunch of the ideas that i've talked about bought together
+
+
+== `main.run` pattern to make `main.main` less special.
+
+

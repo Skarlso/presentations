@@ -1,0 +1,387 @@
+= What's in a name?
+Dave Cheney <dave@cheney.net>
+:toc:
+
+[quote, Romeo & Juliet, Act 2 Scene 2]
+What’s in a name?
+That which we call a rose by any other name would smell as sweet.
+
+[.lead]
+Today I’m going to talk about the most contentious topic in the Go community.
+Is it;
+
+Dependency management?
+Error handling vs exceptions?
+Generic programming?
+
+No, it's
+
+> What’s with all the short variables in go?
+
+I reject the premise of this question.
+It creates a false dichotomy that all names should be either long or short.
+Choosing a _good_ name is more than just its length.
+It’s more than choosing the name of _any_ variable, because variables aren’t the only thing we give names too in our programs.
+
+[quote, Andrew Gerrand]
+Readability is the defining quality of good code.
+Good names are critical to readability.
+
+There are receivers, formal parameters, return values, constants, functions, types, methods, file names, and packages. 
+These are all the kinds of identifiers that we can declare in our Go programs.
+They all have an impact on the maintainability of the program.
+
+== Choose identifiers for clarity, not brevity
+
+[quote, Russ Cox]
+Every programmer has a variable naming philosophy. This is mine:
+A name's length should not exceed its information content.
+
+Let's start at the heart of the matter, long variables vs short, which is best?
+This is a trick question, there are several different kinds of variables:
+
+- local variables 
+- formal parameters and return values
+- struct fields
+- package level
+
+There is an overriding principle which guides the lengths of choosing a good name, it is:
+
+> The greater distance between declaration and use, the larger the identifer.
+
+Let's talk a little about the values that inform this advice.
+
+[quote, George Orwell, Politics and the English language]
+Never use a long word where a short one will do.
+
+We give short names to variables whose lifetime is limited by their encosing scope.
+We give longer names to variables that have a larger scope because when we expect to encounter them infrequently the future.
+
+Computer's don't care about the names of variables, to the CPU it's all addresses.
+Names are for us, the author and the readers.
+Lengthy bureaucratic names need to justify themselves; the longer they are the more value they need to provide to the reader.
+
+=== Names are contextual
+
+It's important to recognise that most advice on naming is contextual.
+If you are obsescing about the length of a local variable, you might be missing the larger picture that there is too much going on in your function.
+
+For example is:
+[source,go]
+----
+for index := 0; index < len(s); index++ {
+	// 
+}
+----
+fundamentally more readable than
+[source,go]
+----
+for i := 0; i < len(s); i++ {
+	// 
+}
+----
+I argue it is not, because it is likely the scope of `i`, and `index` for that matter, is limited to the body of the `for` loop and the extra verbosity of the latter adds little to _comprehension_ of the program.
+
+If you found yourself with so many nested loops that you exhaust your supply of `i`, `j`, and `k` variables, its probably time to break your function into smaller ones.
+A loop nested within a loop is inherently harder to comprehend reguardless of the name of the loop induction variable.
+
+[source,go]
+----
+include::../practical-go/src/names/averageage.go[tags=average]
+----
+
+In this example, `p` lives for a very short time and only referenced on the following line.
+A reader who is interested in the effect values of `p` have on the program need only read the loop's three lines.
+
+By comparison `people` is declared in the function parameters, is live for the body of the function, and is referenced three times over seven lines.
+The same is true for `sum`, and `count`.
+The reader has to scan a wider number of lines to locate them so they are given more distinctive names.
+
+I could have chosen `s` for `sum` and `c` (or possibly `n`) for `count` but this would have reduced all the variables in the program to the same length, thus an equal level of importance.
+I could have chosen `p` instead of `people` but that would have left the problem of what to call the `for ... range` iteration variable and the singular `person` would look odd as the loop iteration variable which lives for little time has a longer name than the slice of values it was derived from.
+
+=== Keep your friends close and your declarations closer
+
+Early programming languages required all declaration to occur at the top of the function.
+This was an implementation restriction, but some people mistook it for good style.
+Go style suggests keeping declarations close to their use.
+
+The corollary of this advice suggests that variables, and by extension functions, types, and even packages, should be arranged to avoid the creation of unnecesarily verbose names.
+
+== A variable’s name should describe its contents, not its type
+
+You don't name your pets _FrankDog_ or _JavaCat_.
+You shouldn't include the name of your type in your variable's name for the same reason.
+
+Consider this example:
+
+[source,go]
+----
+var usersMap map[string]*User
+----
+
+What's good about this declaration?
+We can see that its a map, and it has something to do with the `*User` type, that's useful.
+But `usersMap` _is_ a map, and being a statically typed language Go won't let us accidentally use it where a different type is required.
+
+Now, consider what happens if we were to declare other variables:
+
+[source,go]
+----
+var companiesMap map[string]*Company
+var productsMap  map[string]*Products
+----
+
+Now we have three map type variables in scope, `usersMap`, `companiesMap`, and `productsMap`, all mapping strings to different types.
+We know they are maps; it's right there in their declaration.
+We also know that the declarations prevent us from using one in place of another--the compiler will throw an error if we try to use `companiesMap` where code was expecting a `map[string]*User`.
+In this situation it's clear that the `Map` suffix does not improve the clarity of the code, its just extra boilerplate to type.
+
+Removing the suffix leaves us with the more concise yet equally descriptive:
+[source,go]
+----
+var (
+        users     map[string]*User
+        companies map[string]*Company
+        products  map[string]*Products
+)
+----
+Repeating the type of the variable in its name won't make it mode type safe.
+If `users` isn't descriptive enough, then `usersMap` won't be either.
+
+== Use a predictable naming style
+
+[quote, Kernighan and Plauger, Elements of programming style]
+"Choose variable names that won’t be confused"
+
+Each concept should be represented by a single, predictable name.
+The reader should be able to predict the _what_ an identifier represents and how it should be used when they first encounter it.
+When they encounter the identifier again, they should be able to assume it has not changed meanings since they last saw it.
+
+For example, if your code passes around a database handle rather than a combination of `d *sql.DB`, `dbase *sql.DB`, `DB *sql.DB`, and `database *sql.DB`, consolidate on something like `db *sql.DB` and use it consistently across parameters, return values, local declarations, and potentially receivers.
+Doing so promotes familiarity; if you see a `db`, you know it's a `*sql.DB` and that it has either been declared locally or provided for you by the caller.
+
+Similar advice applies to method receivers; use the same receiver name on every method of that type.
+This makes it easier for the reader to internalise the use of the receiver across the methods of that type which may, occasionally, be defined across multiple files.
+
+Finally, certain single letter variables have traditionally been associated with specific use cases.
+For example;
+
+-  `i`, `j`, and `k` are commonly the loop induction variable for simple `for` loops.
+When readers encounter a variable called `i`, or `j`, they know that a loop is close by.
+- `n` is commonly associated with a counter or accumulator.
+- `v` is a common shorthand for a value in a generic encoding function, `k` is commonly used for the key of a map.
+- `a` and `b` are generic names for parameters comparing two variables of the same type.
+- `x` and `y` are generic names for local variables created for comparision
+- `s` is often used as shorthand for parameters of type `string` whos contents are opaque.
+- Collections; maps, slices, and arrays, should be pluralised.
+
+== Functions name
+
+"If a function is hard to name, maybe you’re giving the function too much responsibility." 
+-- Mike Kerr @codecareercoach
+
+I'm going to move on from variable naming because compared to the next subject, I care more that your functions are short and well named than I care about the names of the transient local variables within them.
+
+Prefer short functions, then give those simple functions simple names.
+If the opertation of a function is so complex a simple name cannot be found for it, consider if the problem lies deeper than the name.
+
+=== Functions should be names for the result they return
+
+[quote, Sam Gardiner]
+If you don’t know what a thing should be called, you cannot know what it is.
+If you don’t know what it is, you cannot sit down and write the code.
+
+Consider this example, we want to write a function that adds two numbers and returns the result.
+Which name do you think is better?
+[source,go]
+----
+func Add(a, b int) int
+func Sum(a, b int) int
+----
+Consider using them in code
+[source,go]
+----
+result := Add(37, 9)
+result = Sum(37, 9)
+----
+I argue that the latter, `Sum` is the better choice of a name because it describes the result, the summation of 37 and 9.
+`Add` on the other hand describes the operation that will be performed, we're going to add 37 and 9.
+`Add` is the operation, the `Sum` is the result. 
+
+Here's another example;
+[source,go]
+----
+func Maximum(a, b int) int
+----
+Clearly this returns the maximum of a and b.
+
+When you have several functions that do related things give the shorter name to the one that people use most often.
+
+[source,go]
+----
+package http
+
+func NewClient() *Client { ... }
+
+func NewClientWithTimeout(timeout time.Duration) *Client { ... }
+----
+
+Convention, and fear of the unknown, will drive users of this API in search of its default behaviour towards the shorter name.
+
+When the list of alternative invocation grows, consider something akin to functional options to reduce the footprint of your API.
+
+[source,go]
+----
+type Option func(*Client) *Client
+
+func NewClient(opts ...Option)
+
+func WithTimeout(timeout time.Duration) func(c *Client) { ... }
+
+c := http.NewClient(http.WithTimeout(10 * time.Second))
+----
+
+=== What about methods?
+
+All Go programmers know that methods are just functions with the receiver as a predeclared parameter.
+So, if methods are just fancy functions, the rules for naming a method should probably be the same as the rules for naming a function; the method's name should reflect what it returns.
+
+But there's a reason for choosing a method over a function, when 
+
+#TODO#
+
+Consider closer
+
+=== Methods named after behaviour
+
+Be consistent in the behaviour
+
+If the behaviour is reading, call the method read, and call it read for reading bytes, reading strings, reading 
+
+
+== A package's name should describe its purpose
+
+[quote, Sameer Ajmani]
+A package's name provides context for its contents, making it easier for clients to understand what the package is for and how to use it. The name also helps package maintainers determine what does and does not belong in the package as it evolves. Well-named packages make it easier to find the code you need.
+
+Writing a good package starts with choosing a good name.
+Name your packages for what they provide, not what they contain.
+
+=== An identifier's name includes the name of its package
+
+From the point of view of another package, an identifier's name includes its package name.
+This means you should think about the name of your types, symbols, etc with their _qualified_ name, `package.Symbol`.
+
+- The `Get` function from the `net/http` package becomes `http.Get` when referenced by another package.
+- The `Reader` type from the `strings` package becomes `strings.Reader` when imported into other packages.
+- The `Error` interface from the `net` package is clearly related to network errors.
+
+=== Avoid package names like `base`, `common`, or `util`
+
+A common cause of poor package names are packages where helpers and utility code congeal over time.
+
+Package names like `utils` or `helpers` are commonly found in larger projects which have developed deep package hierarchies and want to share helper functions without encountering import loops.
+By extracting utility functions to new package the import loop is broken, but because the package stems from a design problem in the project its name doesn't reflect its purpose, only its function of breaking the import cycle.
+
+[quote, Sandy Metz]
+[A little] duplication is far cheaper than the wrong abstraction.
+
+My recommendation to improve the name of `utils` or `helpers` packages is to analyse where they are called and if possible move the relevant functions into their caller's package.
+Even if this involves duplicating some helper code this is better than introducing an import dependency between two packages.
+
+In the case where utility functions are used in many places prefer multiple packages, each focused on a single aspect, to a single monolithic package.
+
+=== Resist the desire to create a package taxonomy
+
+"The biggest issue Go developers have with application layout is thinking of packages as groups instead of layers."
+-- https://twitter.com/benbjohnson/status/1228002814065963008[Ben Johnson]
+
+I believe programmers share a strong desire to apply taxonomies to their work, however many want to find _differences_ between two things so they can be separated and classified.
+I think to write successful Go, you should look for similarities and combine things with a similar _purpose_ into one package.
+
+For example, the `net/http` package does not have `client` and `server` sub packages, instead it has a `client.go` and `server.go` file, each holding their respective types, and a `transport.go` file for the common message transport code.
+For example, `net/http` contains both http client and server facilities, because they both relate to the use of HTTP.
+
+Go packages are for avoid namespace collisions, not for creating taxonomies.
+Within your project, each package's name should be unique, not simply the path to that package
+
+[source,go]
+----
+import "foo/database/server" 
+import ""
+----
+
+If you find you have two packages which need the same name, it is likely either;
+a. The name of the package is too generic--`client`, `worker`, `shared`, etc.
+b. The package overlaps another package of a similar name.
+In this case either you should review your design, or consider merging the packages, or renaming the conflicting packages to make their purpose more specific.
+Consider the `io/ioutil` and `net/http/httputil` packages as weak supporting evidence.
+
+TIP: For the love of god, don't let your packages end with `/v anything or you have to do shit like this
+
+[source,go]
+----
+import (
+        envoy_api_v2_accesslog "github.com/envoyproxy/go-control-plane/envoy/config/filter/accesslog/v2"
+	resource "github.com/envoyproxy/go-control-plane/pkg/resource/v2"
+)
+----
+
+=== Don't let package names steal good variable names.
+
+The name of an imported identifier includes its package name.
+For example the `Context` type in the `context` package will be known as `context.Context`.
+This makes it impossible to use `context` as a variable or type in your package.
+
+[source,go,options=nowrap]
+----
+func WriteLog(context context.Context, message string)
+----
+
+Will not compile.
+This is why the local declaration for `context.Context` types is traditionally `ctx`. eg.
+
+[source,go,options=nowrap]
+----
+func WriteLog(ctx context.Context, message string)
+----
+
+However don't think up a convoluted package name just to retain the use of a convenient identifier.
+
+TIP: There's a reason the `database/sql` package is named the way it is.
+Even though that leads to types like `sql.Conn` rather than `database.Conn` it leaves the identifiery `database` for use within the consumer of the package.
+
+== Conclusion
+
+[quote, David Crawshaw]
+Use the shortest name that carries the right amount of information in its context.
+
+Choosing a good name starts at local variables but extends all the way to your package declaration. 
+Good names share the same charactistics:
+
+Brevity:: A good name is concise. It has a high signal to noise ratio.
+Precision:: A good name accurately describes the thing it represents.
+Consistency:: A good name should be predictable. Whenever you encounter it, it should feel familiar.
+
+A variable’s name should describe its contents::
+
+* Use the smallest scope possible, declare variables close to their use.
+* Short variable names work well when the distance between their declaration and _last_ use is short.
+* Prefer single letter variables for loops and branches, single words for parameters and return values, multiple words for functions and package level declarations.
+It's ok to use a shorter name in a short block inside a larger function.
+* Globals of all kinds deserve longer identifiers than locally scoped ones.
+* Don't include the name of your type in the name of your variable.
+Repeating the type of the variable constantly does not make it more type safe.
+
+Functions should be named for what they return::
+
+* Ideally a function should do one, and only one, thing.
+
+A package's name should describe its purpose::
+
+* Name your packages for what they provide, not what they contain.
+* Eschew elaborate package hierarchies. Go eschewed type hierarchy, and that is generally considered to be a good thing, don't make the mistake or replacing that with an elaborate package hierarchy.
+* Remember that the name of a package is part of the name the caller uses to to refer to it, so make use of that.
+* Package level variables deserve longer identifiers than locally scoped ones because their scope encompases the entire program.
+* Don't blow common identifiers on packages. ie, `path`, `query`, or `db`.

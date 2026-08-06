@@ -1,0 +1,245 @@
+= They're just numbers.
+or, how Go avoided the integer promotion footgun
+
+:docinfo: shared
+
+This is a talk about something Go doesn’t have because we don’t need it.
+Because we don’t need it, most Go programmers don’t notice it’s not there, and because its absence is not noted, they don’t know why this actually a big deal.
+
+== Disclaimer
+
+I was excited to give this talk in the _Vintage talk_ category, because if you know me, I love to read about, and talk about, history.
+And because this _is_ a talk about history, its important to acknowledge that historians, especially amature ones such as mysql, interpret their research through their own bias and opinions.
+
+I don't claim this to be the objective truth, only a story I'm weaving together from my research.
+This is especially true for the history of computing, which has as strong bias towards western, english speaking, protagonists.
+
+Where relevant, I've included links to my source material so you can do you own research.
+
+== Rob Pike, 2009
+
+“Numbers are just numbers, you’ll never see 0x80ULL in a .go source file”.
+-- Rob Pike, The Go Programming Language
+
+// https://www.youtube.com/watch?v=rKnDgT73v8s
+
+This quote comes from the first introduction that most of us had to Go.
+Rob's pithy line, implying that, prior to Go, numbers were sort of broken, is where i'm going to start the story.
+
+== What's a number?
+
+What is a number?
+Number are how we measure things, these are the _real numbers_, 1.333, 3.14159, 36.1.
+All of us known intitively that numbers like these are often approximations; 1 and one third, the ratio of the circumfernce of a circle to its diameter, the temperature of the human body isn't _exactly_ 36.1 degrees.
+
+Numbers are also how we count things, these are the integers.
+A farmer has an integral number of oxen.
+A household has an integral number of occupants on census night.
+The whole number of times around a for loop.
+
+I'm starting here, because in part, this is where the history of computing started.
+Computers evolved, at least initially along parallel lines of evolution.
+
+There were computers designed to solve complex differential equations, like the loft of a projectile across a battlefield, or the implosion of sphere.
+In part these computers _thought_ in real numbers, becuse their forbearers, the _analog_ computers thought in continious values.
+
+In parallel to the great scientific computers like ENIAC, COLLOSUS, IBM Automatic Sequence Controlled Calculators, lineage of commercial computers descended from accounting machines.
+The history of commercial computers begins well before the word computer was co-opted to imply a _machine_ that performed computation.
+
+The internal business machines company started life as the computer tabulating recording company, which itself was a conglomerate of four companies, the most famous of which was Herman Hollorith's Tabulating Machine company, who before the merger, was known for automating the US census with their innovative 80 column punched card.
+
+The first 50 decades of the 20th centry, IBM produced back office accounting machine, sorters, collators.
+What we think of as functions today, in the 1930's were discrete machines, through which punch cards would be marshalled to perform accounts payable, payroll, stock controll, census taking.
+
+== Counting
+
+From relays, to vacume tubes, to transistors, computers have always operated in a binary mode--a value transmitted between two parts of the computer is ether one state or another.
+A high voltage or a low one.
+A pulse, or its absence.
+The implementation of the computers we recognise is digital.
+
+But that does not imply that they operated on numbers, or communicated with their user, in binary.
+ENIAC for example was a decimal machine.
+Each _panel_ communicted with its peers via the _digit trunk_, a cable with 10 wires, of which one would carry a signal.
+
+The Holorith punch card operates in decimal to ensure that, even when it was extended to record letters, numbers and special characters, no more than three holes per row would be punched, lets the card become too flismy.
+
+The hugely popular IBM 1401 used a scheme known as qui-binary, where a decimal digits was stored in 6 bits in such a way that only two bits were set at one time.
+This unusual scheme provided the 1401 with a form of parity checking, which itself discended from the ur relay computer, the telephone exchange.
+
+// http://www.righto.com/2015/10/qui-binary-arithmetic-how-1960s-ibm.html
+
+// http://ibm-1401.info/qui-binary.html
+
+So, while its universally accepted today that computers operate exclusively in binary, in the 50's and 60's, the period where programming languages higher than assembly were being created, this was no where near as settled.
+
+== Word sizes
+
+If you wanted to build a computer that could store a 4 digit decimal number in its memory, how many bits would you need to hold this.
+I think you'd need 14 bits, although the usage would be wasteful.
+
+Just as a string of letters is known as a _word_, in computing string of bits is also a word.
+The _word size_ defines the largest descrete value a computer can store.
+
+With our modern eyes 14 bit isn't enough to do anything; its less that two bytes.
+But if you're taking inventory in a store, the likelyhood you'll have 10,000 of the same item is remote.
+
+The 7070 series stored data in words containing 10 decimal digits plus a sign.
+Why 10?
+Because that was the number of digits their mechanical counterparts offered
+
+// https://en.wikipedia.org/wiki/Mechanical_calculator#/media/File:Figurematic-10SDX.jpg
+
+This lead to a very common word size amongst commercial computers, those that did accounting, inventory, or payroll, was 36 bits.
+Enough to count to a billion, or store 6 upper case characters.
+
+Meanwhile in the scientific domain 36 bits only gives a 26 bit mantissa which is enough for 7, maybe 8, digits following the decimal point, perhaps good enough for high school triganometry, not enough for handling large values that differ by tiny amounts.
+
+Eventually computer designers figured out that it was more economical to work directly in binary rather than implenebt decimal artithmaric in binary
+
+Now we know the history of how computers hold and manipulate numbers internally.
+
+== Literally constants
+
+Lets take a break from the history of computer architecture and talk about constants.
+
+Constants are surprisingly complex because they have to be a textual representation of a value in memory. 
+
+In Go, constants exist only in the source of our programs.
+The notions of _const_ as applied to values whos value is read only, or only writable once, are not in scope.
+
+The constants I want to talk about are so called, literal constants.
+So when I write
+
+----
+var x = 1
+var y = x
+----
+I'm assigning the result of evaluating the expression `1`, which is literally itself, the number one to `x`.
+
+This is super important, constants in Go source code _are_ the results of evaluating their characters in the source file.
+
+The reason i'm belabouring this point is, in Go, this simple statement that when I write 1 in the source code, I want 1, that a number on the page is just a number, is a departure from Go's direct ancestors.
+
+Let's talk about that.
+
+== A little C
+
+If I write a little program in C
+
+----
+int a,b,c = 1, 2, 3
+----
+The types of `a`, `b`, and c are obvious, they're an int; whatever that happens to be on the computer this program is compiled for.
+
+But the question is, what is the type of 1, 2, and 3?
+
+As this is a recorded presentation, the answer is, they have the type int.
+
+So, now let me ask two more questions
+
+----
+int64_t a = 10000000000, b = 2 << 33, c = 8192 * 8192 * 8192;
+----
+
+The first one is, what is the type of 10 billion, 2 shifted left 33 places and 8192 cubed.
+
+the answer is int.
+And that's a problem because 10 billion doesn't fit in int, nor does 8 billion, nor does 56 billion.
+To make matters worse, int is not a fixed size.
+
+To understand why constants have types in C, we need to go back in time a little.
+
+== BCPL to B to C
+
+In 1967 martin richards write BCPL, a stripped down version of CPL for a specific machine.
+BCL had exactly one type, a string of bits, the word.
+
+BCPL is important because it is the predecessor to B, and B begat C.
+
+Everything in BCPL was a word, and this was complicated for two reaons.
+
+1. as we saw before, the native word size for a computer is a deeply personal decision; few alike
+2. not being able to work with values smaller than a word
+
+> B can be thought of as C without types; more accurately, it is BCPL squeezed
+> into 8K bytes of memory and filtered through Thompson's brain.
+
+specifically when unix moved from the pdp-7, an 18 bit word addressed machine, to the pdp-11, a 16 bit _byte_ addressed machine, B, the cut down version of BCPL written for the pdp-7 by Ken THomspson, evolved into C, the language we know today.
+
+// https://www.bell-labs.com/usr/dmr/www/chist.html
+
+Specifically C introduced two integer types; the eponimous `int` for the 16 bit word, and the new `char` type for the 8 bit byte; the name strongly influenced by the main purpose of the type, to hold arrays of charaters; strings.
+
+The growth of the character type from 6 bits, in the 18 and 36 bit machine eras, was heavily influenced by the development of ASCII, and the decision by IBM to standardise on the 8 bit byte for their 360 line of mainframes.
+
+== How large is that int
+
+So this brings us up to speed from a historical point of view.
+
+Computers evolved from word addressed to byte addressed
+And 
+Computers evolved varoius word sizes initially because of the precision of their calculations, but later to allow them to address larger memories.
+
+The key I want you to take away is for historial, cost, performance reasons, and market segmentation reasons, the computers we use today handle real and integer numbers with a variety of word sizes.
+
+So the question is, how large is `int`?
+
+Now this is where things get tricky, because it depends.
+Initially int was 16 bits, because that was the word size of the pdp-11.
+But then unix was ported to the interdata 8/32, a 32 bit machine.
+
+This left something of a problem; if `int` was redefined as a 32 bit quantity, what do to about the 16 bit quantity that was now unmentionable?
+Conversely, if `int` was left as 16 bits, what name should they give the 32 bit quantity.
+
+It turned out that, on the interdata 7/32, `int` was 32 bits, and a new type `short` was introduced for 16 bit types.
+
+// https://www.usenix.org/legacy/publications/library/proceedings/usenix98/invited_talks/miller.ps
+
+== 36 bits forever
+
+However things get more complicated, because, while the byte oriented machines were growing in popularity, the investment in the older word addressed machines wasn't simply discarded.
+
+So C was ported to those platforms.
+
+On DEC pdp-10, int was 36 bits, short was 16 bits.
+
+
+== From types to kinds
+
+The major innovation Go applied to source constants is to duck the question.
+
+Literal constants in c are interpreted as if they were signed ints, this is why you can write -1, not 65534. you can cast the literal constant to another type, but it might be too late, it’s already been trucanted by being trimmed through int. 
+
+This might seem like not a big deal, but surprising this shows up all the time, obviously if you want to have a large integer constant you need to be aware of this, but also such innocuous things like bitmasks. 0xf000 the high bit is set, so if this was interpreted as a signed number it would be negative. 
+
+This happens ALLLL the time in embedded programs. 
+
+This also meant that 
+
+This means C had to grow ULL and other suffixes to modify the type of the literal constant. 
+
+Automatic type conversion; c automatically cooerces types, go either makes it explicit, or 
+
+var x uint8 = 7
+var y = x + 512 // compile time, not undefined behaviour 
+
+Undefined behaviour, 
+
+If something is out of spec it’s undefined and the compiler can ignor your program and do what it wants, this is basically the same non guaranteed with give if a program has race conditions, expect in C, it can happen in single threaded programs just doing arithmetic. 
+
+Bottom line, go means you don’t need to worry about this footgun
+
+== Wrapping up
+
+Constants in C have a type, that type depends on the word size of the machine, and word size of the machine depends on how many digits a Fredian mechanical calculator.
+And because of these quirks of fate, all integer literals are _positive_ numbers.
+
+Fortunatly in Go
+
+== In conclusion
+
+In conclusion, numbers in Go, just work.
+And the fact that they just work often goes unnoticed because _just working_ is what programmers expect.
+But, the hostory of how the algol languages got into this hole, and how Go dug them out, deserves recognition.
+The notion of _untyped_ constants.

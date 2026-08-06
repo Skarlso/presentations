@@ -1,0 +1,13 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/pkg/json
+cpu: Apple M4 Max
+                        │ scanner1.txt │             scanner3.txt             │
+                        │     B/s      │      B/s       vs base               │
+Scanner/canada-16         939.1Mi ± 2%   1014.7Mi ± 1%   +8.05% (p=0.002 n=6)
+Scanner/citm_catalog-16   1.522Gi ± 1%    1.678Gi ± 1%  +10.26% (p=0.002 n=6)
+Scanner/twitter-16        1.192Gi ± 1%    1.284Gi ± 1%   +7.70% (p=0.002 n=6)
+Scanner/code-16           842.1Mi ± 3%    892.3Mi ± 5%   +5.97% (p=0.002 n=6)
+Scanner/example-16        1.179Gi ± 1%    1.253Gi ± 1%   +6.22% (p=0.002 n=6)
+Scanner/sample-16         1.891Gi ± 1%    2.058Gi ± 1%   +8.85% (p=0.002 n=6)
+geomean                   1.204Gi         1.299Gi        +7.83%

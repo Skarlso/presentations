@@ -1,0 +1,18 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/pkg/json
+cpu: Apple M4 Max
+BenchmarkDecoderNextToken/pkgjson/canada-16         	    4412	   2549832 ns/op	 882.83 MB/s	     120 B/op	       2 allocs/op
+BenchmarkDecoderNextToken/encodingjson/canada-16    	     490	  24381827 ns/op	  92.33 MB/s	15091241 B/op	  777969 allocs/op
+BenchmarkDecoderNextToken/pkgjson/citm_catalog-16   	   10000	   1182494 ns/op	1460.65 MB/s	     120 B/op	       2 allocs/op
+BenchmarkDecoderNextToken/encodingjson/citm_catalog-16         	    1489	   7936643 ns/op	 217.62 MB/s	 5100731 B/op	  283595 allocs/op
+BenchmarkDecoderNextToken/pkgjson/twitter-16                   	   21836	    549587 ns/op	1149.07 MB/s	     136 B/op	       3 allocs/op
+BenchmarkDecoderNextToken/encodingjson/twitter-16              	    2361	   5174887 ns/op	 122.03 MB/s	 3300643 B/op	  161149 allocs/op
+BenchmarkDecoderNextToken/pkgjson/code-16                      	    4698	   2445576 ns/op	 793.46 MB/s	     232 B/op	       5 allocs/op
+BenchmarkDecoderNextToken/encodingjson/code-16                 	     387	  31100841 ns/op	  62.39 MB/s	20892475 B/op	 1152644 allocs/op
+BenchmarkDecoderNextToken/pkgjson/example-16                   	 1000000	     11681 ns/op	1114.94 MB/s	     136 B/op	       3 allocs/op
+BenchmarkDecoderNextToken/encodingjson/example-16              	  106668	    113124 ns/op	 115.13 MB/s	   75408 B/op	    3716 allocs/op
+BenchmarkDecoderNextToken/pkgjson/sample-16                    	   36633	    325299 ns/op	2113.42 MB/s	    1128 B/op	       8 allocs/op
+BenchmarkDecoderNextToken/encodingjson/sample-16               	    7701	   1499278 ns/op	 458.55 MB/s	  676765 B/op	   22453 allocs/op
+PASS
+ok  	github.com/pkg/json	160.110s

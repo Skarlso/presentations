@@ -1,0 +1,12 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/pkg/json
+cpu: Apple M4 Max
+BenchmarkScanner/canada-16         	    5574	   2045248 ns/op	1100.63 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/citm_catalog-16   	   12433	    967019 ns/op	1786.11 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/twitter-16        	   25790	    464796 ns/op	1358.69 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/code-16           	    5846	   1977379 ns/op	 981.34 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/example-16        	 1000000	     10366 ns/op	1256.39 MB/s	       0 B/op	       0 allocs/op
+BenchmarkScanner/sample-16         	   36334	    327182 ns/op	2101.25 MB/s	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/pkg/json	87.771s

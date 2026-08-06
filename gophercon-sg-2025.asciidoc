@@ -1,0 +1,201 @@
+===  Just stop already
+Dave Cheney <dave@cheney.net>
+v1.0, 24th January, 2025
+:toc:
+
+== Introduction
+
+Hey there everybody!
+This is a talk about goroutine lifetime manaagement.
+But to tell this story I'm going to start here, and we'll talk a trip all the way around, before we get to the point.
+
+== Memory is a resource
+
+The purpose of gargage collection is to present to the programmer the illusion of an infinite amount of memory.
+
+
+ 
+- Memory is a resource Memory leaks; goroutine is a root
+- Correctness; asynchronous metrics pump, close channel, how do you wait for shutdown?
+Talk
+About group, the history, every program grows a workflow engine
+Group g
+Signals 
+Shutdown
+Safe go 
+
+== No goroutine left behind
+
+In Go it’s trivia to start a goroutine, but, as I’m fond of saying, do you know when that goroutine will stop?
+How will it stop it?
+How will you know when it has stopped?
+And so on.
+
+In this talk I want to present a solution that I find myself rewriting often. It’s small enough that it fits on a slide
+
+Description
+This is a talk about a solution I find myself rewriting on pretty much every backend Go service I work on. Even in a microservice shop the requirement to set up a bunch of parallel goroutines is ubiquitous. For example, the main external web service, plus one listening on loopback for metrics and debug. Most monitoring clients run a background process to batch metrics. Heath checks, database pools, etc, all need to start correctly for your service to run and must trigger a shutdown of your service if one fails.
+
+The group type, documented below, is an idea which has evolved since the Juju days a decade ago of William Reade’s Manifold, through Peter Bourgon’s “How I do things” talk, and through many of my own iterations. Similar, but not identical to, sync.ErrGroup, the group type allows users to compose goroutines with predictable lifetimes; all goroutines start successfully, or non do; when one goroutine exits, all others are shut down automatically. This powerful pattern allows reliable service startup and shutdown behaviour.
+
+Notes
+Here’s the code
+
+----
+// A group manages the lifetime of a set of goroutines from a common context.
+// The first goroutine in the group to return will cause the context to be canceled,
+// terminating the remaining goroutines.
+type group struct {
+   // ctx is the context passed to all goroutines in the group.
+   ctx    context.Context
+   cancel context.CancelFunc
+   done   sync.WaitGroup
+
+   errOnce sync.Once
+   err     error
+}
+
+
+// newGroup returns a new group using the given context.
+func newGroup(ctx context.Context) *group {
+   ctx, cancel := context.WithCancel(ctx)
+   return &group{
+       ctx:    ctx,
+       cancel: cancel,
+   }
+}
+
+
+// add adds a new goroutine to the group. The goroutine should exit when the context
+// passed to it is canceled.
+func (g *group) add(fn func(context.Context) error) {
+   g.done.Add(1)
+   go func() {
+       defer g.done.Done()
+       defer g.cancel()
+       if err := fn(g.ctx); err != nil {
+           g.errOnce.Do(func() { g.err = err })
+       }
+   }()
+}
+
+
+// wait waits for all goroutines in the group to exit. If any of the goroutines
+// fail with an error, wait will return the first error.
+func (g *group) wait() error {
+   g.done.Wait()
+   g.errOnce.Do(func() {
+       // noop, required to synchronise on the errOnce mutex.
+   })
+   return g.err
+}
+----
+
+Whenever you want to do more than one thing at a time in a Go program you'll need goroutines.
+In some scenarios this will be managed for you, the example i'm thinking of is net/http manages the lifetime of the goroutine to the lifetime of the http request.
+But, I've found, and hopefully you'll agree that in any non trivial application you quickly grow a phalanx of goroutines for, lets say, background tasks.
+
+Some examples
+- logging or stats libraries that run a worker process to batch events
+- background tasks
+- the net/http server itself
+
+Initially it seems straight forward to tie the lifetime of these goroutines to the lifetime of the process; process exits, all goroutines are by definition dead.
+But, generally you don't want to hook everything up to cntl-c, you want some notion of graceful shutdown.
+Also, once you group your, lets say, service, goroutines together you want them to live and die as a family, if one goroutine exits you want the rest to shut down as well to prevent your application running in an unknown state;
+imagine if your app ran for days but the metrics pump barfed a few minutes after startup,
+or if the background worker that processed events and jobs stopped running and the rest of your application wedges or drops data.
+
+What i'm going to show you is a piece of code that was the inspiration for the title of this talk, its a piece of code I have (re)written on every project i've worked on.
+
+<group group>
+
+This piece of code is like a jazz standard, every go program eventually implements some versino of it; people like Peter Bourgon were talking about it a decade ago, in 2012 in Juju we ended up implementing some version of it.
+
+Examples
+- grouping workers together
+- http shutdown
+- hook in cntl-c via the context
+- tie back to main.run
+
+== Conclusion
+
+How to sum up this
+
+- style; be consistent, write for the reader and always be looking for opportunites to improve your data model, your names, and thus your design
+- names; as short as possible and no shorter. As you refactor your code, ask yourself, does the name of the containing function or method still match the operation, can it be improved?
+- APIs matter most; when in doubt, defer to the caller of your API, look for ways to make it harder to misue your API.
+- helpers; extend the language of your project with types and helpers to be clearer about what the code is doing. the more helpers you write, the less temporariry variables you'll need in the calling function. This means the identifiers you do declare will live longer, be more meaningful, and thus deserve more descriptive names.
+- push conditionals outwards to the leaves of your program, into free functions, makes it easier to test, easier to read
+- prefer metrics to logs, debug logs are fine during development but if theres no interactive story with your application, and I argue that's most of you, then prefer metrics for observability as by definition you are observing what has happened in the past.
+
+
+
+
+== Stylistic issues
+
+There's no real order here, let just jump in
+
+=== Constants at the top; types in the middle, free functions at the end
+
+Does the compiler care about the order of your declarations? No, not at all.
+So this is purely an asthetic practice, its to make it look preettier, because we like to look at pretty things.
+it makes the code easlier to understand.
+
+For me, I've settled on putting constants at the top, just below imports, then types and exported functions, think the constructor for your types, if needed.
+Then finally the unexported free functions.
+
+But really, consistency is key; it doesn't matter which you really choose more than it does that you're consistent,
+or at least your team is consistent.
+You may not get the whole world to agree on the _one true_ way to order your declarations, but at least in the little part of the world you control, be consistent.
+
+=== Use paragraphs to break up ideas
+
+While we're on the subject of prose, use paragraphs to break up ideas.
+
+This applies equally to writing as it does to programming.
+But be on the lookout for writing a novel in the body of a function.
+I'll have more to say about that later.
+=== Packages
+
+If you have an interface type called Service, that should be in the file called service.go, not that you should have one file per type, but if your Service type is in another file in that package, then its time to clean things up.
+== if is bad, else is worse
+
+
+I know there are many accomplished functional programmers in the room today, so I ask you please bear with me as I transition through this catharsis.
+
+
+In this section I want to go through some examples of how I apply this philosophy.
+
+== Initalise once and only once.
+
+=== Keep to the left; use guard clauses, return early
+
+Repeating Mat Ryer here, keep your code as close as possible to the left hand margin;
+Limit indentantion by putting the _exceptional_ case in the the block. 
+This is a style known as _guard_ clauses.
+
+== Avoid negation, prefer helpers.
+
+
+== Helpers helper helpers
+
+I'm going to make the case that you should be writing helpers.
+Perhaps you already are, perhaps you could be using more.
+I'm going to give a bunch of examples where I think helpers make the code more readable and more testable.
+
+=== Compose functions
+
+When considitering a function that does two things, split it into the composition of those functions.
+
+example: recording time and status of a function
+
+
+How would you test this?
+
+Here are a bunch of the ideas that i've talked about bought together
+
+
+== `main.run` pattern to make `main.main` less special.
+
+

@@ -1,0 +1,236 @@
+= Selling a language; it's got nothing to do with syntax
+Velocity Berlin, 2019
+Dave Cheney <dave@cheney.net>
+
+== Introduction
+
+What makes an open source project popular?
+What makes it successful?
+What gives it longevity and vibrancy?
+What convinces people to invest their careers in it?
+
+I’ve been a Go programmer, contributor and comitter to the project since 2010.
+I organised the user group in Sydney for a few years, I’ve run release parties, organised and spoke at Go conferences, and generally been an advocate for Go.
+
+> Proposition 1:
+> Velocity is not a programming language conference. You don’t want to hear a dork from Australia rabbit on about Go. 
+
+Now, I’m going to go out on a limb and suggest that while probably everyone in this room is using tools written in Go, most of you don’t consider yourselves software developers and it might be fair to say some of you don’t give a hoot about Go.
+
+> Proposition 2:
+> Open source has influenced in, at least in part, the career of everyone in this room. 
+
+But this isn’t a story about me, or a programming lanaguge.
+It’s a story about you.
+I’m willing to bet that every single one of your careers have been touched, enhanced, impacted--possibly significantly--by open source.
+Open source tools, libraries, programming languages, and infrastructure.
+
+== What made Go a success?
+
+Conservative estimates put Go's developer population over 1 million souls.
+What contributed to this success?
+
+- Was it a manical focus on simplicity?
+- Was it solid performance?
+- Was is modern concurrency support?
+- Memory safety?
+- Stoic backwards compatibility?
+- Googles money?
+
+Bzzzt. Wrong.
+
+These things are all true, but they are not reasons why an open source project grows.
+These weren’t the things that made go a success. 
+
+As an audience of infrastructure engineers, arguments like simple, easy to read, concurrent, perfomant, aren’t that compelling for you.
+And, as I discovered, they aren’t that important for and audience at a meetup or programming conference either. 
+
+This talk is based on my experiences in the Go ecosystem over the last decade.
+It's about the things we did right, and the mistakes we made, how they might translate into some lessons for a successful open source project.
+
+== The distribution model
+
+Something which perhaps is not as revoluationary today as it felt back in 2009 was Go’s decision to eschuw a managed runtime.
+You have to remember that 2009 was the era of the JVM, along with Ruby and Python.
+Node.js was just around the corner.
+Nothing against those languages, but their deployment models place a lot of burden on the operators to keep the managed runtime stack on the host up to date.
+You can't say you've really lived until you had to repackage the Oracle JDK as an RPM just too keep puppet happy.
+
+Into that world came Go, which didn’t just skip the managed runtime, it also skipped the GCC and shared library model of deployment.
+The decision was widely panned, but in building upon a simpler tool chain Go delivered two things which I believe absolutely cemented it as _the_ tool for infrastructure software that all of you use today; 
+
+- single static binary deployment
+- simple cross compilation
+
+The former made Go an ideal platform to write programs that could be deployed onto a primordial machine.
+The latter made it trivial to write those tools on OS X, and compile them for linux, or windows, or arm, or freebsd.
+This created a renesuance in free standing CLI tools.
+
+== First impressions matter
+
+What’s the take away for your projects?
+Simply put the deployment experience matters.
+The product I work on is delivered as an 11 mb docker image—and if k8s could learn to deploy a static binary or a tar ball I would need docker at all.
+
+The first user experience matters, a lot. 
+It maters for contributors looking to dive into your project, build it, run the tests, maybe send a fix, but it matters _even more_ for people who just want to use your project.
+The effort you put into the deployment and getting started experience of your project will generate outsized returns in terms of the word of mouth reach you will have--if folks can't try it simply, they're hardly likey to recommend it.
+
+If you're project is struggling to gain traction, its not enough that its the right idea, at the right time, but you have to make it cheap, in terms of personal investment, to try.
+
+== The Gopher
+
+Most projects have a logo 
+
+image::images/wavy-lines.png[]
+
+some even have a mascot
+
+image::images/duke-guitar.png[]
+// https://commons.wikimedia.org/wiki/File:Duke-Guitar.png
+
+Go has a gopher.
+
+image::images/rene-gopher.jpg[]
+
+Created by Rene French the gopher mascot is Go’s unofficial logo.
+(Most people think it _is_ the logo)
+It’s cute, playful, and irreverant.
+Go programmers refer to themselves collectively as _gophers_.
+
+The gopher is a symbol that let Go enthusiasts interact, remix, and reimagine their relationship with the language with their art.
+
+// images gophers
+
+The gopher isn’t just restricted to two dimensions — we have tattoos,
+
+image::images/gopher-tattoo.jpg[]
+
+figureines 
+
+image::images/figurines.jpg[]
+
+// mvhttps://twitter.com/itrycode/status/1181835702125940736?s=12
+
+and even cosplay.
+
+image::images/cosplay.jpg[]
+
+// https://twitter.com/quasilyte/status/1187418458671255552?s=12
+
+=== Contribution is more than code
+
+This might seem trite but in a culture where code is the core deliverable the gopher mascot is not simply a static image.
+Reinterpreting the Go gopher creates a way for enthusiasts to contribute to not just Go the programming language, but the ecosystem of meetups, conferences, articles, project logos.
+
+> The actual company values, as opposed to the nice-sounding values, are shown by who gets rewarded, promoted or let go.
+-- Patty McCord
+
+// https://blog.slideshare.net/2014/06/11/inside-the-netflix-culture-deck
+
+A lot of lip service is given to contributing to open source projects outside of code. 
+Why is this important for your open source projects?
+Is not just about a cute logo, the gopher provides a way for Go enthusiasts to express their devotion in non code ways.
+
+Fans engage with the language by drawing fan art of the gopher.
+
+If you define merit in your project in terms of who’s cut the most code then you explicitly go against this rule.
+I'm the 16th highest contributor on the Go project.
+467 commits, 22,306 lines added 14,543 lines removed, yet the reason, I believe, that I’m here talking to you is because of the recognition that flowed from my blog.
+A blog I started 9 years ago as a life hack to make it easier to help people on IRC by sending them a link to a page if they were stick.
+
+The Go gopher, a simplistic stylised blue blob with eyes, became a lightning rod for Go enthusiasts, many are as passionate about the logo, reproduced in every medium from 3d printed PVC to sticker, to plush toy, as they are about the language.
+
+There are many ways to contribute to an open source project, make sure you recognise and reward them equally.
+
+== A functioning job market
+
+We've all seen this graph.
+
+image::https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Gartner_Hype_Cycle.svg/2880px-Gartner_Hype_Cycle.svg.png[]
+
+Moving any technology from niche to hobby to mainstream requires a functional job market.
+Early adopters, the super fans, of any idea, project, technology are going to do if for love.
+If they cannot use it at work, they’ll tinker with it at home.
+However, mainstream programmers are going to wait and see.
+
+A when I chose in 2012 to take a job where I would be programming in Go full time I also was making a second choice.
+That choice was to park the last 15 years of my career my skills as a system administrator, some useful, somewhat dated.
+
+Choosing to invest you career in a new programming language implicitly means letting your previous skills lapse.
+
+If you pitch a adopting a new management tool, or monitoring solution, or container platform for your company, for people to come on board, they have to know that the risk is worth it.
+
+You have to pitch to the CEO or CTO they don’t care about syntax or deployment strategies they want to know how hard it is to retrain existing staff or recruit new developers.
+
+And this is key; when promoting your open source project as well ask asking people to try it you're also asking them to give up the skill base they have at that moment.
+Its not simply that they'll be inexperienced in the technology you're pushing, they risk getting out of date in the thing they used to do.
+
+For Go we got lucky.
+Our breakout hit was Docker, which opened the flood gates for the tools you all use today; terraform, vitess, cockroachdb, and of course kubernetes.
+
+And with that Go was perfectly positioned for the switch to microservices.
+The deployment model.
+Performance, memory safety and lightweight concurrency, were--as if it were design that way--perfect for Martin Fowler's truth bomb.
+
+== First impressions last
+
+Early in a project’s life, groups form around a notional leader, and as humans we like to fit in, so we model our behaviour in that group after its most important members.
+When Go launched it quickly established a reputation as prickly or cerebral.
+Go lacks the whimsy of the Ruby community, or the deeply nerdy humour of Python.
+Instead our well meaning calls to strive for simplicity are often misinterpreted as elitism or a lack of empathy for the particular challenge the programmer has been set.
+
+It’s a tough stereotype to break.
+It took me many years to understand how exclusionary the the behaviour I empathised and emulated was, and work to change that.
+
+== Codes of conduct
+
+Let me be absolutely clear, harrasment and discrimination are simply unacceptable.
+And folks, I hate to be the one to break it to you, but just because someone joins your project or your meetup, this is not an invitation to slide into their DMs because you  beliece you share a common _amarous_ interest.
+
+You need to write down your code of conduct.
+You need to think about how you will enforce it in public and online spaces.
+
+Codes of conduct are just words on paper, but they're important words.
+Its important to write down the expectations of members of your project, or members of your meetup, or the speakers and attendees of your conference.
+Its important because then organisers have a code which they can be held too.
+They're important because then you can have a concrete discussion with your conference staff about what happens when you have a report of a conduct violation.
+Its important to write this down because then it is explicit, rather than tacit knowledge.
+
+Go waited too long to add a Code of conduct.
+It wasn’t until https://go.googlesource.com/proposal/+/master/design/13073-code-of-conduct.md[late 2015] that one was proposed.
+Adopting a code was a long, fractious, process that burned many people.
+It’s enforcement is incomplete and lead to a definition of community and non community on line spaces, a schism which lurks barely below the surface even today.
+A few years prior the Python community had gone through an equally acramonious debate retrofitting a code of conduct to their much older project.
+
+In comparison, Rust--Go's contemporary--at least from an outsiders perspective had their code of conduct and moderation process in place from day one.
+This set the tone for all the interaction in the project online, offline, in code, and in real life. 
+Now I’m sure it wasn’t this cut and dry, I’m barely a bystander in their community, contemporaties like rust showed that haveing, and enforcing, a code of conduct, from day one, is required for the health of any open source project.
+
+The lesson I think for all of us is, if your project grows beyond a hobby, if you seek to build a community around it, start a meetup, have a conference, start up a discourse server, slack or god help you a sub reddit, have a code of conduct in place from day one and back it up with consistent moderation.
+
+== Open goverance and succession
+
+I want to close on the realisation that I've come to most recently.
+For the last four years I've been working in the CNCF ecosystem and it's has thrown Go's lack of open govenance into stark relief.
+
+The comforting paternalism of Go's earlier years has, like teenager outgrowing the home, become stifiling because while the source code to Go may be open source, its governance is not.
+While the project welcomes contributions from all, membership of its governing body is closed.
+
+It is driven by a sincere desire to avoid the disingenuous homogenization of design by committee and a fear that the current governors of the language cannot successfully promulgate their values to potential successors.
+
+So this is my message to you.
+It’s not enough for an infrastructure project to be open source, it must also embrace an open governance model.
+It is unacceptable for the direction of an open source project used by millions of people to be controlled by a group who’s membership is closed to the community in which it depends.
+
+== Conclusion
+
+- First impressions matter
+- Contribution is more than code
+- Functional job market key to success 
+- Write a code of conduct, enforce it
+- Adopt open governance and plan for succession 
+
+Because actively avoiding planning for succession is instead planning for obsolescence. 
+
+Thank you

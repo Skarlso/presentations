@@ -1,0 +1,1446 @@
+goos: darwin
+goarch: arm64
+pkg: json
+cpu: Apple M4 Max
+BenchmarkWhitespaceVariants/array/canada.json-16         	    1894	    531620 ns/op	4234.34 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2250	    536651 ns/op	4194.64 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2271	    531732 ns/op	4233.45 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2259	    534839 ns/op	4208.85 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2270	    537096 ns/op	4191.17 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2239	    538708 ns/op	4178.63 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2074	    532301 ns/op	4228.92 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2286	    533985 ns/op	4215.58 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2266	    537587 ns/op	4187.34 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2257	    537963 ns/op	4184.42 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2198	    533288 ns/op	4221.10 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2250	    533116 ns/op	4222.46 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2250	    535080 ns/op	4206.96 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2253	    536993 ns/op	4191.97 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2221	    533655 ns/op	4218.20 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2235	    534468 ns/op	4211.77 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2264	    538478 ns/op	4180.41 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2247	    541035 ns/op	4160.66 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2221	    535858 ns/op	4200.85 MB/s
+BenchmarkWhitespaceVariants/array/canada.json-16         	    2229	    536907 ns/op	4192.64 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2346	    456845 ns/op	4247.55 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2636	    461844 ns/op	4201.57 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2450	    459720 ns/op	4220.98 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2625	    454946 ns/op	4265.28 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2654	    458468 ns/op	4232.51 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2661	    455623 ns/op	4258.95 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2703	    458066 ns/op	4236.22 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2494	    459468 ns/op	4223.31 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2658	    456149 ns/op	4254.03 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2685	    455863 ns/op	4256.70 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2618	    456770 ns/op	4248.24 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2647	    455947 ns/op	4255.92 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2666	    456149 ns/op	4254.03 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2684	    457094 ns/op	4245.23 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2629	    457653 ns/op	4240.05 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2643	    459447 ns/op	4223.50 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2648	    467554 ns/op	4150.26 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2647	    467436 ns/op	4151.31 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2430	    471554 ns/op	4115.06 MB/s
+BenchmarkWhitespaceVariants/array/code.json-16           	    2559	    468474 ns/op	4142.11 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2827	    419555 ns/op	4116.75 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2854	    417939 ns/op	4132.67 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2900	    417172 ns/op	4140.27 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2872	    417266 ns/op	4139.34 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2859	    417783 ns/op	4134.21 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2869	    416834 ns/op	4143.63 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2888	    417666 ns/op	4135.37 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2905	    417459 ns/op	4137.42 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2887	    416600 ns/op	4145.96 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2882	    416825 ns/op	4143.72 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2895	    430606 ns/op	4011.10 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2840	    419317 ns/op	4119.09 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2899	    418541 ns/op	4126.73 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2866	    420584 ns/op	4106.68 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2752	    420596 ns/op	4106.57 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2865	    417609 ns/op	4135.93 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2856	    418139 ns/op	4130.69 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2847	    420379 ns/op	4108.68 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2683	    417761 ns/op	4134.43 MB/s
+BenchmarkWhitespaceVariants/array/citm.json-16           	    2890	    418604 ns/op	4126.10 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  368311	      3141 ns/op	4146.42 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  394105	      3091 ns/op	4213.49 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  390819	      3090 ns/op	4215.13 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  394804	      3082 ns/op	4225.41 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  395463	      3084 ns/op	4223.65 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  397407	      3086 ns/op	4220.93 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  392625	      3084 ns/op	4223.40 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  386329	      3115 ns/op	4181.53 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  385950	      3081 ns/op	4226.82 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  392172	      3097 ns/op	4205.08 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  392794	      3151 ns/op	4132.76 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  384889	      3082 ns/op	4226.47 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  387152	      3101 ns/op	4200.43 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  370761	      3103 ns/op	4197.64 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  382569	      3126 ns/op	4166.94 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  384037	      3095 ns/op	4207.58 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  384805	      3121 ns/op	4172.90 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  340789	      3243 ns/op	4016.13 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  373630	      3187 ns/op	4086.10 MB/s
+BenchmarkWhitespaceVariants/array/example.json-16        	  376921	      3138 ns/op	4150.33 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7162	    158027 ns/op	3996.24 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7881	    154242 ns/op	4094.30 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7898	    155784 ns/op	4053.79 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7700	    155535 ns/op	4060.26 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7809	    158600 ns/op	3981.81 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7752	    155042 ns/op	4073.17 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7762	    157527 ns/op	4008.91 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7808	    157470 ns/op	4010.37 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7483	    157103 ns/op	4019.75 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7914	    154253 ns/op	4094.02 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7748	    159280 ns/op	3964.79 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7507	    158949 ns/op	3973.06 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7396	    158916 ns/op	3973.89 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7455	    156684 ns/op	4030.51 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7934	    155074 ns/op	4072.33 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7968	    155089 ns/op	4071.96 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7719	    154742 ns/op	4081.09 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7747	    156788 ns/op	4027.82 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7840	    154696 ns/op	4082.29 MB/s
+BenchmarkWhitespaceVariants/array/twitter.json-16        	    7916	    155667 ns/op	4056.84 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7060	    167334 ns/op	4108.50 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    6909	    182829 ns/op	3760.31 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    6559	    173231 ns/op	3968.64 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    6734	    168755 ns/op	4073.91 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7363	    167712 ns/op	4099.24 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7162	    168050 ns/op	4091.00 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7126	    169939 ns/op	4045.52 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    6926	    170145 ns/op	4040.62 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7232	    167563 ns/op	4102.88 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7242	    167612 ns/op	4101.69 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7134	    167958 ns/op	4093.24 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7195	    175493 ns/op	3917.49 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7315	    178238 ns/op	3857.16 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    6686	    175250 ns/op	3922.92 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    6702	    172927 ns/op	3975.61 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    6902	    169351 ns/op	4059.57 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7350	    168934 ns/op	4069.59 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7308	    168478 ns/op	4080.61 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7282	    168109 ns/op	4089.57 MB/s
+BenchmarkWhitespaceVariants/array/sample.json-16         	    7104	    170402 ns/op	4034.53 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2100	    558301 ns/op	4031.98 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2168	    557406 ns/op	4038.46 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2152	    557724 ns/op	4036.16 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2170	    558784 ns/op	4028.50 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2176	    558119 ns/op	4033.30 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2160	    556734 ns/op	4043.33 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2168	    577120 ns/op	3900.51 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2152	    556228 ns/op	4047.01 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2152	    556005 ns/op	4048.64 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2166	    555829 ns/op	4049.92 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2169	    559185 ns/op	4025.61 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    1995	    563620 ns/op	3993.93 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2161	    556044 ns/op	4048.35 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2161	    556544 ns/op	4044.71 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2158	    555101 ns/op	4055.23 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2125	    563124 ns/op	3997.45 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2134	    563845 ns/op	3992.34 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2149	    559637 ns/op	4022.36 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2161	    556342 ns/op	4046.18 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/canada.json-16         	    2148	    561863 ns/op	4006.42 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2564	    474241 ns/op	4091.74 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2565	    471714 ns/op	4113.66 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2556	    470981 ns/op	4120.07 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2522	    471077 ns/op	4119.22 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2533	    473431 ns/op	4098.74 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2554	    473552 ns/op	4097.70 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2547	    489013 ns/op	3968.14 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2335	    485997 ns/op	3992.77 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2485	    475676 ns/op	4079.40 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2536	    477216 ns/op	4066.23 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2547	    474579 ns/op	4088.82 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2446	    479882 ns/op	4043.64 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2553	    472200 ns/op	4109.42 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2538	    471464 ns/op	4115.85 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2530	    477936 ns/op	4060.11 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2540	    472409 ns/op	4107.61 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2553	    472656 ns/op	4105.46 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2535	    471338 ns/op	4116.94 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2547	    471800 ns/op	4112.92 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/code.json-16           	    2539	    492603 ns/op	3939.22 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2800	    431255 ns/op	4005.07 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2805	    429404 ns/op	4022.32 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2804	    439562 ns/op	3929.38 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2685	    433874 ns/op	3980.89 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2776	    429285 ns/op	4023.44 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2809	    428328 ns/op	4032.43 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2781	    429469 ns/op	4021.72 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2804	    432266 ns/op	3995.69 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2821	    428191 ns/op	4033.72 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2812	    429895 ns/op	4017.73 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2832	    427425 ns/op	4040.95 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2796	    427353 ns/op	4041.63 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2852	    428325 ns/op	4032.46 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2815	    427141 ns/op	4043.64 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2808	    426784 ns/op	4047.02 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2821	    431378 ns/op	4003.92 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2828	    432342 ns/op	3994.99 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2790	    431121 ns/op	4006.31 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2791	    429773 ns/op	4018.87 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/citm.json-16           	    2816	    432302 ns/op	3995.36 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  377011	      3186 ns/op	4087.89 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  385912	      3176 ns/op	4100.60 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  379466	      3175 ns/op	4101.82 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  362359	      3207 ns/op	4061.28 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  384174	      3175 ns/op	4102.62 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  378656	      3170 ns/op	4108.39 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  388716	      3177 ns/op	4099.60 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  385556	      3165 ns/op	4114.75 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  382200	      3193 ns/op	4079.03 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  380892	      3202 ns/op	4067.30 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  377730	      3194 ns/op	4077.44 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  373819	      3171 ns/op	4107.77 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  380352	      3158 ns/op	4124.42 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  385641	      3151 ns/op	4133.34 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  385114	      3149 ns/op	4135.59 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  385425	      3316 ns/op	3927.14 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  371194	      3185 ns/op	4089.79 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  377673	      3166 ns/op	4113.33 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  383523	      3183 ns/op	4092.15 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/example.json-16        	  382932	      3197 ns/op	4073.99 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7860	    156279 ns/op	4040.94 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7621	    156311 ns/op	4040.11 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7642	    155866 ns/op	4051.65 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7851	    155622 ns/op	4058.01 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7867	    155968 ns/op	4048.99 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7880	    156114 ns/op	4045.20 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7671	    156124 ns/op	4044.95 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7939	    159172 ns/op	3967.49 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    6838	    159028 ns/op	3971.10 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7705	    156255 ns/op	4041.57 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7611	    156534 ns/op	4034.35 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7768	    156399 ns/op	4037.85 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7627	    156527 ns/op	4034.54 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7899	    156373 ns/op	4038.51 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7945	    156289 ns/op	4040.69 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7766	    157551 ns/op	4008.32 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7692	    155978 ns/op	4048.74 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7918	    156145 ns/op	4044.41 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7656	    155830 ns/op	4052.59 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/twitter.json-16        	    7710	    155414 ns/op	4063.42 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7183	    167459 ns/op	4105.44 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7216	    167611 ns/op	4101.72 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7213	    167794 ns/op	4097.23 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7245	    167794 ns/op	4097.23 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7131	    167926 ns/op	4094.03 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7137	    169346 ns/op	4059.68 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7407	    167833 ns/op	4096.29 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7470	    167786 ns/op	4097.42 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7159	    167561 ns/op	4102.94 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7201	    167700 ns/op	4099.52 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7149	    169763 ns/op	4049.70 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7071	    171131 ns/op	4017.35 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7132	    167793 ns/op	4097.25 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7192	    168163 ns/op	4088.25 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7422	    168149 ns/op	4088.58 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7141	    168153 ns/op	4088.50 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7358	    167446 ns/op	4105.75 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7120	    170403 ns/op	4034.51 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7142	    167699 ns/op	4099.55 MB/s
+BenchmarkWhitespaceVariants/array_(inlined)/sample.json-16         	    7263	    167415 ns/op	4106.50 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1180	   1025747 ns/op	2194.56 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1176	   1079009 ns/op	2086.23 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1096	   1107881 ns/op	2031.86 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1111	   1031265 ns/op	2182.81 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1168	   1035356 ns/op	2174.19 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1183	   1072228 ns/op	2099.42 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1106	   1049127 ns/op	2145.65 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1177	   1043414 ns/op	2157.40 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1168	   1024910 ns/op	2196.35 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1149	   1029624 ns/op	2186.29 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1174	   1048909 ns/op	2146.10 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1135	   1051385 ns/op	2141.04 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1090	   1034326 ns/op	2176.35 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1159	   1040830 ns/op	2162.75 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1165	   1084664 ns/op	2075.35 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1147	   1071241 ns/op	2101.36 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1134	   1083572 ns/op	2077.44 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1141	   1058901 ns/op	2125.84 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1161	   1040657 ns/op	2163.12 MB/s
+BenchmarkWhitespaceVariants/check/canada.json-16                   	    1161	   1037751 ns/op	2169.17 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1322	    892243 ns/op	2174.83 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1341	    884841 ns/op	2193.02 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1360	    902074 ns/op	2151.12 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1351	    892624 ns/op	2173.90 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1365	    890272 ns/op	2179.64 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1346	    890453 ns/op	2179.20 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1358	    885656 ns/op	2191.00 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1362	    886231 ns/op	2189.58 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1357	    887800 ns/op	2185.71 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1348	    886580 ns/op	2188.72 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1371	    882627 ns/op	2198.52 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1356	    883288 ns/op	2196.87 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1346	    885642 ns/op	2191.03 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1346	    883287 ns/op	2196.88 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1359	    881629 ns/op	2201.01 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1356	    884013 ns/op	2195.07 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1354	    880095 ns/op	2204.84 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1378	    881883 ns/op	2200.37 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1370	    897618 ns/op	2161.80 MB/s
+BenchmarkWhitespaceVariants/check/code.json-16                     	    1365	    878682 ns/op	2208.39 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1693	    702893 ns/op	2457.28 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1688	    704634 ns/op	2451.21 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1699	    704748 ns/op	2450.81 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1704	    704885 ns/op	2450.34 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1694	    706346 ns/op	2445.26 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1708	    700244 ns/op	2466.57 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1712	    702464 ns/op	2458.78 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1696	    700278 ns/op	2466.45 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1740	    706945 ns/op	2443.19 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1704	    699833 ns/op	2468.02 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1755	    705532 ns/op	2448.09 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1716	    703481 ns/op	2455.23 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1682	    703218 ns/op	2456.14 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1704	    723763 ns/op	2386.42 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1686	    707826 ns/op	2440.15 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1705	    701318 ns/op	2462.80 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1708	    701865 ns/op	2460.88 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1732	    701059 ns/op	2463.71 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1710	    698853 ns/op	2471.49 MB/s
+BenchmarkWhitespaceVariants/check/citm.json-16                     	    1702	    698840 ns/op	2471.53 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  180811	      6687 ns/op	1947.77 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  173245	      6613 ns/op	1969.48 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  182884	      6587 ns/op	1977.28 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  183298	      6586 ns/op	1977.38 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  182620	      6574 ns/op	1981.02 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  181422	      6594 ns/op	1975.12 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  183306	      6595 ns/op	1974.90 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  182402	      6629 ns/op	1964.72 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  177890	      6642 ns/op	1960.98 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  171568	      7022 ns/op	1854.62 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  180806	      6694 ns/op	1945.63 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  182707	      6665 ns/op	1954.22 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  180394	      6645 ns/op	1960.02 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  183429	      6998 ns/op	1861.16 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  179614	      6693 ns/op	1945.93 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  180487	      6683 ns/op	1948.89 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  182330	      7354 ns/op	1771.03 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  173998	      7100 ns/op	1834.39 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  170320	      6937 ns/op	1877.51 MB/s
+BenchmarkWhitespaceVariants/check/example.json-16                  	  174084	      6827 ns/op	1907.66 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3500	    351418 ns/op	1797.05 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3362	    341445 ns/op	1849.53 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3468	    353477 ns/op	1786.58 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3494	    351619 ns/op	1796.02 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3200	    367810 ns/op	1716.96 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3357	    355653 ns/op	1775.64 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3472	    354049 ns/op	1783.69 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3506	    342117 ns/op	1845.90 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3530	    341568 ns/op	1848.87 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3483	    341151 ns/op	1851.13 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3579	    340858 ns/op	1852.72 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3577	    339543 ns/op	1859.89 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3582	    339118 ns/op	1862.22 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3583	    339150 ns/op	1862.05 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3591	    339500 ns/op	1860.13 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3524	    338712 ns/op	1864.46 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3577	    339353 ns/op	1860.93 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3572	    358144 ns/op	1763.30 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3282	    353132 ns/op	1788.32 MB/s
+BenchmarkWhitespaceVariants/check/twitter.json-16                  	    3566	    341385 ns/op	1849.86 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    3824	    297747 ns/op	2308.98 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4170	    303495 ns/op	2265.25 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4071	    295179 ns/op	2329.07 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4050	    298478 ns/op	2303.32 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4047	    294539 ns/op	2334.13 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4134	    292858 ns/op	2347.53 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4089	    293758 ns/op	2340.33 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4123	    293783 ns/op	2340.14 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4046	    293172 ns/op	2345.01 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4201	    309523 ns/op	2221.13 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    3999	    301667 ns/op	2278.98 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4101	    294304 ns/op	2336.00 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4090	    296090 ns/op	2321.90 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    3991	    296979 ns/op	2314.95 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4063	    295087 ns/op	2329.80 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4167	    298273 ns/op	2304.91 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    4065	    303518 ns/op	2265.08 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    3656	    309182 ns/op	2223.58 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    3932	    309506 ns/op	2221.26 MB/s
+BenchmarkWhitespaceVariants/check/sample.json-16                   	    3903	    309400 ns/op	2222.01 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1141	   1068555 ns/op	2106.64 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1117	   1062905 ns/op	2117.84 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1146	   1067026 ns/op	2109.66 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1143	   1053941 ns/op	2135.85 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1158	   1084285 ns/op	2076.08 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1159	   1045748 ns/op	2152.58 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1156	   1040288 ns/op	2163.88 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1155	   1039768 ns/op	2164.96 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1156	   1033409 ns/op	2178.29 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1160	   1041027 ns/op	2162.35 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1116	   1048465 ns/op	2147.01 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1136	   1038520 ns/op	2167.57 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1158	   1044455 ns/op	2155.25 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1136	   1047472 ns/op	2149.04 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1158	   1037908 ns/op	2168.84 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1150	   1039648 ns/op	2165.21 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1156	   1038706 ns/op	2167.18 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1154	   1039759 ns/op	2164.98 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1154	   1047499 ns/op	2148.99 MB/s
+BenchmarkWhitespaceVariants/shift/canada.json-16                   	    1164	   1031582 ns/op	2182.14 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1357	    888303 ns/op	2184.47 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1350	    899786 ns/op	2156.59 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1351	    892096 ns/op	2175.18 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1357	    891443 ns/op	2176.78 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1346	    904409 ns/op	2145.57 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1284	    904681 ns/op	2144.92 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1323	    900970 ns/op	2153.76 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1335	    893341 ns/op	2172.15 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1345	    901973 ns/op	2151.36 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1345	    897990 ns/op	2160.91 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1351	    894690 ns/op	2168.88 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1357	    898704 ns/op	2159.19 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1342	    893849 ns/op	2170.92 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1344	    894359 ns/op	2169.68 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1336	    896562 ns/op	2164.35 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1346	    893109 ns/op	2172.72 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1348	    893341 ns/op	2172.15 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1350	    892473 ns/op	2174.26 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1346	    892882 ns/op	2173.27 MB/s
+BenchmarkWhitespaceVariants/shift/code.json-16                     	    1348	    889972 ns/op	2180.38 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1514	    792855 ns/op	2178.46 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1500	    792079 ns/op	2180.59 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1510	    797778 ns/op	2165.02 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1437	    853237 ns/op	2024.29 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1479	    887582 ns/op	1945.97 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1424	    826353 ns/op	2090.15 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1471	    825331 ns/op	2092.74 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1459	    828620 ns/op	2084.43 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1448	    827026 ns/op	2088.45 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1447	    832020 ns/op	2075.92 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1436	    841955 ns/op	2051.42 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1461	    821371 ns/op	2102.83 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1484	    815224 ns/op	2118.69 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1450	    818662 ns/op	2109.79 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1459	    821688 ns/op	2102.02 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1467	    820559 ns/op	2104.91 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1454	    839261 ns/op	2058.01 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1494	    838378 ns/op	2060.17 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1443	    797288 ns/op	2166.35 MB/s
+BenchmarkWhitespaceVariants/shift/citm.json-16                     	    1515	    803145 ns/op	2150.55 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  200438	      5964 ns/op	2183.71 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  200560	      6005 ns/op	2168.97 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  200728	      5998 ns/op	2171.54 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  199933	      6000 ns/op	2170.79 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  200194	      5979 ns/op	2178.31 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  201462	      5977 ns/op	2178.90 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  202286	      5962 ns/op	2184.61 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  201856	      5978 ns/op	2178.74 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  201658	      5991 ns/op	2173.88 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  199478	      5977 ns/op	2179.07 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  201075	      5998 ns/op	2171.24 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  197496	      6142 ns/op	2120.39 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  197756	      6053 ns/op	2151.78 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  199376	      6017 ns/op	2164.37 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  167998	      6011 ns/op	2166.83 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  200034	      6031 ns/op	2159.38 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  202495	      5982 ns/op	2177.21 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  202242	      6026 ns/op	2161.22 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  199274	      6055 ns/op	2150.93 MB/s
+BenchmarkWhitespaceVariants/shift/example.json-16                  	  196072	      6044 ns/op	2154.90 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4054	    292723 ns/op	2157.38 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4160	    292606 ns/op	2158.24 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4180	    292015 ns/op	2162.61 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4100	    291751 ns/op	2164.56 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4164	    302354 ns/op	2088.66 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    3980	    293510 ns/op	2151.59 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4158	    290540 ns/op	2173.58 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4209	    290326 ns/op	2175.19 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4189	    289908 ns/op	2178.33 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4189	    290149 ns/op	2176.52 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4190	    289506 ns/op	2181.35 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4141	    292961 ns/op	2155.63 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4147	    289644 ns/op	2180.31 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4170	    290817 ns/op	2171.52 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4233	    290164 ns/op	2176.40 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4132	    291861 ns/op	2163.75 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4131	    291323 ns/op	2167.75 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4220	    289557 ns/op	2180.97 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4148	    299234 ns/op	2110.44 MB/s
+BenchmarkWhitespaceVariants/shift/twitter.json-16                  	    4040	    292981 ns/op	2155.48 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3747	    316925 ns/op	2169.26 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3777	    315053 ns/op	2182.15 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3766	    315808 ns/op	2176.93 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3817	    315644 ns/op	2178.06 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3838	    315532 ns/op	2178.83 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3812	    330877 ns/op	2077.79 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3567	    319813 ns/op	2149.67 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3795	    319467 ns/op	2152.00 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3825	    316794 ns/op	2170.15 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3786	    316837 ns/op	2169.86 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3774	    332413 ns/op	2068.18 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3786	    317728 ns/op	2163.78 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3825	    317177 ns/op	2167.53 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3865	    315407 ns/op	2179.70 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3814	    315584 ns/op	2178.48 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3888	    316677 ns/op	2170.95 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3775	    317549 ns/op	2165.00 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3772	    318287 ns/op	2159.97 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3828	    314925 ns/op	2183.03 MB/s
+BenchmarkWhitespaceVariants/shift/sample.json-16                   	    3778	    317273 ns/op	2166.88 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1148	   1070808 ns/op	2102.21 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1150	   1043382 ns/op	2157.47 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1158	   1033910 ns/op	2177.23 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1160	   1048596 ns/op	2146.74 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1155	   1032907 ns/op	2179.34 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1158	   1039956 ns/op	2164.57 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1155	   1037291 ns/op	2170.13 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1158	   1034493 ns/op	2176.00 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1155	   1036301 ns/op	2172.21 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1156	   1035785 ns/op	2173.29 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1159	   1035478 ns/op	2173.93 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1160	   1033896 ns/op	2177.26 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1160	   1036861 ns/op	2171.03 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1156	   1040861 ns/op	2162.69 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1156	   1038334 ns/op	2167.95 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1154	   1040505 ns/op	2163.43 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1156	   1040060 ns/op	2164.36 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1153	   1041120 ns/op	2162.15 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1123	   1063118 ns/op	2117.41 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/canada.json-16         	    1153	   1039948 ns/op	2164.59 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1297	    896344 ns/op	2164.87 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1356	    895468 ns/op	2166.99 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1302	    895594 ns/op	2166.69 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1334	    894275 ns/op	2169.88 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1341	    893203 ns/op	2172.49 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1344	    916839 ns/op	2116.48 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1335	    901567 ns/op	2152.33 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1351	    897056 ns/op	2163.16 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1322	    895237 ns/op	2167.55 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1344	    891304 ns/op	2177.12 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1351	    892669 ns/op	2173.79 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1364	    913535 ns/op	2124.14 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1300	    916064 ns/op	2118.27 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1339	    899533 ns/op	2157.20 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1280	    893827 ns/op	2170.97 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1347	    889524 ns/op	2181.47 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1352	    893715 ns/op	2171.24 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1357	    891652 ns/op	2176.26 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1345	    891709 ns/op	2176.13 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/code.json-16           	    1368	    892240 ns/op	2174.83 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1497	    791614 ns/op	2181.88 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1528	    790967 ns/op	2183.66 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1509	    791292 ns/op	2182.76 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1516	    790726 ns/op	2184.33 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1519	    793956 ns/op	2175.44 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1524	    795067 ns/op	2172.40 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1513	    815447 ns/op	2118.11 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1519	    804634 ns/op	2146.57 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1502	    797487 ns/op	2165.81 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1508	    806673 ns/op	2141.14 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1490	    796658 ns/op	2168.06 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1516	    791998 ns/op	2180.82 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1512	    790451 ns/op	2185.09 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1518	    803503 ns/op	2149.59 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1510	    793354 ns/op	2177.09 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1516	    793189 ns/op	2177.54 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1520	    793486 ns/op	2176.73 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1466	    795155 ns/op	2172.16 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1503	    795555 ns/op	2171.07 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/citm.json-16           	    1515	    795550 ns/op	2171.08 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  198933	      5957 ns/op	2186.33 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  204175	      5943 ns/op	2191.36 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202186	      5942 ns/op	2191.69 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202942	      5969 ns/op	2181.88 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202437	      5924 ns/op	2198.53 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  201498	      6015 ns/op	2165.17 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  201904	      5972 ns/op	2180.87 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202720	      5944 ns/op	2191.23 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202647	      5940 ns/op	2192.42 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  204036	      5913 ns/op	2202.54 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  203503	      5909 ns/op	2203.97 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  200896	      5913 ns/op	2202.42 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202267	      6177 ns/op	2108.55 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  199598	      5987 ns/op	2175.55 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202402	      5967 ns/op	2182.84 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  202935	      5925 ns/op	2198.11 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  199414	      5950 ns/op	2188.95 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  203523	      5917 ns/op	2201.01 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  203902	      6096 ns/op	2136.48 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/example.json-16        	  197637	      6324 ns/op	2059.52 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    3976	    291423 ns/op	2167.00 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4014	    292270 ns/op	2160.72 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4201	    291589 ns/op	2165.76 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4188	    291105 ns/op	2169.37 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4100	    291590 ns/op	2165.76 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4196	    291384 ns/op	2167.29 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4200	    290056 ns/op	2177.21 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4122	    289754 ns/op	2179.48 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4159	    290454 ns/op	2174.23 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4197	    290181 ns/op	2176.27 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4059	    290893 ns/op	2170.95 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4272	    291129 ns/op	2169.19 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4296	    289226 ns/op	2183.46 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4219	    288695 ns/op	2187.48 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4311	    299499 ns/op	2108.56 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4101	    291731 ns/op	2164.71 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4083	    291727 ns/op	2164.75 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    3944	    292201 ns/op	2161.23 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4059	    291007 ns/op	2170.10 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/twitter.json-16        	    4243	    290903 ns/op	2170.87 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3800	    316795 ns/op	2170.15 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3852	    316675 ns/op	2170.97 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3802	    316965 ns/op	2168.98 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3859	    316823 ns/op	2169.95 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3784	    316016 ns/op	2175.50 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3920	    315365 ns/op	2179.99 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3880	    314835 ns/op	2183.66 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3778	    316888 ns/op	2169.51 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3868	    320595 ns/op	2144.43 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3829	    314231 ns/op	2187.85 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3914	    315752 ns/op	2177.32 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3891	    314281 ns/op	2187.51 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3788	    313643 ns/op	2191.96 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3831	    318349 ns/op	2159.55 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3859	    316049 ns/op	2175.27 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3780	    316654 ns/op	2171.12 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3781	    317356 ns/op	2166.31 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3778	    316152 ns/op	2174.56 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3770	    316180 ns/op	2174.37 MB/s
+BenchmarkWhitespaceVariants/shift_(inlined)/sample.json-16         	    3868	    316535 ns/op	2171.93 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1135	   1113428 ns/op	2021.74 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1112	   1084531 ns/op	2075.61 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1120	   1075245 ns/op	2093.53 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1122	   1071463 ns/op	2100.92 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1126	   1068777 ns/op	2106.20 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1110	   1080493 ns/op	2083.36 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1093	   1115446 ns/op	2018.08 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1112	   1112890 ns/op	2022.72 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1120	   1089152 ns/op	2066.80 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1117	   1076286 ns/op	2091.51 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1125	   1083082 ns/op	2078.38 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1092	   1087536 ns/op	2069.87 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1128	   1078532 ns/op	2087.15 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1119	   1087285 ns/op	2070.35 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1119	   1073674 ns/op	2096.60 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1111	   1071652 ns/op	2100.55 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1117	   1071923 ns/op	2100.02 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1108	   1074628 ns/op	2094.73 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1108	   1074913 ns/op	2094.18 MB/s
+BenchmarkWhitespaceVariants/switch/canada.json-16                  	    1111	   1085460 ns/op	2073.83 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1521	    742658 ns/op	2612.87 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1660	    711003 ns/op	2729.20 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1857	    731784 ns/op	2651.70 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1756	    756101 ns/op	2566.42 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1852	    669747 ns/op	2897.32 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1657	    699704 ns/op	2773.28 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1851	    702630 ns/op	2761.73 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1612	    724858 ns/op	2677.04 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1670	    728476 ns/op	2663.74 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1694	    732817 ns/op	2647.96 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1696	    700761 ns/op	2769.09 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1669	    707295 ns/op	2743.51 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1694	    716150 ns/op	2709.59 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1705	    742995 ns/op	2611.69 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1687	    729494 ns/op	2660.02 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1681	    789246 ns/op	2458.64 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1624	    766894 ns/op	2530.30 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1368	    743912 ns/op	2608.47 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1494	    692724 ns/op	2801.22 MB/s
+BenchmarkWhitespaceVariants/switch/code.json-16                    	    1393	    724205 ns/op	2679.45 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1396	    791308 ns/op	2182.72 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1386	    766530 ns/op	2253.28 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1618	    765133 ns/op	2257.39 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1587	    787674 ns/op	2192.79 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1680	    737696 ns/op	2341.35 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1711	    739190 ns/op	2336.62 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1753	    738304 ns/op	2339.42 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1683	    683659 ns/op	2526.41 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1747	    704304 ns/op	2452.35 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1743	    683821 ns/op	2525.81 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1758	    786755 ns/op	2195.35 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1432	    810229 ns/op	2131.75 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1774	    742504 ns/op	2326.19 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1760	    709080 ns/op	2435.84 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1759	    731429 ns/op	2361.41 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1747	    752557 ns/op	2295.11 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1722	    743328 ns/op	2323.61 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1747	    735299 ns/op	2348.98 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1756	    808731 ns/op	2135.70 MB/s
+BenchmarkWhitespaceVariants/switch/citm.json-16                    	    1460	    814115 ns/op	2121.57 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  176791	      6519 ns/op	1997.85 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  182540	      6532 ns/op	1993.80 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  181194	      6443 ns/op	2021.28 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  197902	      6505 ns/op	2002.20 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  182389	      6666 ns/op	1953.66 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  182338	      6506 ns/op	2001.81 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  180955	      6396 ns/op	2036.28 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  180646	      6008 ns/op	2167.62 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  195888	      5946 ns/op	2190.20 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  180156	      6495 ns/op	2005.14 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  179031	      6427 ns/op	2026.34 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  182864	      6359 ns/op	2048.05 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  188371	      6351 ns/op	2050.61 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  183021	      6371 ns/op	2044.23 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  218964	      6604 ns/op	1972.26 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  194628	      5751 ns/op	2264.82 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  213081	      5801 ns/op	2245.18 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  221718	      6013 ns/op	2165.85 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  221787	      6583 ns/op	1978.55 MB/s
+BenchmarkWhitespaceVariants/switch/example.json-16                 	  180120	      6628 ns/op	1964.87 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3438	    336679 ns/op	1875.72 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3555	    334988 ns/op	1885.19 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3619	    329736 ns/op	1915.21 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    4290	    322550 ns/op	1957.88 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    4432	    278155 ns/op	2270.37 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    4202	    278636 ns/op	2266.45 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    4408	    277341 ns/op	2277.03 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    4314	    296226 ns/op	2131.86 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    4411	    327204 ns/op	1930.03 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3559	    335679 ns/op	1881.31 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3666	    323901 ns/op	1949.71 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3616	    335837 ns/op	1880.42 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3564	    318256 ns/op	1984.30 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3645	    317869 ns/op	1986.71 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3631	    325978 ns/op	1937.29 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3568	    318053 ns/op	1985.56 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3656	    318249 ns/op	1984.34 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3692	    334148 ns/op	1889.92 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    3682	    321628 ns/op	1963.49 MB/s
+BenchmarkWhitespaceVariants/switch/twitter.json-16                 	    4447	    302252 ns/op	2089.36 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3753	    324940 ns/op	2115.75 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3799	    330137 ns/op	2082.44 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3336	    356058 ns/op	1930.84 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3354	    337141 ns/op	2039.18 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3298	    323802 ns/op	2123.18 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3926	    328791 ns/op	2090.97 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3930	    337282 ns/op	2038.33 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3356	    352974 ns/op	1947.71 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3334	    351972 ns/op	1953.26 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3309	    358631 ns/op	1916.99 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3325	    363626 ns/op	1890.66 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3254	    355284 ns/op	1935.05 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3807	    335109 ns/op	2051.55 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3804	    346089 ns/op	1986.46 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3945	    343978 ns/op	1998.65 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3810	    356222 ns/op	1929.95 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3908	    318120 ns/op	2161.11 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3925	    325347 ns/op	2113.10 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3379	    319316 ns/op	2153.02 MB/s
+BenchmarkWhitespaceVariants/switch/sample.json-16                  	    3297	    313763 ns/op	2191.12 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2228	    539334 ns/op	4173.78 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2241	    541739 ns/op	4155.25 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2244	    541845 ns/op	4154.44 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2232	    541478 ns/op	4157.25 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2205	    541800 ns/op	4154.78 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2204	    542721 ns/op	4147.73 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2214	    542207 ns/op	4151.66 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2216	    543002 ns/op	4145.59 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2202	    546112 ns/op	4121.98 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2235	    542135 ns/op	4152.21 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2227	    541997 ns/op	4153.27 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2218	    549526 ns/op	4096.37 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2197	    543833 ns/op	4139.25 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2233	    543520 ns/op	4141.63 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2248	    544554 ns/op	4133.77 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2223	    545560 ns/op	4126.15 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2212	    544150 ns/op	4136.84 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2228	    543507 ns/op	4141.73 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2209	    543032 ns/op	4145.36 MB/s
+BenchmarkWhitespaceVariants/if/canada.json-16                      	    2235	    542096 ns/op	4152.51 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2620	    459814 ns/op	4220.13 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2593	    462146 ns/op	4198.82 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2620	    464742 ns/op	4175.37 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2584	    461982 ns/op	4200.32 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2565	    462669 ns/op	4194.09 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2641	    460366 ns/op	4215.07 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2671	    460339 ns/op	4215.31 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2566	    467695 ns/op	4149.01 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2619	    463695 ns/op	4184.81 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2623	    463873 ns/op	4183.19 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2564	    467174 ns/op	4153.64 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2563	    463453 ns/op	4186.98 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2648	    462841 ns/op	4192.53 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2599	    469756 ns/op	4130.81 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2613	    472889 ns/op	4103.44 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2601	    467791 ns/op	4148.16 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2553	    466041 ns/op	4163.74 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2628	    465280 ns/op	4170.55 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2528	    462011 ns/op	4200.06 MB/s
+BenchmarkWhitespaceVariants/if/code.json-16                        	    2647	    464066 ns/op	4181.46 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1508	    802694 ns/op	2151.76 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1522	    806227 ns/op	2142.33 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1494	    793830 ns/op	2175.78 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1513	    813545 ns/op	2123.06 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1485	    799559 ns/op	2160.20 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1520	    791593 ns/op	2181.93 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1392	    798866 ns/op	2162.07 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1516	    797882 ns/op	2164.74 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1519	    798700 ns/op	2162.52 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1504	    805649 ns/op	2143.87 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1528	    798272 ns/op	2163.68 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1371	    808431 ns/op	2136.49 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1490	    800197 ns/op	2158.47 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1401	    808873 ns/op	2135.32 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1514	    834426 ns/op	2069.93 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1380	    841647 ns/op	2052.17 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1478	    811843 ns/op	2127.51 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1501	    811033 ns/op	2129.63 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1489	    816340 ns/op	2115.79 MB/s
+BenchmarkWhitespaceVariants/if/citm.json-16                        	    1425	    803585 ns/op	2149.37 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  230205	      5179 ns/op	2514.64 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  231217	      5179 ns/op	2514.90 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  233215	      5186 ns/op	2511.58 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  234684	      5157 ns/op	2525.61 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  233408	      5148 ns/op	2530.06 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  232689	      5123 ns/op	2542.11 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  232653	      5134 ns/op	2536.65 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  229563	      5239 ns/op	2486.12 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  235041	      5140 ns/op	2534.09 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  232485	      5207 ns/op	2501.27 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  224313	      5362 ns/op	2429.13 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  220543	      5390 ns/op	2416.23 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  228607	      5193 ns/op	2508.13 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  232484	      5186 ns/op	2511.16 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  223780	      5292 ns/op	2461.01 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  217351	      5276 ns/op	2468.74 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  231886	      5213 ns/op	2498.57 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  231309	      5330 ns/op	2443.58 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  232368	      5195 ns/op	2507.09 MB/s
+BenchmarkWhitespaceVariants/if/example.json-16                     	  233792	      5193 ns/op	2508.01 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5017	    238621 ns/op	2646.51 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5176	    238412 ns/op	2648.83 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5186	    244994 ns/op	2577.67 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4714	    246677 ns/op	2560.08 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5010	    237483 ns/op	2659.20 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5119	    240981 ns/op	2620.60 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4520	    252099 ns/op	2505.02 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4998	    244789 ns/op	2579.83 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4976	    242848 ns/op	2600.45 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5037	    238702 ns/op	2645.61 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5043	    242061 ns/op	2608.90 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4536	    245066 ns/op	2576.91 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5016	    242568 ns/op	2603.45 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5054	    247492 ns/op	2551.65 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4807	    243502 ns/op	2593.46 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5044	    238982 ns/op	2642.52 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4660	    246915 ns/op	2557.61 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4966	    255173 ns/op	2474.85 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    4705	    245941 ns/op	2567.75 MB/s
+BenchmarkWhitespaceVariants/if/twitter.json-16                     	    5164	    240223 ns/op	2628.87 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3681	    331019 ns/op	2076.89 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3644	    331682 ns/op	2072.74 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3570	    331361 ns/op	2074.75 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3673	    330558 ns/op	2079.79 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3716	    330426 ns/op	2080.62 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3626	    329587 ns/op	2085.92 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3656	    330253 ns/op	2081.71 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3664	    335277 ns/op	2050.52 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3704	    329467 ns/op	2086.68 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3622	    329456 ns/op	2086.75 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3639	    331192 ns/op	2075.81 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3712	    329836 ns/op	2084.34 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3651	    329631 ns/op	2085.64 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3622	    329205 ns/op	2088.34 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3684	    329863 ns/op	2084.17 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3657	    329327 ns/op	2087.57 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3630	    329581 ns/op	2085.96 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3616	    329289 ns/op	2087.81 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3730	    328708 ns/op	2091.50 MB/s
+BenchmarkWhitespaceVariants/if/sample.json-16                      	    3634	    329437 ns/op	2086.87 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2228	    537834 ns/op	4185.42 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2185	    541918 ns/op	4153.88 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2232	    537118 ns/op	4190.99 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2229	    545462 ns/op	4126.89 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2233	    540749 ns/op	4162.86 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2214	    538133 ns/op	4183.09 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2227	    542842 ns/op	4146.81 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2205	    538706 ns/op	4178.64 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2204	    543189 ns/op	4144.16 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2100	    543204 ns/op	4144.04 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2254	    544435 ns/op	4134.67 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2190	    546140 ns/op	4121.77 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2268	    536250 ns/op	4197.78 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2220	    548075 ns/op	4107.21 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2148	    551885 ns/op	4078.85 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2222	    536400 ns/op	4196.61 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2275	    534393 ns/op	4212.36 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2247	    534822 ns/op	4208.99 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2258	    537054 ns/op	4191.50 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/canada.json-16            	    2220	    544913 ns/op	4131.04 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2654	    458193 ns/op	4235.06 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2587	    462116 ns/op	4199.10 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2658	    458713 ns/op	4230.25 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2661	    459854 ns/op	4219.76 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2676	    458552 ns/op	4231.73 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2659	    458571 ns/op	4231.57 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2673	    460159 ns/op	4216.96 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2628	    459143 ns/op	4226.30 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2642	    457213 ns/op	4244.13 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2628	    457459 ns/op	4241.85 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2593	    459956 ns/op	4218.82 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2584	    460666 ns/op	4212.32 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2592	    458305 ns/op	4234.02 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2614	    459662 ns/op	4221.52 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2606	    457244 ns/op	4243.84 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2624	    466872 ns/op	4156.32 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2652	    464364 ns/op	4178.77 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2608	    461436 ns/op	4205.29 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2637	    465339 ns/op	4170.01 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/code.json-16              	    2614	    458900 ns/op	4228.53 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1516	    805806 ns/op	2143.45 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1522	    806489 ns/op	2141.63 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1473	    810627 ns/op	2130.70 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1452	    802798 ns/op	2151.48 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1525	    802058 ns/op	2153.46 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1514	    804182 ns/op	2147.78 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1500	    805127 ns/op	2145.26 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1532	    801631 ns/op	2154.61 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1531	    791318 ns/op	2182.69 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1520	    793595 ns/op	2176.43 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1404	    819473 ns/op	2107.70 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1527	    810743 ns/op	2130.40 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1507	    809304 ns/op	2134.18 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1464	    808833 ns/op	2135.43 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1435	    802405 ns/op	2152.53 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1460	    797578 ns/op	2165.56 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1519	    805568 ns/op	2144.08 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1477	    799215 ns/op	2161.13 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1461	    792473 ns/op	2179.51 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/citm.json-16              	    1512	    797048 ns/op	2167.00 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  232432	      5143 ns/op	2532.36 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  231937	      5147 ns/op	2530.29 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  234156	      5150 ns/op	2528.82 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  227485	      5181 ns/op	2513.83 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  235203	      5120 ns/op	2543.50 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  236299	      5113 ns/op	2547.29 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  236620	      5226 ns/op	2491.93 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  234279	      5163 ns/op	2522.62 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  236293	      5144 ns/op	2531.69 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  231982	      5149 ns/op	2529.38 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  235864	      5128 ns/op	2539.61 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  232194	      5117 ns/op	2545.07 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  235797	      5122 ns/op	2542.82 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  237555	      5106 ns/op	2550.66 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  236542	      5117 ns/op	2545.44 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  234308	      5125 ns/op	2541.25 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  233910	      5488 ns/op	2373.36 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  235016	      5144 ns/op	2531.95 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  232808	      5123 ns/op	2542.40 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/example.json-16           	  240464	      5120 ns/op	2543.70 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    4998	    239247 ns/op	2639.59 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5127	    238985 ns/op	2642.49 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5088	    242499 ns/op	2604.19 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5121	    239671 ns/op	2634.92 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    4992	    239521 ns/op	2636.57 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5106	    239094 ns/op	2641.28 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5119	    241364 ns/op	2616.44 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    4532	    241708 ns/op	2612.71 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5148	    239991 ns/op	2631.41 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    4968	    238983 ns/op	2642.51 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5151	    240079 ns/op	2630.45 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5026	    239275 ns/op	2639.28 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5094	    238698 ns/op	2645.66 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5140	    238847 ns/op	2644.01 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5074	    238232 ns/op	2650.83 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5107	    238254 ns/op	2650.59 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5089	    238195 ns/op	2651.25 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5059	    238046 ns/op	2652.90 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5067	    243165 ns/op	2597.06 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/twitter.json-16           	    5103	    239011 ns/op	2642.20 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3766	    325749 ns/op	2110.49 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3688	    325871 ns/op	2109.71 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3730	    327376 ns/op	2100.01 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3664	    326030 ns/op	2108.68 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3730	    331205 ns/op	2075.73 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3778	    325371 ns/op	2112.95 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3729	    325411 ns/op	2112.69 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3656	    325385 ns/op	2112.86 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3703	    328236 ns/op	2094.50 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3472	    332026 ns/op	2070.60 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3714	    331907 ns/op	2071.34 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3690	    326292 ns/op	2106.98 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3666	    325963 ns/op	2109.11 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3667	    326727 ns/op	2104.18 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3669	    332115 ns/op	2070.05 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3577	    326765 ns/op	2103.93 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3669	    325832 ns/op	2109.96 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3724	    326011 ns/op	2108.80 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3768	    328417 ns/op	2093.35 MB/s
+BenchmarkWhitespaceVariants/if_(inlined)/sample.json-16            	    3650	    325855 ns/op	2109.81 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2150	    558984 ns/op	4027.06 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2154	    556968 ns/op	4041.63 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2162	    557569 ns/op	4037.28 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2164	    557299 ns/op	4039.23 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2161	    556752 ns/op	4043.20 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2163	    556407 ns/op	4045.70 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2158	    556890 ns/op	4042.20 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2155	    558655 ns/op	4029.43 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2162	    557985 ns/op	4034.27 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2160	    558724 ns/op	4028.93 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2166	    562500 ns/op	4001.89 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2154	    558835 ns/op	4028.13 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2140	    558630 ns/op	4029.61 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2142	    557872 ns/op	4035.08 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2160	    558674 ns/op	4029.29 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2146	    558017 ns/op	4034.04 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2172	    557739 ns/op	4036.05 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2133	    557435 ns/op	4038.25 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2169	    558119 ns/op	4033.30 MB/s
+BenchmarkWhitespaceVariants/constant/canada.json-16                	    2145	    558464 ns/op	4030.81 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2510	    480340 ns/op	4039.79 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2526	    479369 ns/op	4047.97 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2523	    479422 ns/op	4047.52 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2509	    479552 ns/op	4046.42 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2510	    479299 ns/op	4048.56 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2522	    480234 ns/op	4040.68 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2478	    487718 ns/op	3978.68 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2520	    480355 ns/op	4039.66 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2478	    480191 ns/op	4041.04 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2500	    480334 ns/op	4039.84 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2520	    479817 ns/op	4044.19 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2529	    480860 ns/op	4035.42 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2493	    482149 ns/op	4024.63 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2455	    490408 ns/op	3956.86 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2462	    484220 ns/op	4007.42 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2508	    483054 ns/op	4017.09 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2482	    482083 ns/op	4025.18 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2504	    481220 ns/op	4032.40 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2497	    481218 ns/op	4032.42 MB/s
+BenchmarkWhitespaceVariants/constant/code.json-16                  	    2498	    481030 ns/op	4033.99 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2822	    428608 ns/op	4029.80 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2778	    429418 ns/op	4022.20 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2820	    431578 ns/op	4002.07 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2784	    429771 ns/op	4018.90 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2805	    429428 ns/op	4022.10 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2792	    429584 ns/op	4020.64 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2800	    433818 ns/op	3981.40 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2814	    429582 ns/op	4020.66 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2778	    431150 ns/op	4006.04 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2768	    430522 ns/op	4011.88 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2790	    429296 ns/op	4023.34 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2779	    432728 ns/op	3991.43 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2812	    429730 ns/op	4019.28 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2803	    429521 ns/op	4021.23 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2806	    431021 ns/op	4007.24 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2794	    430293 ns/op	4014.02 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2775	    430549 ns/op	4011.63 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2799	    430228 ns/op	4014.62 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2778	    432538 ns/op	3993.19 MB/s
+BenchmarkWhitespaceVariants/constant/citm.json-16                  	    2803	    428361 ns/op	4032.12 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  379986	      3211 ns/op	4056.04 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  377773	      3208 ns/op	4060.15 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  375016	      3217 ns/op	4048.87 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  378909	      3230 ns/op	4031.90 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  373720	      3229 ns/op	4034.03 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  374931	      3211 ns/op	4056.20 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  376456	      3206 ns/op	4062.58 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  381676	      3216 ns/op	4049.77 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  377430	      3215 ns/op	4051.28 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  380631	      3200 ns/op	4069.39 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  378927	      3226 ns/op	4036.61 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  375277	      3222 ns/op	4041.68 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  373125	      3209 ns/op	4059.02 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  378108	      3215 ns/op	4050.79 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  371324	      3260 ns/op	3995.63 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  377142	      3203 ns/op	4066.36 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  378492	      3200 ns/op	4069.89 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  382558	      3213 ns/op	4053.71 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  376689	      3228 ns/op	4034.24 MB/s
+BenchmarkWhitespaceVariants/constant/example.json-16               	  374437	      3201 ns/op	4068.25 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7782	    156304 ns/op	4040.30 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7748	    156242 ns/op	4041.90 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7714	    156671 ns/op	4030.83 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7628	    156881 ns/op	4025.43 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7561	    156811 ns/op	4027.23 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7815	    157836 ns/op	4001.08 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7772	    156142 ns/op	4044.48 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7525	    156688 ns/op	4030.38 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7633	    156478 ns/op	4035.81 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7797	    156331 ns/op	4039.60 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7722	    157232 ns/op	4016.45 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7296	    158041 ns/op	3995.89 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7810	    156368 ns/op	4038.63 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7675	    156043 ns/op	4047.05 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7762	    156401 ns/op	4037.79 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7797	    156403 ns/op	4037.73 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7628	    156433 ns/op	4036.96 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7628	    158073 ns/op	3995.07 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7252	    158719 ns/op	3978.82 MB/s
+BenchmarkWhitespaceVariants/constant/twitter.json-16               	    7718	    156608 ns/op	4032.45 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    6945	    171895 ns/op	3999.48 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7054	    170881 ns/op	4023.22 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7129	    170873 ns/op	4023.40 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7008	    170954 ns/op	4021.51 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    6987	    170812 ns/op	4024.84 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    6966	    170958 ns/op	4021.40 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7158	    170966 ns/op	4021.22 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7090	    172178 ns/op	3992.91 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7194	    170682 ns/op	4027.92 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    6992	    170179 ns/op	4039.81 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7009	    170277 ns/op	4037.49 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    6975	    171948 ns/op	3998.25 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7042	    170978 ns/op	4020.94 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7202	    170359 ns/op	4035.54 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7140	    170156 ns/op	4040.36 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7135	    170084 ns/op	4042.07 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7140	    170100 ns/op	4041.69 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7058	    170331 ns/op	4036.21 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    6946	    170393 ns/op	4034.74 MB/s
+BenchmarkWhitespaceVariants/constant/sample.json-16                	    7066	    170156 ns/op	4040.35 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2116	    554624 ns/op	4058.71 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2162	    557322 ns/op	4039.07 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2100	    556766 ns/op	4043.10 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2170	    561929 ns/op	4005.95 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2164	    554642 ns/op	4058.58 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2161	    555436 ns/op	4052.78 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2155	    558402 ns/op	4031.26 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2176	    559978 ns/op	4019.91 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2150	    556507 ns/op	4044.98 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2155	    560165 ns/op	4018.57 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2100	    556586 ns/op	4044.41 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2166	    555703 ns/op	4050.84 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2158	    555751 ns/op	4050.48 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2155	    555478 ns/op	4052.47 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2144	    558701 ns/op	4029.10 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2164	    557336 ns/op	4038.96 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2137	    555992 ns/op	4048.72 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2155	    555742 ns/op	4050.55 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2155	    556440 ns/op	4045.47 MB/s
+BenchmarkWhitespace/array/canada.json-16                           	    2158	    562583 ns/op	4001.29 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2546	    475656 ns/op	4079.57 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2552	    475385 ns/op	4081.89 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2551	    475754 ns/op	4078.73 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2550	    475691 ns/op	4079.27 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2560	    475037 ns/op	4084.89 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2511	    475335 ns/op	4082.33 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2523	    475557 ns/op	4080.42 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2544	    475623 ns/op	4079.85 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2540	    475269 ns/op	4082.90 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2529	    475775 ns/op	4078.55 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2520	    475064 ns/op	4084.65 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2546	    475405 ns/op	4081.72 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2523	    474615 ns/op	4088.52 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2500	    474585 ns/op	4088.77 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2524	    474759 ns/op	4087.27 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2554	    480233 ns/op	4040.68 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2535	    475231 ns/op	4083.22 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2523	    475159 ns/op	4083.84 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2541	    474655 ns/op	4088.18 MB/s
+BenchmarkWhitespace/array/code.json-16                             	    2509	    477127 ns/op	4066.99 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2791	    430350 ns/op	4013.48 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2836	    443341 ns/op	3895.88 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2764	    438167 ns/op	3941.88 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2816	    430502 ns/op	4012.07 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2817	    429483 ns/op	4021.59 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2798	    429112 ns/op	4025.07 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2804	    430892 ns/op	4008.44 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2793	    427407 ns/op	4041.12 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2839	    427598 ns/op	4039.32 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2821	    429938 ns/op	4017.33 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2792	    429087 ns/op	4025.30 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2798	    433212 ns/op	3986.97 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2808	    431021 ns/op	4007.24 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2812	    434335 ns/op	3976.66 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2709	    434453 ns/op	3975.58 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2760	    429417 ns/op	4022.21 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2773	    428580 ns/op	4030.06 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2811	    428260 ns/op	4033.07 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2845	    431654 ns/op	4001.37 MB/s
+BenchmarkWhitespace/array/citm.json-16                             	    2810	    428934 ns/op	4026.74 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  380815	      3203 ns/op	4066.51 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  373773	      3198 ns/op	4072.13 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  373815	      3181 ns/op	4094.62 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  376732	      3205 ns/op	4063.19 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  377962	      3186 ns/op	4088.37 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  370718	      3213 ns/op	4053.18 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  373790	      3210 ns/op	4057.62 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  372692	      3269 ns/op	3983.76 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  370327	      3304 ns/op	3942.18 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  365542	      3252 ns/op	4005.23 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  372948	      3200 ns/op	4069.48 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  380408	      3219 ns/op	4046.07 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  378631	      3209 ns/op	4058.45 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  372342	      3205 ns/op	4063.14 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  375878	      3205 ns/op	4063.36 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  379809	      3195 ns/op	4076.33 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  373818	      3210 ns/op	4056.96 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  371751	      3222 ns/op	4042.70 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  383566	      3200 ns/op	4070.25 MB/s
+BenchmarkWhitespace/array/example.json-16                          	  382387	      3192 ns/op	4079.97 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7674	    156307 ns/op	4040.22 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7645	    156585 ns/op	4033.03 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7693	    156487 ns/op	4035.57 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7777	    157745 ns/op	4003.39 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7750	    156623 ns/op	4032.07 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7610	    156548 ns/op	4033.99 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7687	    157438 ns/op	4011.19 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7756	    156324 ns/op	4039.77 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7683	    156529 ns/op	4034.48 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7693	    156272 ns/op	4041.13 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7810	    156135 ns/op	4044.67 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7716	    156086 ns/op	4045.93 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7710	    156293 ns/op	4040.57 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7495	    157019 ns/op	4021.89 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7666	    156526 ns/op	4034.56 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7616	    156783 ns/op	4027.94 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7825	    156673 ns/op	4030.79 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7650	    156846 ns/op	4026.32 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7760	    156880 ns/op	4025.45 MB/s
+BenchmarkWhitespace/array/twitter.json-16                          	    7765	    156992 ns/op	4022.60 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7189	    172133 ns/op	3993.96 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7016	    170153 ns/op	4040.43 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7294	    170635 ns/op	4029.03 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7244	    169934 ns/op	4045.64 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7173	    169691 ns/op	4051.44 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7089	    169807 ns/op	4048.67 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    6945	    169639 ns/op	4052.68 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7236	    169311 ns/op	4060.53 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7143	    169350 ns/op	4059.59 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7184	    169325 ns/op	4060.20 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7040	    171335 ns/op	4012.56 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7166	    170440 ns/op	4033.62 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7231	    170269 ns/op	4037.69 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    6951	    173321 ns/op	3966.58 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7076	    170594 ns/op	4029.98 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7120	    169841 ns/op	4047.86 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7201	    172289 ns/op	3990.33 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7183	    169963 ns/op	4044.96 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7232	    169682 ns/op	4051.65 MB/s
+BenchmarkWhitespace/array/sample.json-16                           	    7060	    170130 ns/op	4040.98 MB/s
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2074	    578463 ns/op	3891.45 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2055	    578194 ns/op	3893.26 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2060	    577708 ns/op	3896.53 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2090	    576865 ns/op	3902.23 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2101	    577697 ns/op	3896.61 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2088	    579101 ns/op	3887.16 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2052	    577753 ns/op	3896.23 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2098	    575526 ns/op	3911.31 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2103	    574221 ns/op	3920.20 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2098	    576589 ns/op	3904.10 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2085	    574510 ns/op	3918.22 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2107	    578032 ns/op	3894.35 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2049	    592607 ns/op	3798.57 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2098	    577111 ns/op	3900.57 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2064	    583981 ns/op	3854.68 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2072	    580252 ns/op	3879.45 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2092	    582714 ns/op	3863.06 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2091	    580953 ns/op	3874.77 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2082	    582333 ns/op	3865.59 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/canada.json-16                 	    2094	    577905 ns/op	3895.21 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2418	    499240 ns/op	3886.86 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2439	    509066 ns/op	3811.83 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2217	    514510 ns/op	3771.49 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2416	    501268 ns/op	3871.13 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2404	    518803 ns/op	3740.28 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2376	    509017 ns/op	3812.20 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2356	    516666 ns/op	3755.76 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2371	    516884 ns/op	3754.17 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2262	    520352 ns/op	3729.15 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2325	    514384 ns/op	3772.42 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2278	    512857 ns/op	3783.65 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2370	    501118 ns/op	3872.29 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2415	    511553 ns/op	3793.29 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2370	    508786 ns/op	3813.93 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2276	    505114 ns/op	3841.65 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2389	    502966 ns/op	3858.06 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2397	    516305 ns/op	3758.38 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2328	    519170 ns/op	3737.64 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2300	    524795 ns/op	3697.58 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/code.json-16                   	    2319	    506811 ns/op	3828.79 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2660	    454286 ns/op	3802.02 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2637	    451813 ns/op	3822.83 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2673	    459660 ns/op	3757.57 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2641	    453716 ns/op	3806.80 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2547	    459794 ns/op	3756.47 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2637	    459425 ns/op	3759.49 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2616	    464267 ns/op	3720.29 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2571	    461568 ns/op	3742.03 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2664	    454041 ns/op	3804.07 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2614	    453635 ns/op	3807.48 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2667	    458200 ns/op	3769.54 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2506	    461677 ns/op	3741.15 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2635	    453869 ns/op	3805.51 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2586	    455001 ns/op	3796.05 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2653	    451854 ns/op	3822.48 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2662	    453158 ns/op	3811.48 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2676	    452801 ns/op	3814.49 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2665	    452421 ns/op	3817.69 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2640	    452782 ns/op	3814.65 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/citm.json-16                   	    2646	    451310 ns/op	3827.09 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  361387	      3400 ns/op	3830.49 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  353995	      3367 ns/op	3867.74 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  355152	      3388 ns/op	3844.69 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  348631	      3417 ns/op	3811.74 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  360002	      3380 ns/op	3853.68 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  355966	      3385 ns/op	3848.02 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  360002	      3387 ns/op	3845.61 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  354015	      3483 ns/op	3739.68 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  359611	      3387 ns/op	3845.73 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  361130	      3414 ns/op	3814.89 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  351774	      3427 ns/op	3799.87 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  355371	      3372 ns/op	3862.63 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  356688	      3407 ns/op	3823.06 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  356325	      3398 ns/op	3832.57 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  352642	      3531 ns/op	3688.48 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  358036	      3411 ns/op	3818.66 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  350109	      3424 ns/op	3804.12 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  356014	      3604 ns/op	3614.26 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  345562	      3506 ns/op	3714.95 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/example.json-16                	  346778	      3557 ns/op	3661.57 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7107	    167291 ns/op	3774.94 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7186	    167411 ns/op	3772.23 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7254	    166625 ns/op	3790.03 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7213	    170134 ns/op	3711.87 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7058	    169397 ns/op	3728.01 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7010	    169085 ns/op	3734.89 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7152	    167933 ns/op	3760.52 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7076	    168648 ns/op	3744.56 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7087	    168441 ns/op	3749.17 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7233	    166367 ns/op	3795.90 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7230	    166491 ns/op	3793.09 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7438	    166261 ns/op	3798.32 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7293	    167741 ns/op	3764.81 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7184	    166919 ns/op	3783.35 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7245	    166128 ns/op	3801.37 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7192	    166334 ns/op	3796.67 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7300	    166499 ns/op	3792.90 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    6784	    166233 ns/op	3798.97 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7390	    165562 ns/op	3814.36 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/twitter.json-16                	    7299	    165645 ns/op	3812.46 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6589	    184114 ns/op	3734.05 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6414	    181334 ns/op	3791.30 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6702	    182876 ns/op	3759.33 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6614	    181441 ns/op	3789.07 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6669	    181418 ns/op	3789.55 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6603	    180785 ns/op	3802.82 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6607	    185500 ns/op	3706.15 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6579	    185330 ns/op	3709.56 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6717	    184689 ns/op	3722.43 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6219	    182770 ns/op	3761.52 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6727	    182840 ns/op	3760.07 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6579	    181855 ns/op	3780.44 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6673	    182990 ns/op	3756.99 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6619	    185080 ns/op	3714.56 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6384	    185322 ns/op	3709.72 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6616	    184748 ns/op	3721.23 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6636	    182330 ns/op	3770.58 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6589	    181677 ns/op	3784.15 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6526	    184308 ns/op	3730.12 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/ByteReader/sample.json-16                 	    6696	    182990 ns/op	3757.00 MB/s	      48 B/op	       1 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     280	   4283009 ns/op	 525.58 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     282	   4230034 ns/op	 532.16 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     285	   4219764 ns/op	 533.46 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     280	   4282008 ns/op	 525.70 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     283	   4244539 ns/op	 530.34 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     283	   4218643 ns/op	 533.60 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     283	   4253469 ns/op	 529.23 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     282	   4237966 ns/op	 531.17 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     279	   4220279 ns/op	 533.39 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     280	   4212317 ns/op	 534.40 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     286	   4192961 ns/op	 536.87 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     285	   4190723 ns/op	 537.15 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     282	   4186238 ns/op	 537.73 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     285	   4186531 ns/op	 537.69 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     286	   4177218 ns/op	 538.89 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     286	   4177378 ns/op	 538.87 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     279	   4187921 ns/op	 537.51 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     286	   4188096 ns/op	 537.49 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     286	   4177609 ns/op	 538.84 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/canada.json-16               	     286	   4191828 ns/op	 537.01 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     331	   3611405 ns/op	 537.32 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3609411 ns/op	 537.61 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3604000 ns/op	 538.42 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3607348 ns/op	 537.92 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3602905 ns/op	 538.59 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3618724 ns/op	 536.23 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3606942 ns/op	 537.98 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3608172 ns/op	 537.80 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     328	   3691614 ns/op	 525.64 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     331	   3637998 ns/op	 533.39 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     324	   3638031 ns/op	 533.39 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3620744 ns/op	 535.93 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     331	   3611943 ns/op	 537.24 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     326	   3637628 ns/op	 533.44 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     331	   3635400 ns/op	 533.77 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     328	   3625855 ns/op	 535.18 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     331	   3616505 ns/op	 536.56 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     331	   3625746 ns/op	 535.19 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3615646 ns/op	 536.69 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/code.json-16                 	     332	   3616692 ns/op	 536.53 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     380	   3152885 ns/op	 547.82 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     375	   3191088 ns/op	 541.26 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     381	   3154699 ns/op	 547.50 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     376	   3133751 ns/op	 551.16 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3129599 ns/op	 551.89 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     384	   3129060 ns/op	 551.99 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3130004 ns/op	 551.82 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     384	   3127271 ns/op	 552.30 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3125891 ns/op	 552.55 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3141250 ns/op	 549.85 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     379	   3147361 ns/op	 548.78 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3139133 ns/op	 550.22 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     381	   3173832 ns/op	 544.20 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     381	   3130782 ns/op	 551.68 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3156830 ns/op	 547.13 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3129307 ns/op	 551.94 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     382	   3135951 ns/op	 550.78 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     380	   3136931 ns/op	 550.60 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     381	   3130706 ns/op	 551.70 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/citm.json-16                 	     381	   3141225 ns/op	 549.85 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49873	     23990 ns/op	 542.90 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49814	     24047 ns/op	 541.60 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49864	     24715 ns/op	 526.97 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   48556	     24155 ns/op	 539.18 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49750	     24100 ns/op	 540.42 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49914	     24089 ns/op	 540.67 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49947	     24414 ns/op	 533.47 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49968	     24044 ns/op	 541.68 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   50080	     24196 ns/op	 538.27 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49723	     24094 ns/op	 540.56 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49952	     24055 ns/op	 541.42 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49735	     24182 ns/op	 538.59 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49876	     24038 ns/op	 541.81 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49950	     24051 ns/op	 541.53 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49846	     24143 ns/op	 539.45 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49828	     24120 ns/op	 539.96 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49812	     24029 ns/op	 542.01 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   50002	     24008 ns/op	 542.48 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49916	     24090 ns/op	 540.63 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/example.json-16              	   49938	     23988 ns/op	 542.94 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1047	   1176901 ns/op	 536.59 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1029	   1159232 ns/op	 544.77 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1044	   1158113 ns/op	 545.30 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1044	   1149798 ns/op	 549.24 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1044	   1150112 ns/op	 549.09 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1012	   1151246 ns/op	 548.55 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1047	   1146654 ns/op	 550.74 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1048	   1146974 ns/op	 550.59 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1045	   1146982 ns/op	 550.59 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1044	   1146850 ns/op	 550.65 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1045	   1147627 ns/op	 550.28 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1045	   1146770 ns/op	 550.69 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1046	   1148555 ns/op	 549.83 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1021	   1152930 ns/op	 547.75 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1050	   1145473 ns/op	 551.31 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1047	   1143465 ns/op	 552.28 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1048	   1146413 ns/op	 550.86 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1044	   1156023 ns/op	 546.28 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1046	   1145607 ns/op	 551.25 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/twitter.json-16              	    1044	   1146849 ns/op	 550.65 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     952	   1262489 ns/op	 544.55 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     952	   1265506 ns/op	 543.25 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     954	   1262092 ns/op	 544.72 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     950	   1259918 ns/op	 545.66 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     951	   1260086 ns/op	 545.59 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     950	   1260680 ns/op	 545.33 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     932	   1262247 ns/op	 544.66 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     949	   1260079 ns/op	 545.59 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     951	   1261515 ns/op	 544.97 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     928	   1262319 ns/op	 544.63 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     950	   1261390 ns/op	 545.03 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     954	   1260537 ns/op	 545.40 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     951	   1269055 ns/op	 541.74 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     954	   1260614 ns/op	 545.36 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     950	   1260442 ns/op	 545.44 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     951	   1264608 ns/op	 543.64 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     954	   1260911 ns/op	 545.23 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     952	   1258191 ns/op	 546.41 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     954	   1259330 ns/op	 545.92 MB/s	    4144 B/op	       2 allocs/op
+BenchmarkCountWhitespace/bufio.Reader/sample.json-16               	     952	   1259499 ns/op	 545.85 MB/s	    4144 B/op	       2 allocs/op
+PASS
+ok  	json	1837.307s

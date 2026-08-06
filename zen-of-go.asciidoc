@@ -1,0 +1,626 @@
+= The Zen of Go
+Dave Cheney <dave@cheney.net>
+GopherCon Israel 2020
+
+== Introduction
+
+Thank you for staying to hear me speak.
+And thank you to the organisers for making it possible for me to be here with you today.
+
+This talk is, well, its talk.
+Specifically its as much ideas from many other people as it is my own.
+If anything, what I'm bringing to you today is the results of research and thinking I've done.
+But to be clear I stand here on this stage firmly on the shoulders of many others.
+These are not my ideas, perhaps only the composition of others' is somewhat novel.
+
+Reflecting on the body of my own work there is a common subtitle;
+
+> How should I write good go code?
+
+Why would someone invest their time in learning to do something _badly_?
+You don't want to write bad code, you don’t want to read bad code, you don’t want to work with it, or depend on it?
+
+This is obvious, perhaps so obvious that it is never said explicitly.
+But now that I have, let’s ask the obvious questions;
+
+- How do you know when you’ve written good code
+- What are its properties
+- It's attributes
+- It's hallmarks
+- It's patterns
+- It's idioms 
+
+== Idiomatic go?
+
+Let’s start with idioms as this is perhaps the most common vocabulary the diaspora of Go programmers share to enumerate the quality of Go code. 
+
+image::https://frinkiac.com/meme/S04E17/1014346.jpg?b64lines=IFNPIEkgVElFRCBBTiBPTklPTiBUTyBNWQogQkVMVCwgV0hJQ0ggV0FTIFRIRSBTVFlMRQogQVQgVEhFIFRJTUUuIA==[]
+
+// i had an onion on my belt, it was the style at the time -- idiomatic go.
+
+To say that something is idiomatic is to say that it follows the style of the time.
+Isn't it common to see a critique of someone's work as _non-idiomatic_?
+
+However knowing what is appropriate is often not apparent from the words used to describe it.
+
+> idiom (noun): a group of words established by usage as having a meaning not deducible from those of the individual words.
+
+Like all truths, the meaning is right there in the dictionary.
+
+=== You can't sit with us
+
+Idiomatic go is not something you can learn from a book, it’s something that you acquire by being part of a group, a community, a hallmark of shared values. 
+
+image::https://foxandshadowcat.files.wordpress.com/2015/10/wpid-2015-10-23-19-03-57.png?w=1060[]
+
+Idiomatic Go is an exclusionary term.
+It's saying "you can’t sit with us".
+
+Idiomatic Go is a poor base for establishing Go values because it is defined by telling someone they did it wrong. 
+To say that someone's code is or is not idiomatic is to pass a value judgement on it.
+It is something that is wheeled out to, perhaps with good intention, break the spirit of a newcommer to Go right at the point they are most engaged.
+Idiomatic Go is not a suitable mechanism for teaching the engineering values of Go.
+
+Its important to not be dogmatic, propositions that start with _do_, _don’t_, _must_, _must not_, _always_, and _never_ are reductive. 
+They place the reader in a binary position — accept this truth, or else.
+Wouldn’t it be better if the advice we gave didn’t alienate the reader right at the point they were about to consider our suggestion?
+
+== Engineering values
+
+https://danluu.com/microsoft-culture/[Dan Luu has an old link] to a presentationby Mark Lucovsky about the engineering culture of the windows team around the windows NT-windows 2000 timeframe.
+I haven't seen it referenced much, and tried to find out more about the author, but haven't been successful.
+So, if this guy turns out to be a huge asshole, I appologise in advance, I don't mean to endorse his view, only cite him.
+
+Anyway, the pertinent part of this slide
+
+=== What are values?
+
+[quote]
+----
+Developing a culture
+
+To scale a dev team, you need to establish a culture
+- Common way of evaluating designs, making tradeoffs, etc.
+- Common way of developing code and reacting to problems (build breaks, critical bugs, etc.)
+- Common way of establishing ownership of problems
+- Goal setting can be the foundation for the culture
+- Keeping culture alive as a team grows is a huge challenge
+----
+
+The reason I wanted to start here is the description of a cluture as a common way of evaluation designs, making tradeoffs.
+A common way of prioritising writing code vs fixing bugs.
+
+There are many ways of discussing cluture, but with respect to an engineering culture, a set of values shared by a group of engineers, Lucovsky's description was apt.
+Engineering values are, crudely, _this is the way things are done around here_.
+
+Values guide decisions in unknown design space.
+They are highly cluturally specific. 
+
+The values of the NT team were; Portability, Reliability, Security, and Extensibility.
+
+These ingrained as the teams top priority, Every decision was made in the context of th goals.
+
+The subtext of this talk is, what are the values of Go?
+
+== Go Proverbs
+
+Alright then, but we have Rob Pike's Go Proverbs, can we use those for our values?
+Well, not so much.
+
+> proverb (noun): a short, well-known pithy saying, stating a general truth or piece of advice.
+
+Pike's Go Proverbs, just like Kensaku's, are short pieces of advice.
+They’re teaching tools.
+Go proverbs are observations, not statements of value.
+
+The goal of the Go Proverbs are to reveal a deeper truth about the design of the language, but how useful is advice like _the empty interface says nothing_, to a novice?
+
+== Gopher values?
+
+So, we can ask the question, what are the engineering values that bind Go programmers?
+What are the explicit values of Go?
+What are the core beliefs or philosophy and defines the way Go programmers interprets the world? 
+- How are they promulgated?
+- How are they taught?
+- How are they enforced?
+- How do they change over time?
+
+So how will you, as a newly minted Go programmer, learn the engineering values of Go?
+Or, how will you, as a entrenched Go programmer, promulgate your values to a future generation of Go programmers?
+
+Remember, an engineer culture is a _shared_ set of values, not just _how I'd like to see things done_.
+Cohesion is valued higher than individualism.
+
+== Values from other languages
+
+We can look to other languages we see examples of their engineering values.
+For example, C\++ (and by extension Rust) believe that a programmer should not have to pay for a feature they do not use.
+If your program does not use some computationally expensive feature of a language, then it shouldn't be forced to suffer the cost of that feature.
+This value extends from the langauge, to its standard library, and is used as a yardstick for judging the design of code written in C++.
+
+In Java, and Ruby, and Smalltalk, the core value that _everything is an object_ drives the design of programs to be designed around message passing, information hiding, and polymorphism.
+Designs that shoehorns a procedural style into these languages is considered to be wrong -- or as Gopher's would say, _non idiomatic_.
+
+Deriving a set of core values in the current community would be formidable. 
+Consensus is critical, but exponentially more difficult as the number of contributors to the discussing increases. 
+
+But what if someone had done the hard work for us?
+
+== The Zen of Go
+
+As you've probably guessed from the title of this talk, several decades ago Tim Peters sat down an penned PEP-20, the Zen of Python, an attempt to summarize the philosophy that he saw Guido van Rossen apply.
+Last year I made a comment, that I promptly forgot, that the Zen of Python was followed more by gophers than python programmers. 
+
+So for this talk, let’s look to Tim peters' pep-20 for inspiration.
+
+== PEP-20 https://www.python.org/dev/peps/pep-0020/
+
+There are 19 items there, not all of them are realy items, some reference others.
+Anyway, let's shoot for ten and see how we go.
+
+== Special cases aren't special enough to break the rules (Although practicality beats purity)
+
+Do you really need your own collection type? Can you make do with a slice or a map?
+
+You might be surprised what you can do with a simple slice. 
+
+https://github.com/xtgo/set
+
+Do you really need a raw unadorned concurrent hashmap, or can you use a map and a mutex?
+
+"Fancy algorithms are slow when n is small, and n is usually small."
+-- Rob Pike.
+
+== Namespaces are one honking great idea
+
+"Namespaces are one honking great idea -- let's do more of those!"
+-- Tim Peters, PEP-20
+
+This is pretty unequivital, python programmers should use namespaces -- a lot!
+
+In go parlance a namespace is a package.
+A package’s name describes what it provides.
+It’s purpose. 
+
+This is not a new idea for me, I’ve been saying this a while, but why should you do this rather than take a Java or Ruby approach where a packages are use as a taxonomy for organising? 
+
+Because change?
+
+"Design is the art of arranging code to work today, and be changable forever.""
+-- Sandi Metz
+
+Change is the name of the game at the end of the day. 
+
+If you are writing a program that works perfectly, one time, for one fixed set of requirement and input then nobody cares if the code is good or bad because ultimately the output of the program is all the business cares about. 
+
+But this is not true.
+Software has bugs, requirements change, inputs change, and very few programs are written to ever be executed once. 
+
+So, your program _will_ change over time, maybe it’s you who'll be tasked with this, maybe it’s someone else, but someone has to change that code, maintain that code. 
+
+So, how to we make it easy to change?
+
+- Interfaces everywhere?
+- Dependency injection? 
+
+Well, maybe, for some classes of programs, but not many.
+For most programs designing something to be flexible up front is over engineering. So what if we take a position that rather than enhancing components, we replace them.
+
+=== Each package should have a single purpose
+
+So to reinterpret Peters' words, every package should have a single purpose.
+
+A good package starts with choosing a good name.
+Think of your package's name as an elevator pitch to describe what it provides, using just one word.
+
+== Simple is better than complex
+
+A few years ago I made this tweet
+
+https://twitter.com/davecheney/status/539576755254611968?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E539576755254611968&ref_url=https%3A%2F%2Fdave.cheney.net%2F2015%2F03%2F08%2Fsimplicity-and-collaboration
+
+My observation was, at least at the time, that I couldn't think of a language introduced in my life time that didn’t purport to be simple.
+Each new language offers as a justification, and an enticement, their inherent simplicity.
+
+But it turns out, doing a quick assay of Go's contemporaties, the word "simple" isn't anywhere to be found.
+So, either these languages aren't simple, or they don't think of themselves as being simple.
+
+When did being simple fall out of style?
+
+image::https://giphy.com/embed/CKrlUi30dn44w[]
+
+On the other hand, I cannot point to a language introduced in the same time frame with the rallying call of complexity; more complexity than its contemporaries—but many instead claim to be powerful.
+
+The idea of proposing a language which offered higher levels of inherent complexity is clearly laughable, yet this is exactly what so many contemporary languages have become; complicated, baroque, messes.
+A parody of the languages they sought to replace.
+
+Clumsy syntax and non orthogonality is justified by the difficulty of capturing nuanced corner cases of the language, many of them self inflicted by years of careless feature creep.
+
+So, every language starts out with simplicity as a goal, yet many of them fail to achieve this goal.
+Eventually falling back on notions of expressiveness or power of the language as justification for a failure to remain simple.
+
+Whether Python abides by its mantra of simplicity is a matter for debate, but Go holds simplicity as a core value.
+
+=== Simplicity matters
+
+"There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult."
+-- C. A. R. Hoare
+
+Simple does not mean easy, we know that.
+Often it is more work to make something simple to use than easy to build.
+
+"Simplicity is prerequisite for reliability."
+-- Edsger W. Dijkstra
+
+Why should we strive for simplicity?
+Why is important that Go programs be simple?
+
+"Controlling complexity is the essence of computer programming."
+-- Brian Kernighan
+
+Simple doesn't mean crude, it means _readable_ and _maintainable_.
+Simple doesn't mean unsophisticated, it means _reliable_, _relatable_, and _understandable_.
+
+And I think that we can all agree that when it comes to Go, simple code is preferable to clever code.
+
+== Explicit is better than implicit
+
+This is a place where I think Peters' was more aspirational than factual.
+Many things in Python are no explicit; decorators, dunder methods, etc.
+They are powerful, but heavy use of those features makes is harder for the reader to predict the cost of an operation, its side effects.
+
+=== Seek to be explicit
+
+But the good news, we have a choice as Go programmers to choose to make our code explicit.
+
+Explicit could mean many things, i'm sure perhaps you may be thinging explicit could be a nice way of saying _long winded_.
+But that's a superficial interpretation.
+It's a misnomer to focus only on the syntax on the page, to fret about line lengths and DRYing up expressions.
+
+The more valuable, in my opinon, places to be explicit are to do with coupling and with state.
+
+Coupling is a measure of the amount one thing depends on another.
+There abstruce concepts like connasence and efferant vs afferant coupling, but the simple thing is this.
+If two things are tightly coupled, they move together, an action that affects one is directly reflected in another.
+Imagine a train, each carriage joined, ironically the correct word is coupled, together; where the engine goes, the carrages follow.
+
+Another way to describe coupling is the word cohesion.
+Cohesion measures how well two things work together.
+We talk about a cohesive argument, or a cohesive team; all their parts fit together as if they were designed that way.
+
+The alternatie to cohesion is adhesion.
+Adhesion means sticking things together.
+Things which are not intended to be together thus requiring an _adhesive_--a glue.
+
+Why does coupling matter?
+Because just like the train carrages, when you need to change a piece of code, all the code that is tightly coupled to it must change.
+A prime example, someone release a new version of their API and now your code doesn't compile.
+
+API, programming _interfaces_ are an unavoidable source of coupling but there are more incidious forms of coupling.
+
+Clearly everyone knows that if an API's signature changes the data passing into and out of that call changes.
+It's right there in the signature of the function; I take values of these types and return values of other types.
+But what if the API passed data another way?
+What if every time you called this API the result was based on the previous time you called that API even though you didn't change your parameters.
+
+> signature. a distinctive pattern, product, or characteristic by which someone or something can be identified:
+
+This is state.
+And management of state is _the_ problem in computer science.
+
+[source,go]
+----
+package counter
+
+var count int
+
+func Increment(n int) int {
+    count+=n
+    return count
+}
+----
+
+Suppose we have this simple counter package.
+You can call Incremement to increment the counter, you can even get the value back if you Increment with a value of zero?
+
+Suppose you had to test this code, how would you reset the counter afger each test?
+Suppose you wanted to run those tests in parallel, could you do it?
+Now suppose that you wanted to count more than one thing per program, could you do it?
+
+No, of course not.
+Clearly the answer is to encapsulate the counter variable in a type
+
+[source,go]
+----
+package counter
+
+type Counter struct {
+    count int
+}
+
+func (c *Counter) Increment(n int) int {
+    c.count+=n
+    return c.count
+}
+----
+
+Now imagine that this problem isn't restricted to trivial counters, but your applications main business logic.
+
+Avoid package level state.
+Reduce coupling and spooky action at a distance by providing the dependencies a type needs as fields on that type rather than using package variables.
+
+// https://twitter.com/gypsydave5/status/1002863984561795072
+
+== Errors should never pass silently
+
+It's been said of languages that favour exception handling follow the Samurai Principle.
+Which is;
+
+> Return victorious, or not at all.
+
+In languages like Python, and Java, a functions only return valid results.
+If they don't succed then control flow takes an entirely differnt path.
+
+Obviously Go has chosen a different path.
+It's a bit hard to talk about this path without exposing my bias.
+Unchecked exceptions are clearly an unsafe model to program in.
+How can you possibly write code that is robust in the presence of errors when you don't know which statements could possibly throw an exception.
+
+Java tried to make exceptions safer by introducing the notion of a checked exception which to the best of my knowledge has not been repeated in a mainstream language.
+
+Just to be clear, there are plenty of languages which use exceptions, but all of them, with the singular exception of Java, do so in the unchecked variety.
+
+=== Plan for failure, not success
+
+Robust programs are composed from pieces that handle the failure cases before they pat themselves on the back.
+
+In the space that Go was designed for; server programs, multi threaded programs, programs that handle input over the network, dealing with unexpected data, timeouts, connection failures and corrupted data must be front and center of the programmers mind if they are to produce robust programs.
+
+=== Handle errors explicitly
+
+Specifically when it comes to error handling, the verbosity of
+
+[source,go]
+if err != nil { 
+    eturn err
+}
+
+is outweighed by the value of deliberately handling each failure condition at the point at which they occur.
+
+"I think that error handling should be explicit, this should be a core value of the language."
+-- Peter Bourgon, https://changelog.com/gotime/91[GoTime episode 91]
+
+I want to echo Peter's assertion.
+I think so much of the success of Go is due to the explicit way errors are handled.
+Go programmers thinks about the failure case first.
+We solve the "what if..." case first.
+This leads to programs where failures are handled at the point of writing, rather than the point they occur in production.
+
+Key to this philosophy is the cultural value of handling each and every error explicitly.
+
+== Flat is better than nested
+
+This is sage advice coming from a language where indentation is the primary form of control flow.
+Or a Rob Pike put it -- significant whitespace.
+
+How can we interpret this advice in terms of Go?
+Gofmt controls the overall whitespace of a Go program so there's not thing there.
+
+I've talked before about package names, and there is probably some advice about avoiding a complicated package heirarchy.
+In my experience the more a programmer tries to subdivide and taxonimise their codebase the more they risk hitting the dead end that is package import loops.
+
+=== Return early rather than nesting deeply
+
+I think the best application of Python's advice would be the control flow within a function.
+Simply put, avoid control flow that requires deep indentation.
+
+Mat Ryer calls this https://medium.com/@matryer/line-of-sight-in-code-186dd7cdea88[light of sight coding].
+
+****
+I almost called this "keep to the left" but as this is a right hand drive country, it would make no sense.
+****
+
+> Line of sight is “a straight line along which an observer has unobstructed vision"
+-- Mat Ryer, https://medium.com/@matryer/line-of-sight-in-code-186dd7cdea88[Code: Align the happy path to the left edge]
+
+Light of sight code means things like 
+
+- Using guard clauses to return early if a precondition is not met.
+- Placing the successful return statement at the end of the function rather than inside a conditional block.
+- Reducing the overall indentation level (not the length) of the function by extracting fuctions and methods.
+
+This has a side effect that you'll avoid pointless arguments about line lengths.
+
+Every time you indent you add another precondition to the programmers stack consuming one of the 7 ±2 slots in their short term memory.
+Rather than nesting deeply, keep the successful path of the function as close to the left hand side of your screen.
+
+== In the face of ambiguity, refuse the temptation to guess
+
+Programming, is based on mathematics and logic, two concepts which rarely involve the element of chance.
+But there are things we, as programmers, guess about every day?
+
+What does the package variable X do?
+What does this parameter do?
+What happens if i pass nil here?
+What happens if I call this register function twice.
+
+There's actually a lot of guesswork in modern programming, especially when it comes using libraries you didn't write.
+
+"APIs should be easy to use and hard to misuse."
+-- https://www.infoq.com/articles/API-Design-Joshua-Bloch[Josh Bloch]
+
+One of the best ways I know to help a programmer avoid having to guess is, when building an API, focus on the default use case.
+Make it as easy as you can for them to do the most common thing.
+As Josh Bloch says, APIs should be designed such that they are easy to use, and equally so they are hard to misuse.
+
+=== If you think it’s slow, first prove it with a benchmark
+
+I've written and talked a lot about API design in the past, and I don't want to bore you with this here so instead they inpretation of this advice I'm choosing to say is; don't guess about _performance_.
+
+Dispite what you think about Hoare's advice about the evils of optimisation, one of the drivers of Go's success is its efficient execution.
+You can write efficient programs in Go and thus people will choose Go because of this.
+
+My request is, when you're looking to performance tune your code; _don't guess_.
+Go has excellent benchmarking and profiling tools that come in the distribution for free.
+Use them to find your bottleknecks.
+And if you think something is slow, first prove it with a benchmark.
+
+== Going beyond
+
+At this point I think I think i've mined the valuable points from PEP-20 and possibly stretched its reinterpretation beyond the point of good taste.
+
+I think that's fine, because although this is an interesting retorical device, ultimately we are talking about two different languages--although they do share a common ideological ancestor.
+
+== Before you launch a goroutine, know when it will stop
+
+These next two suggestions I'll dedicate to goroutines.
+Goroutines are the signature feature of the language, our answer for first class concurrency.
+
+"You type _g_ _o_, a space, and then a function call.
+So three keystrokes, you can't make it much shorter than that."
+Three keystrokes and you've just started a sub process."
+-- Rob Pike, https://www.youtube.com/watch?v=rFejpH_tAHM[Simplicity is Complicated, dotGo 2015]
+
+And they are so easy to use, just put the word `go` in front of the statement and you've launched that function asynchronusly.
+
+It's so simple, no threads, no stack sizes, no thread pool executors.
+No ID's, no tracking completion status.
+
+Goroutines are cheap too.
+Because of the runtime's ability to multiplex goroutines onto a small pool of threads (which you don't have to manage), hundreds of thousands, millions of goroutines are easily accomodated.
+This opens up designs that would be not be practical under other concurrency models like threads or evented callbacks.
+
+But as cheep as goroutines are they're not free.
+At a minimum there's a few kilobytes for their stack, which, when you're getting up into the 10^6 goroutines does start to add up.
+
+This is not to say you shouldn't use millions of goroutines, but when you do, its critical that you keep track of them because they're consuming a non trivial amount of resource in agregate.
+
+And its not just about the memory they pin, to be useful a goroutine has to do something, and that means it almost always hold reference to, or ownership of a resource.
+A lock, a network connection, a buffer with data, the sending end of a channel.
+While that goroutine is alive, the lock is held, the network connection remains open, the buffer retained and the receivers of the channel will continue to wait for more data.
+
+The simplest way to free those resources is to tye them to the lifetime of the goroutine.
+When the goroutine exits, you know the resource has been freed.
+
+And so while its near trivial to start a goroutine, before you write those three letters, `g` `o` and a space, make sure you have an answer to these questions.
+
+Under what conditions will this goroutine stop::
+Go doesn't have a way to tell a goroutine to exit, there is no stop or kill function, for good reason.
+If we cannot _command_ a goroutine to stop, we must instead _ask_ it, politely.
+Almost always this comes down to a channel operation. Range loops over a channel exit when the channel is closed. A channel will become selectable if it is selectable. The signal from one goroutine to another is best expressed as a closed channel. 
+What is required for those conditions to arrise::
+If channels are both the vehicle to communicate between goroutines and the mechanism for them to signal completion, the next question to the programm becomes, _who will close the channel_, when will that happen?
+What signal will you use to confirm that the goroutine has stopped:: 
+Lastly, when you signal a goroutine to stop, that stopping will happen at some time in the future relative to the goroutine's frame of reference. It might happen quickly in terms of human preception, but computers execute billions of instructinos every second, and from the point of view of each goroutine, their execution of instructions is unshncronised. The solution is often to use a channel to signal back or a waitgroup where a fan in approach is needed.
+
+== Leave concurrency to the caller
+
+Continuing on from the management of individual goroutines it is likely that in any serious Go program you write there will be concurrency involved.
+
+And this raises the problem, many of the libraries and code that we write fall into this a one goroutine per connection, or worker pattern.
+
+net/http is a prime example, shutting down the server owning the listening socket is reletively straight forward, but what about the goroutines spawned from that accepting socket?
+
+net/http does provide a context object inside the request object which can be used to signal -- to code that is listening -- that the request should be canceled, thereby terminating the goroutine, however it is less clear how to _know_ when all of these things have been done.
+
+I tend to pick on net/http a lot, and this is not because it is bad, in fact it is the opposite, it is the most successful, oldest, most used API in the Go codebase.
+And because of that its design, evolution, and shortcoming have been thoroughly picked over.
+
+The point I want to make about net/http is that its a counter example to good practice.
+Because each connection is handled by a goroutine spawned inside the net/http Server type, the called, y'all, don't have an opprotunity to attach it to a waitgroup.
+
+This is an area of design that is still evolving, with efforts like go-kits Group and the Go teams ErrGroup which provide a framework to execute, cancel and wait on functions run asynchronusly.
+
+The bigger design maxim is that for library writers, or anyone writing code that _could_ be run asynchronusly, leave the responsibliity of starting to goroutine to your caller.
+
+Let then choose how they want to start, track, and wait on your functions asynchronus execition.
+
+== Readability counts
+
+So much has been written, and spoken, about the importance of readability, not just in Go, but all programming languages.
+
+Words like readability, clarity, simplicity.
+Phrases like _clean code_.
+These are all symptoms.
+They are symptomatic of a desire for code to be maintainable.
+
+The real goal is to write maintainable code.
+Code that can live on after the original author.
+Code that can exist not just as a point in time investment, but as a foundation for future value.
+
+Go is not a language that optimises for clever one liners.
+Go is not a language which optimises for the least number of lines in a program.
+We're not optimising for the size of the source code on disk, nor how long it takes to type the program into an editor.
+Rather, we want to optimise our code to be clear to the reader.
+Because its the reader who's going to have to maintain this code.
+
+=== Maintainability counts
+
+"Readable means reliable"
+-- Rob Pike, https://www.youtube.com/watch?v=rFejpH_tAHM[Simplicity is Complicated, dotGo 2015]
+
+People like me who stand on stages advocating for Go have a lot of words to pitch Go.
+We use words like _simplicity_, _readability_, _clarity_, _productivity_, but ultimately they are all synonyms for one word--_maintainabilty_.
+
+Simply put, the goal is maintainability. 
+
+If you’re writing a program for yourself, maybe it only has to run once, or you’re the only person who’ll ever see it, then do what ever works for you.
+
+But if this is a piece of software that more than one person will contribute to, or that will be used by people over a long enough time that requirements, features, or the environment it runs in may change, then your goal must be for your program to be maintainable.
+
+Code is read many more times than it is written.
+A single piece of code will, over its lifetime, be read hundreds, maybe thousands of times.
+But they _why_ of 
+
+The first step towards writing maintainable code is making sure intent of the code is clear.
+If software cannot be maintained, then it will be rewritten; and that could be the last time your company will invest in Go.
+
+The take away is;
+- Can the thing you worked hard to build be maintained after you’re gone?
+- What can you do today to make it easier for those that come after you?
+
+== Moderation is a virtue
+
+Go is a simple language, only 25 keywords.
+In some ways this makes the features that are built into the langauge stand out.
+Equally these are the features that the language sells itself on, lightweight concurrency, structural typing.
+
+I think all of us have experienced the confusion that comes from trying to use all of Go's features at once.
+
+Who was so excited to use channels that they used them as much as they could, as often as they could?
+Personally for me I found the result was hard to test, fragile, and ultimately overcomplicated.
+Am I alone?
+
+I had the same experience with goroutines, attempting to break the work into tiny units I created a hard to manage hurd of Goroutines and ultimately missed the observation that most of my goroutines were always blocked waiting for their predecessor -- the code was ultimately sequential and I had added a lot of complexity for little real world benefit.
+Who has experienced something like this?
+
+I had the same experience with embedding.
+Initially I mistook it for inheretence.
+Then later I recreated the fragile base class problem by composing complicated types, which already had several responsiblities, into more complicated mega types.
+
+This is potentially the least actionable piece of advice, but one I think is important enough to mention.
+The story is always the same, take all things in moderation, and Go's features are no exception.
+If you can, don't reach for a goroutine, or a channel, or embed a struct, anonymous functions, going overboard with packages, interfaces for everything, and prefer simpler approach rather than the clever approach.
+
+== Conclusion. 
+
+What makes Go Go is our shared values.
+It’s our culture.
+Expressing your culture openly can be super weird.
+
+Just like the example I opened with, how the windows NT team defined their culture in terms of 
+
+, like this rude to talk on the phone in japan.
+Isn’t that a weird thing?
+Tipping in the us?
+Why would you pay extra for a meal that someone was paid to serve you?
+Doesn’t that seam weird?
+So talking about our culture, our shared cultural identity is weird. 
+
+Props to peter bourgon and Danielle petrizalack. And apparently me, although I have no recollection of that senator.
+
+---
+
+:leveloffset: +1
+include::../the-zen-of-go/the-zen-of-go.adoc[]
+

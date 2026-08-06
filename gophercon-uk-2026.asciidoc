@@ -1,6 +1,6 @@
-= Building a high performance JSON parser
+= API Design as a Performance Primitive
 Dave Cheney <dave@cheney.net>
-GopherCon Singapore 2023
+GopherCon UK 2026
 :docinfo: shared
 :appendix-caption: Appx
 :hide-uri-scheme:
@@ -14,23 +14,37 @@ GopherCon Singapore 2023
 :icons: font
 :source-highlighter: rouge
 :rouge-style: github
+:presentation-link: https://dave.cheney.net/paste/gophercon-uk-2026.html
+
+== Abstract
+
+Beyond a certain level, performance cannot be engineered into a library, product, or codebase, _after the fact_.
+
+This presentation aims to prove this by investigating a common place operation; JSON decoding.
+In comparison to its encoding counterpart, JSON decoding is expensive in both time and space.
+
+During this presentation we’ll investigate the performance of the stdlib JSON decoder; exploring the places where time is spent and comparing that to a clean room decoder.
+
+In doing so this presentation will introduce a new primitive for buffered io and explore how an API designed sympathetically with the needs of its callers can deliver higher performance.
 
 == Introduction
 
-This talk is a case study of designing an efficient Go package.
 I'm going to use the example of building a high performance JSON parser.
+The goals of this parser are:
 
-The goals of this project were:
-
+Reasonably compatible with the `encoding/json` package::
+This package offers the same high level `json.Decoder` API but higher throughput and reduced allocations.
+Allocation free, or bounded API::
+In addition to the `encoding/json` API, provide an alternative, more efficient API.
 Supports streaming operations::
 It's unrealistic to expect to have the entire input in memory.
 Buffering in memory is a availability risk, input sizes are usually unknown and potentially unbounded.
 Buffering before processing introduces latency.
 Streaming reads lets you process data as it arrives and overlap that processing with reading.
-Reasonably compatible with the `encoding/json` package::
-This package offers the same high level `json.Decoder` API but higher throughput and reduced allocations.
-Allocation free, or bounded API::
-In addition to the `encoding/json` API, provide an alternative, more efficient API.
+
+- This work originally started in 2022 and originally benchmarked on an Intel Macbook, circa Go 1.18.
+I've re-baselined all the benchmarks for Go 1.26 on an M4 Macbook Pro.
+- Comparisons against the upcoming json/v2 is an exercise for the reader.
 
 == Time complexity
 
@@ -72,6 +86,8 @@ A JSON decoder has two main components:
 
 JSON is regular, well defined grammar.
 https://json.org has a wonderful set of railroad diagrams that describe the grammar of JSON.
+
+image:https://www.json.org/img/object.png[JSON Object, width=45%] image:https://www.json.org/img/value.png[JSON Value, width=45%]
 
 [source,json]
 ----
@@ -201,6 +217,21 @@ This is similar to the `bufio.Scanner` API.
 2. Sometimes people want to know type of the token; collection, array, string, number, etc, sometimes they want the token _value_, _the string_, the _number_, in a form they can work with.
 `Decoder.NextToken` isn't convenient for that, but can be used to build higher level abstractions.
 
+[source,go,options="nowrap"]
+----
+include::json/nexttoken_test.go[tags=bench]
+----
+
+```
+BenchmarkJSONDecoderToken/encoding/json.NewDecoder.Token-16               943509              1318 ns/op          31.87 MB/s        1800 B/op         52 allocs/op
+BenchmarkJSONDecoderToken/pkg/json.Decoder.NextToken-16                  9566983               128.3 ns/op       327.30 MB/s         152 B/op          3 allocs/op
+```
+
+====
+Exercise to the reader; re-run the benchmark _without_ the buffer
+====
+
+
 == Reading
 
 Let's talk about reading data.
@@ -226,25 +257,97 @@ If the end token isn’t in the buffer you need to do a lot of bookkeeping and c
 
 This is tricky to get right, and inefficient even if you do.
 
-The alternative is an idea inspired by Steven Schveighoffer's iopipe footnote:[DConf 2017: IOPipe: a High Performance I/O Library -- Steven Schveighoffer https://www.youtube.com/watch?v=un-bZdyumog] and Phil Pearl footnote:[https://philpearl.github.io/post/reader/] which I adapted into a type called a `byteReader`.
-`byteReader` operates similarly to `bufio.Reader` but has a more efficient API.
+== An alternative ByteReader
+
+The alternative is an idea inspired by Steven Schveighoffer's iopipe footnote:[DConf 2017: IOPipe: a High Performance I/O Library -- Steven Schveighoffer https://www.youtube.com/watch?v=un-bZdyumog] and Phil Pearl footnote:[https://philpearl.github.io/post/reader/] which I adapted into a type called a `ByteReader`.
+`ByteReader` operates similarly to `bufio.Reader` but has a more efficient API.
 
 [source,go,options=nowrap]
 ----
 include::json/reader.go[tags=reader]
 ----
 
+[options="header", cols="32*"]
+|===
+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31
+
+| { | " | a | " | : |   | 1 | , |   | " | b  | "  | :  |    | t  | r  | u  | e  | ,  |    | "  | c  | "  | :  |    | [  | 1  | ,  | "  | t  | w  | o
+
+8+^|Window()
+24+|
+|===
+
+Because the window is a []byte slice, any operation which is valid on a slice; ranging, contains, etc is available without overhead or error checking. 
+This is the same as using a buffer after calling Reader.Read, except you don't need to provide the buffer, and copies are avoided.
+
+[options="header", cols="32*"]
+|===
+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31
+
+| { | " | a | " | : |   | 1 | , |   | " | b  | "  | :  |    | t  | r  | u  | e  | ,  |    | "  | c  | "  | :  |    | [  | 1  | ,  | "  | t  | w  | o
+4+| _Release(4)_
+4+^|Window()
+24+|
+|===
+
+Once a portion of the window is not needed it can be signalled with the `Release()` method.
+If the window is exhausted, calling `Extend()` will refill it, _without_ discarding any data that has not been `Released()`.
+This means you don't have to keep a temporary copy of partial data, it will still be there after `Extend()`.
+
+[options="header", cols="32*"]
+|===
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31
+| { | " | a | " | : |   | 1 | , |   | " | b  | "  | :  |    | t  | r  | u  | e  | ,  |    | "  | c  | "  | :  |    | [  | 1  | ,  | "  | t  | w  | o
+4+| 
+8+^|Window()
+20+|
+8+|
+4+^|Extend()
+20+|
+|===
+
+After `Extend()` ing the previous window is invalid and `Window()` must be called again.
+Any data which was not `Release()` d will remain visibile in the window, at its same offset from the start of the []byte.
+
+[options="header", cols="32*"]
+|===
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31
+| { | " | a | " | : |   | 1 | , |   | " | b  | "  | :  |    | t  | r  | u  | e  | ,  |    | "  | c  | "  | :  |    | [  | 1  | ,  | "  | t  | w  | o
+4+| 
+16+^|Window()
+12+|
+8+|
+12+^|Extend()
+12+|
+|===
+
+
+Error checking only occurs during `Extend()` whcih returns 0 as a sigil, leaving the caller to retrieve the `Error`.
+This is also inspired by bufio.Scanner's Next and Err methods.
+
+
 === Example: whitespace
 
-JSON contains a mixture of tokens and whitespace.
-Space, tab, newline and carriage return can occur between tokens and are ignored, thus the search for a token begins with a search for the first _non_ whitespace character.
+[.float-group]
+--
+image::https://www.json.org/img/whitespace.png[JSON Whitespace, width=350, float="right"]
+
+JSON contains a mixture of tokens and whitespace. Space, tab, newline and carriage return can occur between tokens and are ignored, thus the search for a token begins with a search for the first _non_ whitespace character.
+--
 
 [source,json]
 ----
 {"a": 1, "b": true, "c": [1, "two", null]}
 ----
 
-This is a good time to talk about the search for whitespace with an example of using a `byteReader`.
+[source,go,options="nowrap"]
+----
+include::json/whitespace_test.go[tags=count_whitespace]
+----
+
+This is a good time to talk about the search for whitespace with an example of using a `ByteReader`.
 
 [source,go,options="nowrap"]
 ----
@@ -253,28 +356,34 @@ include::json/whitespace_test.go[tags=count]
 This does the minimum, visit each character and test if it matches a whitespace character.
 Any (useful) JSON decoder code cannot go faster that this.
 
-```
-name                             time/op
-CountWhitespace/canada-16          1.10ms ± 2%
-CountWhitespace/citm_catalog-16     838µs ± 1%
-CountWhitespace/twitter-16          306µs ± 1%
-CountWhitespace/code-16             937µs ± 1%
-CountWhitespace/example-16         6.40µs ± 1%
-CountWhitespace/sample-16           333µs ± 1%
+[source,options="nowrap"]
+----
+include::json/benchstat-whitespace.txt[lines=5..]
+----
 
-name                             speed
-CountWhitespace/canada-16        2.04GB/s ± 2%
-CountWhitespace/citm_catalog-16  2.06GB/s ± 1%
-CountWhitespace/twitter-16       2.06GB/s ± 1%
-CountWhitespace/code-16          2.07GB/s ± 1%
-CountWhitespace/example-16       2.04GB/s ± 1%
-CountWhitespace/sample-16        2.06GB/s ± 1%
-```
 So this is our baseline.
+
+====
+Take away:
+
+- moved from one call per character to one call per underlying window fill (extend)
+- window size grows as required, but initial size determines the overhead. modest window sizes, which can be pooled, quickly ameliorate underling Read calls to refill.
+====
 
 .Quiz me after the talk on the best way to write a general purpose whitespace counter.
 [%collapsible]
 ====
+
+[source,go,options="nowrap"]
+----
+include::json/whitespace_test.go[tags=whitespace]
+----
+
+[source,options="nowrap"]
+----
+include::json/benchstat-whitespace-variants.txt[lines=5..]
+----
+
 https://github.com/davecheney/whitespace
 ====
 
@@ -284,7 +393,7 @@ Now we can tell which characters are tokens and which are simply whitespace, let
 
 [source,go,options="nowrap"]
 ----
-include::json/scanner-pos.go[tags=next]
+include::json/scanner1/scanner.go[tags=next]
 ----
 This is the core loop of `Scanner.Next`.
 `Scanner.Next` skips over any intermediate whitespace, determines the token from the first character in the window, then continues to read until the token is read or we hit the end of the input.
@@ -293,14 +402,14 @@ Let's look at how `token` works, then we'll talk about some optimisations
 
 [source,go,options="nowrap"]
 ----
-include::json/scanner-pos.go[tags=token]
+include::json/scanner1/scanner.go[tags=token]
 ----
 
 - We start by getting the current window from the `byteReader`.
 This is a `[]byte` slice of all the data that is yet to be read.
 - We're looking for the first non whitespace character.
-If the character is a whitespace we increment `s.offset` to ignore the character and loop around.
-- If we do find a non whitespace character, we release `s.offset` characters from the front of the window.
+If the character is a whitespace we increment `offset` to ignore the character and loop around.
+- If we do find a non whitespace character, we release `offset` characters from the front of the window.
 Now the start of the window is properly aligned with the first character of the token.
 - It turns out that we also get the first character of the token for free, it's in `c`, so we can return that as a hint to `Scanner.Next`.
 - If we run out of characters without hitting a token then we called `extend()` to grow the window.
@@ -316,25 +425,13 @@ Some things to note:
 In practice an initial buffer of 8k is sufficient.
 
 Let's talk about the performance of this code.
-```
-name                     time/op
-Scanner/canada-16         4.41ms ± 2%
-Scanner/citm_catalog-16   2.55ms ± 3%
-Scanner/twitter-16        1.03ms ± 1%
-Scanner/code-16           4.21ms ± 1%
-Scanner/example-16        21.4µs ± 1%
-Scanner/sample-16          822µs ± 1%
+[source,options="nowrap"]
+----
+include::json/benchstat-scanner1.txt[lines=5..]
+----
 
-name                     speed
-Scanner/canada-16        510MB/s ± 2%
-Scanner/citm_catalog-16  677MB/s ± 3%
-Scanner/twitter-16       615MB/s ± 1%
-Scanner/code-16          461MB/s ± 1%
-Scanner/example-16       608MB/s ± 1%
-Scanner/sample-16        837MB/s ± 1%
-```
 Comparing the performance of `Scanner.Next` to our whitespace benchmark we can see that we're between 1/4 and 2/5ths of our baseline.
-
+////
 Let's talk about improvements we can make to the code.
 Note the amount of work being spent to keep `s.offset` up to date. 
 We know that `s.offset` is set to 0 just before `Scanner.Next` calls this function, and we set `s.offset` to zero on the way out of the function, so the changes we make to `s.offset` within the function are invisible--it's zero on entry, and zero on exit.
@@ -342,26 +439,14 @@ We know that `s.offset` is set to 0 just before `Scanner.Next` calls this functi
 We can rewrite the function to keep a local `offset` value, which has an impressive effect on `token`.
 [source,go,options="nowrap"]
 ----
-include::json/scanner-pos2.go[tags=token]
+include::json/scanner2/scanner.go[tags=token]
 ----
 
-```
-name                     old time/op    new time/op    delta
-Scanner/canada-16          4.39ms ± 1%    4.43ms ± 4%     ~     (p=1.000 n=5+5)
-Scanner/citm_catalog-16    2.52ms ± 1%    1.80ms ± 4%  -28.46%  (p=0.008 n=5+5)
-Scanner/twitter-16         1.03ms ± 2%    0.95ms ± 3%   -7.41%  (p=0.008 n=5+5)
-Scanner/code-16            4.24ms ± 2%    4.18ms ± 1%     ~     (p=0.095 n=5+5)
-Scanner/example-16         21.4µs ± 1%    18.9µs ± 2%  -11.68%  (p=0.008 n=5+5)
-Scanner/sample-16           828µs ± 2%     528µs ± 2%  -36.24%  (p=0.008 n=5+5)
+[source,options="nowrap"]
+----
+include::json/benchstat-scanner2.txt[lines=5..]
+----
 
-name                     old speed      new speed      delta
-Scanner/canada-16         512MB/s ± 1%   509MB/s ± 4%     ~     (p=1.000 n=5+5)
-Scanner/citm_catalog-16   685MB/s ± 1%   958MB/s ± 4%  +39.84%  (p=0.008 n=5+5)
-Scanner/twitter-16        616MB/s ± 2%   665MB/s ± 3%   +8.01%  (p=0.008 n=5+5)
-Scanner/code-16           458MB/s ± 2%   465MB/s ± 1%     ~     (p=0.095 n=5+5)
-Scanner/example-16        608MB/s ± 1%   688MB/s ± 2%  +13.23%  (p=0.008 n=5+5)
-Scanner/sample-16         831MB/s ± 2%  1303MB/s ± 2%  +56.84%  (p=0.008 n=5+5)
-```
 By keeping `offset` local the compiler avoided those temporary writes back to memory.
 The question I have for you is why did this improve some inputs and not others?
 
@@ -373,6 +458,7 @@ For example `canada` only has 33 whitespace characters whereas `citm` has 1,227,
 ====
 Hint: `panic()`
 ====
+////
 
 === Inlining
 
@@ -383,13 +469,9 @@ This avoids the overhead of the function call.
 The Go compiler has reasonable support for inlining, but has a number of limitations. 
 
 ```
- % go build -gcflags=-m=2 2>&1 | grep cannot | grep -v decoder
-./reader.go:31:6: cannot inline (*byteReader).extend: function too complex: cost 198 exceeds budget 80
-./scanner.go:99:6: cannot inline (*Scanner).token: unhandled op FOR
-./scanner.go:130:6: cannot inline validateToken: unhandled op FOR
-./scanner.go:153:6: cannot inline parseString: unhandled op FOR
-./scanner.go:182:6: cannot inline (*Scanner).parseNumber: unhandled op FOR
-./scanner.go:56:6: cannot inline (*Scanner).Next: function too complex: cost 476 exceeds budget 80
+% go build -gcflags=-m=2 2>&1 | grep cannot | grep -v decoder | head -n2
+./reader.go:31:6: cannot inline (*byteReader).extend: function too complex: cost 187 exceeds budget 80
+./scanner.go:125:6: cannot inline (*Scanner).token: function too complex: cost 117 exceeds budget 80
 ```
 
 The first is the size of the function, `byteReader.extend` cannot be inlined because it is too complex.
@@ -409,26 +491,15 @@ We can remove one of these by manually inlining `Scanner.token` into its caller.
 
 [source,go,options="nowrap"]
 ----
-include::json/scanner-pos3.go[tags=next]
+include::json/scanner2/scanner.go[tags=next]
 ----
 The results support our thesis:
-```
-name                     old time/op    new time/op    delta
-Scanner/canada-16          4.36ms ± 1%    3.50ms ± 0%  -19.68%  (p=0.008 n=5+5)
-Scanner/citm_catalog-16    1.80ms ± 1%    1.56ms ± 2%  -13.16%  (p=0.008 n=5+5)
-Scanner/twitter-16          965µs ± 2%     833µs ± 2%  -13.75%  (p=0.008 n=5+5)
-Scanner/code-16            4.15ms ± 1%    3.61ms ± 1%  -12.82%  (p=0.008 n=5+5)
-Scanner/example-16         18.9µs ± 2%    16.6µs ± 1%  -12.42%  (p=0.008 n=5+5)
-Scanner/sample-16           515µs ± 1%     472µs ± 2%   -8.34%  (p=0.008 n=5+5)
 
-name                     old speed      new speed      delta
-Scanner/canada-16         516MB/s ± 1%   642MB/s ± 0%  +24.50%  (p=0.008 n=5+5)
-Scanner/citm_catalog-16   960MB/s ± 1%  1105MB/s ± 2%  +15.16%  (p=0.008 n=5+5)
-Scanner/twitter-16        654MB/s ± 2%   759MB/s ± 1%  +15.94%  (p=0.008 n=5+5)
-Scanner/code-16           468MB/s ± 1%   537MB/s ± 1%  +14.69%  (p=0.008 n=5+5)
-Scanner/example-16        689MB/s ± 2%   787MB/s ± 1%  +14.17%  (p=0.008 n=5+5)
-Scanner/sample-16        1.33GB/s ± 1%  1.46GB/s ± 1%   +9.11%  (p=0.008 n=5+5)
-```
+[source,options="nowrap"]
+----
+include::json/benchstat-scanner2.txt[lines=5..]
+----
+
 By saving the function call we've improved throughput by 9-24%. 
 The largest improvement comes from `canada`, which basically contained no whitespace, so the call to `Scanner.token` almost always returned immediately having done no work!
 
@@ -444,6 +515,10 @@ It turns out, the more whitespace, the faster `pkg/json` decodes! `citm` is over
 
 ====
 Take away: Avoiding function calls _can_ improve performance in the hot path.
+====
+
+====
+Bonus points: does Go's profile guided optimisation obsolete this advice?
 ====
 
 == Decoding
@@ -463,7 +538,7 @@ This is the role of `Decoder.NextToken`:
 
 [source,go,options="nowrap"]
 ----
-include::json/decoder1.go[tags=nexttoken]
+include::json/decoder1/decoder.go[tags=nexttoken]
 ----
 This is pretty straightforward stuff.
 We take track the current state in `d.state` and based on its value we dispatch to the various state methods which assert token is valid and update the state.
@@ -473,39 +548,16 @@ We take track the current state in `d.state` and based on its value we dispatch 
 ====
 [source,go,options="nowrap"]
 ----
-include::json/decoder1.go[tags=states]
+include::json/decoder1/decoder.go[tags=states]
 ----
 ====
 Let's look at the results.
-----
-name                                           time/op
-DecoderNextToken/pkgjson/canada-16               5.64ms ± 1%
-DecoderNextToken/encodingjson/canada-16          65.1ms ± 1%
-DecoderNextToken/pkgjson/citm_catalog-16         2.42ms ± 2%
-DecoderNextToken/encodingjson/citm_catalog-16    19.8ms ± 1%
-DecoderNextToken/pkgjson/twitter-16              1.18ms ± 1%
-DecoderNextToken/encodingjson/twitter-16         12.1ms ± 0%
-DecoderNextToken/pkgjson/code-16                 6.10ms ± 2%
-DecoderNextToken/encodingjson/code-16            77.5ms ± 1%
-DecoderNextToken/pkgjson/example-16              25.2µs ± 1%
-DecoderNextToken/encodingjson/example-16          266µs ± 1%
-DecoderNextToken/pkgjson/sample-16                559µs ± 0%
-DecoderNextToken/encodingjson/sample-16          3.18ms ± 2%
 
-name                                           speed
-DecoderNextToken/pkgjson/canada-16              399MB/s ± 1%
-DecoderNextToken/encodingjson/canada-16        34.6MB/s ± 1%
-DecoderNextToken/pkgjson/citm_catalog-16        713MB/s ± 2%
-DecoderNextToken/encodingjson/citm_catalog-16  87.1MB/s ± 1%
-DecoderNextToken/pkgjson/twitter-16             537MB/s ± 1%
-DecoderNextToken/encodingjson/twitter-16       52.2MB/s ± 0%
-DecoderNextToken/pkgjson/code-16                318MB/s ± 2%
-DecoderNextToken/encodingjson/code-16          25.0MB/s ± 1%
-DecoderNextToken/pkgjson/example-16             517MB/s ± 1%
-DecoderNextToken/encodingjson/example-16       49.0MB/s ± 1%
-DecoderNextToken/pkgjson/sample-16             1.23GB/s ± 0%
-DecoderNextToken/encodingjson/sample-16         216MB/s ± 2%
+[source,options="nowrap"]
 ----
+include::json/benchstat-decoder1.txt[lines=5..]
+----
+
 Compared to `encoding/json` we're 8-10x faster.
 But there are some things we can do to improve:
 
@@ -552,39 +604,16 @@ What if we could just store the method directly and call it directly?
 And infact, we can do just that with some old Go 1.0 magic, https://golang.org/ref/spec#Method_expressions[_method expression_].
 [source,go,options="nowrap"]
 ----
-include::json/decoder4.go[tags=nexttoken]
+include::json/decoder4/decoder.go[tags=nexttoken]
 ----
 
 Let's see how this performs.
-```
-name                                           old time/op    new time/op    delta
-DecoderNextToken/pkgjson/canada-16               5.60ms ± 0%    5.61ms ± 0%     ~     (p=0.841 n=5+5)
-DecoderNextToken/encodingjson/canada-16          64.9ms ± 1%    64.4ms ± 0%     ~     (p=0.222 n=5+5)
-DecoderNextToken/pkgjson/citm_catalog-16         2.41ms ± 1%    2.42ms ± 1%     ~     (p=0.310 n=5+5)
-DecoderNextToken/encodingjson/citm_catalog-16    19.8ms ± 1%    19.7ms ± 1%     ~     (p=0.548 n=5+5)
-DecoderNextToken/pkgjson/twitter-16              1.17ms ± 1%    1.20ms ± 2%   +2.70%  (p=0.008 n=5+5)
-DecoderNextToken/encodingjson/twitter-16         12.2ms ± 1%    12.1ms ± 1%     ~     (p=1.000 n=5+5)
-DecoderNextToken/pkgjson/code-16                 6.11ms ± 3%    6.37ms ± 4%   +4.26%  (p=0.016 n=5+5)
-DecoderNextToken/encodingjson/code-16            77.7ms ± 2%    78.6ms ± 2%     ~     (p=0.310 n=5+5)
-DecoderNextToken/pkgjson/example-16              25.0µs ± 0%    25.6µs ± 1%   +2.25%  (p=0.008 n=5+5)
-DecoderNextToken/encodingjson/example-16          263µs ± 1%     265µs ± 2%     ~     (p=0.222 n=5+5)
-DecoderNextToken/pkgjson/sample-16                560µs ± 1%     553µs ± 0%   -1.15%  (p=0.008 n=5+5)
-DecoderNextToken/encodingjson/sample-16          3.16ms ± 1%    3.17ms ± 1%     ~     (p=0.690 n=5+5)
 
-name                                           old speed      new speed      delta
-DecoderNextToken/pkgjson/canada-16              402MB/s ± 0%   401MB/s ± 0%     ~     (p=0.841 n=5+5)
-DecoderNextToken/encodingjson/canada-16        34.7MB/s ± 1%  35.0MB/s ± 0%     ~     (p=0.222 n=5+5)
-DecoderNextToken/pkgjson/citm_catalog-16        716MB/s ± 1%   713MB/s ± 1%     ~     (p=0.310 n=5+5)
-DecoderNextToken/encodingjson/citm_catalog-16  87.3MB/s ± 1%  87.6MB/s ± 1%     ~     (p=0.548 n=5+5)
-DecoderNextToken/pkgjson/twitter-16             539MB/s ± 1%   524MB/s ± 2%   -2.62%  (p=0.008 n=5+5)
-DecoderNextToken/encodingjson/twitter-16       51.9MB/s ± 1%  52.0MB/s ± 1%     ~     (p=1.000 n=5+5)
-DecoderNextToken/pkgjson/code-16                318MB/s ± 2%   305MB/s ± 3%   -4.07%  (p=0.016 n=5+5)
-DecoderNextToken/encodingjson/code-16          25.0MB/s ± 2%  24.7MB/s ± 2%     ~     (p=0.310 n=5+5)
-DecoderNextToken/pkgjson/example-16             521MB/s ± 0%   509MB/s ± 1%   -2.19%  (p=0.008 n=5+5)
-DecoderNextToken/encodingjson/example-16       49.5MB/s ± 1%  49.1MB/s ± 2%     ~     (p=0.222 n=5+5)
-DecoderNextToken/pkgjson/sample-16             1.23GB/s ± 1%  1.24GB/s ± 0%   +1.16%  (p=0.008 n=5+5)
-DecoderNextToken/encodingjson/sample-16         218MB/s ± 1%   217MB/s ± 1%     ~     (p=0.690 n=5+5)
-```
+[source,options="nowrap"]
+----
+include::json/benchstat-decoder4.txt[lines=5..]
+----
+
 The results aren't that promising, but now we can unlock our final optimisation.
 
 === Outlining
@@ -593,14 +622,14 @@ Compare the previous version of `Decoder.NextToken`
 
 [source,go,options="nowrap"]
 ----
-include::json/decoder4.go[tags=before]
+include::json/decoder4/decoder.go[tags=before]
 ----
 
 with the version after outlining.
 
 [source,go,options="nowrap"]
 ----
-include::json/decoder5.go[tags=nexttoken]
+include::json/decoder5/decoder.go[tags=nexttoken]
 ----
 Moving the `tok := d.scanner.Next()` call into each state method might seem like a step backwards, but it has several positive effects.
 
@@ -616,18 +645,20 @@ When the `if` check is moved into the same function, the compiler knows that if 
 We can see this in the debug information.
 [source,options="nowrap"]
 ----
-% go build -gcflags=-d=ssa/prove/debug=2 2>&1 | grep 135\:
-./decoder.go:135:13: Proved IsInBounds (v31)
+% go build -gcflags=-d=ssa/prove/debug=2 2>&1 | grep decoder.go:100
+./decoder.go:100:13: Proved IsInBounds (v26)
 ----
 - The final optimisation occurs because `Decoder.NextToken`, which was previously too complex to inline
 [source,options="nowrap"]
 ----
-./decoder.go:107:6: cannot inline (*Decoder).NextToken: function too complex: cost 145 exceeds budget 80
+% go build -gcflags=-m=2 2>&1 | grep Decoder..NextToken | head -n1
+./decoder.go:92:6: cannot inline (*Decoder).NextToken: function too complex: cost 144 exceeds budget 80
 ----
 is now inlinable 
 [source,options="nowrap"]
 ----
-./bench_test.go:217:29: inlining call to (*Decoder).NextToken method(*Decoder) func() ([]byte, error) { return d.state(d) }
+% go build -gcflags=-m=2 2>&1 | grep Decoder..NextToken | head -n1
+./decoder.go:91:6: can inline (*Decoder).NextToken with cost 71 as: method(*Decoder) func() ([]byte, error) { return ([]byte)(.autotmp_3), .autotmp_4 }
 ----
 Which means, calls to `dec.NextToken()`
 [source,go,options="nowrap"]
@@ -655,64 +686,40 @@ for {
 ----
 Eliminating the cost of the function call.
 
+[source,options="nowrap"]
+----
+include::json/benchstat-decoder5.txt[lines=5..]
+----
+
 === Results 
 
 At the lowest level `pkg/json.Scanner` can tokenize streaming JSON without allocation (provided it is supplied a few kilobytes of buffer).
 
-```
-BenchmarkScanner/canada-16                  1561           3524005 ns/op         638.78 MB/s           0 B/op          0 allocs/op
-BenchmarkScanner/citm_catalog-16            3556           1555322 ns/op        1110.51 MB/s           0 B/op          0 allocs/op
-BenchmarkScanner/twitter-16                 7068            836031 ns/op         755.37 MB/s           0 B/op          0 allocs/op
-BenchmarkScanner/code-16                    1543           3640425 ns/op         533.03 MB/s           0 B/op          0 allocs/op
-BenchmarkScanner/example-16               341224             16362 ns/op         796.00 MB/s           0 B/op          0 allocs/op
-BenchmarkScanner/sample-16                 12771            467360 ns/op        1471.01 MB/s           0 B/op          0 allocs/op
-```
-At the next level `pkg/json.Decoder.Token` is 2-3x faster than `encoding/json.Decoder.Token`.
-```
-BenchmarkDecoderToken/pkgjson/canada-16                      267          22073095 ns/op         101.98 MB/s     4402914 B/op     222279 allocs/op
-BenchmarkDecoderToken/encodingjson/canada-16                  86          67830737 ns/op          33.19 MB/s    17740387 B/op     889106 allocs/op
-BenchmarkDecoderToken/pkgjson/citm_catalog-16               1114           5183226 ns/op         333.23 MB/s      965992 B/op      81995 allocs/op
-BenchmarkDecoderToken/encodingjson/citm_catalog-16           288          20882018 ns/op          82.71 MB/s     5661597 B/op     324692 allocs/op
-BenchmarkDecoderToken/pkgjson/twitter-16                    2356           2467042 ns/op         255.98 MB/s      768354 B/op      38992 allocs/op
-BenchmarkDecoderToken/encodingjson/twitter-16                471          12606205 ns/op          50.10 MB/s     3584017 B/op     187319 allocs/op
-BenchmarkDecoderToken/pkgjson/code-16                        346          16877006 ns/op         114.98 MB/s     4304233 B/op     320235 allocs/op
-BenchmarkDecoderToken/encodingjson/code-16                    73          80255994 ns/op          24.18 MB/s    23355962 B/op    1319125 allocs/op
-BenchmarkDecoderToken/pkgjson/example-16                  113912             53083 ns/op         245.35 MB/s       16016 B/op        914 allocs/op
-BenchmarkDecoderToken/encodingjson/example-16              21734            273991 ns/op          47.53 MB/s       82416 B/op       4325 allocs/op
-BenchmarkDecoderToken/pkgjson/sample-16                     6642            871796 ns/op         788.59 MB/s      213761 B/op       5081 allocs/op
-BenchmarkDecoderToken/encodingjson/sample-16                1803           3287623 ns/op         209.12 MB/s      723782 B/op      26095 allocs/op
-```
-Because allocations make up a large proportion of the `Decoder.Token` API, `pkg/json.Decoder` provides an alternative API that produces significantly fewer allocations and is 8-10x faster.
-```
-BenchmarkDecoderNextToken/pkgjson/canada-16                 1197           4825232 ns/op         466.52 MB/s         136 B/op          3 allocs/op
-BenchmarkDecoderNextToken/encodingjson/canada-16              90          65392440 ns/op          34.42 MB/s    17740399 B/op     889106 allocs/op
-BenchmarkDecoderNextToken/pkgjson/citm_catalog-16           2709           2162849 ns/op         798.58 MB/s         136 B/op          3 allocs/op
-BenchmarkDecoderNextToken/encodingjson/citm_catalog-16       301          20064314 ns/op          86.08 MB/s     5661597 B/op     324692 allocs/op
-BenchmarkDecoderNextToken/pkgjson/twitter-16                5395           1068106 ns/op         591.25 MB/s         152 B/op          4 allocs/op
-BenchmarkDecoderNextToken/encodingjson/twitter-16            494          12072956 ns/op          52.31 MB/s     3584013 B/op     187319 allocs/op
-BenchmarkDecoderNextToken/pkgjson/code-16                   1135           5124666 ns/op         378.65 MB/s         248 B/op          6 allocs/op
-BenchmarkDecoderNextToken/encodingjson/code-16                74          77579973 ns/op          25.01 MB/s    23355955 B/op    1319125 allocs/op
-BenchmarkDecoderNextToken/pkgjson/example-16              269010             22323 ns/op         583.43 MB/s         152 B/op          4 allocs/op
-BenchmarkDecoderNextToken/encodingjson/example-16          22707            264078 ns/op          49.32 MB/s       82416 B/op       4325 allocs/op
-BenchmarkDecoderNextToken/pkgjson/sample-16                10000            510445 ns/op        1346.85 MB/s        1144 B/op          9 allocs/op
-BenchmarkDecoderNextToken/encodingjson/sample-16            1836           3161804 ns/op         217.44 MB/s      723781 B/op      26095 allocs/op
-```
-At the highest level, `pkg/json` can unmarshal data into a Go object with the same API as `encoding/json`.
-```
-BenchmarkDecoderDecodeInterfaceAny/pkgjson/canada-16                 217          27425893 ns/op          82.08 MB/s     8747163 B/op     281408 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/encodingjson/canada-16            153          38347477 ns/op          58.70 MB/s    20647616 B/op     392553 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/pkgjson/citm_catalog-16           747           8008839 ns/op         215.66 MB/s     5197853 B/op      89673 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/encodingjson/citm_catalog-16      360          16607501 ns/op         104.00 MB/s     9406809 B/op      95389 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/pkgjson/twitter-16               1606           3714515 ns/op         170.01 MB/s     2130731 B/op      30182 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/encodingjson/twitter-16           862           6927998 ns/op          91.15 MB/s     4283407 B/op      31278 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/pkgjson/code-16                   333          17939351 ns/op         108.17 MB/s     7331643 B/op     232059 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/encodingjson/code-16              236          25324951 ns/op          76.62 MB/s    12332753 B/op     271292 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/pkgjson/example-16              76874             78079 ns/op         166.81 MB/s       50980 B/op        739 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/encodingjson/example-16         40886            146685 ns/op          88.79 MB/s       82855 B/op        782 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/pkgjson/sample-16                5240           1116081 ns/op         615.99 MB/s      399970 B/op       5542 allocs/op
-BenchmarkDecoderDecodeInterfaceAny/encodingjson/sample-16           1123           5369313 ns/op         128.04 MB/s     2661872 B/op       7527 allocs/op
+[source,options="nowrap"]
+----
+include::json/scanner-final.txt[lines=5..-2]
+----
 
-```
+At the next level `pkg/json.Decoder.Token` is 2-3x faster than `encoding/json.Decoder.Token`.
+
+[source,options="nowrap"]
+----
+include::json/decodertoken-final.txt[lines=5..-2]
+----
+
+Because allocations make up a large proportion of the `Decoder.Token` API, `pkg/json.Decoder` provides an alternative API that produces significantly fewer allocations and is 8-10x faster.
+
+[source,options="nowrap"]
+----
+include::json/decodernexttoken-final.txt[lines=5..-2]
+----
+
+At the highest level, `pkg/json` can unmarshal data into a Go object with the same API as `encoding/json`.
+
+[source,options="nowrap"]
+----
+include::json/decoderinterfaceany-final.txt[lines=5..-2]
+----
 
 == Thematic ideas
 
@@ -737,13 +744,23 @@ I believed that it was possible implement an efficient JSON parser based on my _
 
 It turned out there is 2-3x performance in some unmarshalling paths and between 8x and 10x performance in tokenisation, if you're prepared to accept a different API.
 
+== One more thing
+
+io.Reader.Read is an inefficient API.
+If the goal is to read data from one place and send it someplace else without any inspection, even that is insufficent as we see hacks like `sendfile(2)`, `ReadFrom`, `WriteTo`, etc  propogate.
+
+At a minimum it pushes the management of reader buffers to the caller, then adds the complexity of managing partially read buffers to the caller.
+Yes, io.Reader.Read is _safe_ in that it cannot be blamed for data corruption as it pushes all the complexity to the caller.
+
+Bytereader is small enough to fit on a page, and provides a more efficient way to read from a stream of data, which is almost always because that data needs to be decoded, processes
+
 [discrete]
 == Thank you
 
-- Thank you to Valentine and all the GopherCon Singapore organisers. ❤️
-- Link to this presentation: https://dave.cheney.net/paste/gophercon-sg-2023.html
+- Thank you to the GopherconUK 2026 organisers ❤️
+- Link to this presentation: {presentation-link}
 +
-qrcode:https://dave.cheney.net/paste/gophercon-sg-2023.html[svg, xdim=5]
+qrcode:{presentation-link}[svg, xdim=5]
 - Link to the code: https://github.com/pkg/json
 +
 qrcode:https://github.com/pkg/json[svg, xdim=5]
